@@ -6,7 +6,7 @@
     <!-- <settings-dropdown class="app-navbar-actions__item" /> -->
     <language-dropdown class="app-navbar-actions__item"/>
     <profile-dropdown class="app-navbar-actions__item app-navbar-actions__item--profile">
-      <span>{{userName}}</span>
+      <span>TEST</span>
     </profile-dropdown>
   </div>
 </template>
