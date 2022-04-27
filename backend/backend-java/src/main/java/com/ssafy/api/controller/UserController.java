@@ -84,7 +84,7 @@ public class UserController {
         @ApiResponse(code = 404, message = "사용자 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<? extends BaseResponseBody> register(
+	public ResponseEntity<? extends BaseResponseBody> register(@RequestBody
 			@ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo, HttpServletResponse response) throws IOException {
 
 		User u = userService.createUser(registerInfo);

@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(userRegisterInfo.getEmail());
 		// 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장.
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
+		System.out.println("password"+ userRegisterInfo.getPassword());
 		user.setPassword(bCryptPasswordEncoder.encode(userRegisterInfo.getPassword()));
 		user.setNickname(userRegisterInfo.getNickname());
 		user.setRole("ROLE_USER");
