@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import AuthLayout from '@/layout/auth-layout.vue'
 import AppLayout from '@/layout/app-layout.vue'
 import Page404Layout from '@/layout/page-404-layout.vue'
+import LandingLayout from '@/layout/landing-layout.vue'
 
 import RouteViewComponent from './route-view.vue'
 import UIRoute from '@/pages/admin/ui/route'
@@ -10,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
     redirect: { name: 'dashboard' },
+  },
+  {
+    name: 'landing',
+    path: '/landing',
+    component: LandingLayout,
   },
   {
     name: 'admin',
