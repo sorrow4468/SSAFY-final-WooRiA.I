@@ -69,6 +69,20 @@ springfox:
 #      instanceProfile: true
 
 spring:
+  kafka:
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      auto-offset-reset: latest
+      max-poll-records: '1000'
+      group-id: kafka-demo
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: 'true'
+    template:
+      default-topic: kafka-demo
+    bootstrap-servers: localhost:9092
 #  profiles:
 #    include:
 #      -aws
@@ -159,7 +173,7 @@ spring:
       hibernate:
         format_sql: true # sql 쿼리문을 정제해서 볼수있음.
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       format_sql: true
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
