@@ -1,11 +1,12 @@
 <template>
   <div class="landing-layout">
-    <navbar />
-    <div class="landing-layout__content">
-      <div class="d-flex justify--center">
-        <h1>landingpage</h1>
-      </div>
-    </div>
+    <center class="landing-layout__content">
+      <Intro />
+      <WhyWeCreate />
+      <WhatCanDo />
+      <WhatWeChange />
+      <Footer />
+    </center>
   </div>
 </template>
 
@@ -13,13 +14,23 @@
 import { useStore } from 'vuex';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { onBeforeRouteUpdate } from 'vue-router';
-import Navbar from '@/components/navbar/Navbar.vue';
+
+import Intro from '@/pages/landing/intro/Intro.vue';
+import WhyWeCreate from '@/pages/landing/why-we-create/WhyWeCreate.vue';
+import WhatCanDo from '@/pages/landing/what-can-do/WhatCanDo.vue';
+import WhatWeChange from '@/pages/landing/what-we-change/WhatWeChange.vue';
+import Footer from '@/pages/landing/footer/Footer.vue';
+
 
 export default {
   name: 'landing-layout',
 
   components: {
-    Navbar,
+    Intro,
+    WhyWeCreate,
+    WhatCanDo,
+    WhatWeChange,
+    Footer,
   },
 
   setup() {
@@ -82,16 +93,14 @@ export default {
 $mobileBreakPointPX: 640px;
 $tabletBreakPointPX: 768px;
 
-.app-layout {
+.landing-layout {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  &__navbar {
-    min-height: 4rem;
-  }
 
   &__content {
     display: flex;
+    flex-direction: column;
     height: calc(100vh - 4rem);
     flex: 1;
 
@@ -99,33 +108,7 @@ $tabletBreakPointPX: 768px;
       height: calc(100vh - 6.5rem);
     }
 
-    .app-layout__sidebar-wrapper {
-      position: relative;
-      height: 100%;
-      background: var(--va-white);
-
-      @media screen and (max-width: $tabletBreakPointPX) {
-        &:not(.minimized) {
-          width: 100%;
-          height: 100%;
-          position: fixed;
-          top: 0;
-          z-index: 999;
-        }
-
-        .va-sidebar:not(.va-sidebar--minimized) {
-          // Z-index fix for preventing overflow for close button
-          z-index: -1;
-          .va-sidebar__menu {
-            padding: 0;
-          }
-        }
-      }
-    }
   }
-  &__page {
-    flex-grow: 2;
-    overflow-y: scroll;
-  }
+
 }
 </style>
