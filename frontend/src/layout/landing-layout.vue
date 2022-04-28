@@ -1,13 +1,11 @@
 <template>
-  <div class="landing-layout">
-    <center class="landing-layout__content">
-      <Intro />
-      <WhyWeCreate />
-      <WhatCanDo />
-      <WhatWeChange />
-      <Footer />
-    </center>
-  </div>
+  <center class="landing-layout">
+    <Intro />
+    <WhyWeCreate style="margin-top:300px;"/>
+    <WhatCanDo />
+    <WhatWeChange />
+    <Footer />
+  </center>
 </template>
 
 <script>
@@ -95,20 +93,7 @@ $tabletBreakPointPX: 768px;
 
 .landing-layout {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 4rem);
-    flex: 1;
-
-    @media screen and (max-width: $tabletBreakPointPX) {
-      height: calc(100vh - 6.5rem);
-    }
-
-  }
-
+  width: 100vh;
+  margin: auto;
 }
 </style>
