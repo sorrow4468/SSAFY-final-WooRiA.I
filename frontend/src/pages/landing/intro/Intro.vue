@@ -1,6 +1,6 @@
 <template>
   <div>
-    <head class="d-flex justify--space-between mt-4">
+    <head class="d-flex justify--space-between mt-5">
       <img src="@/../public/img/landing-page/LandingPage.png" alt="wallpaper" class="wallpaper">
       <div class="d-flex align--center">
         <img src="@/../public/img/landing-page/woori-ai-logo/child-boy.png" alt="logo" class="main-logo">
@@ -70,7 +70,7 @@ export default {
     width: 100%;
     position: absolute;
     z-index: -1;
-    top: -25px;
+    top: -50px;
     left: 0%;
     height: 90%;
     max-height: 900px;
