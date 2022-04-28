@@ -1,16 +1,21 @@
 {
   "auth": {
-    "agree": "I agree to",
-    "createAccount": "Create account",
-    "createNewAccount": "Create New Account",
-    "email": "Email",
-    "login": "Login",
-    "password": "Password",
-    "recover_password": "Recover password",
-    "sign_up": "Sign Up",
-    "keep_logged_in": "Keep me logged in",
-    "termsOfUse": "Terms of Use.",
-    "reset_password": "Reset password"
+    "agree": "약관에 동의하기",
+    "createAccount": "회원가입",
+    "createNewAccount": "회원가입",
+    "email": "이메일",
+    "id": "아이디",
+    "login": "로그인",
+    "password": "비밀번호",
+    "password_check": "비밀번호 확인",
+    "phone_number": "전화번호 (-제외, 숫자만)",
+    "number_check": "인증번호",
+    "recover_password": "비밀번호 찾기",
+    "sign_up": "회원가입",
+    "keep_logged_in": "로그인 유지하기",
+    "termsOfUse": "",
+    "reset_password": "비밀번호 변경",
+    "kakaotalk": "카카오톡 로그인"
   },
   "404": {
     "title": "This page’s gone fishing.",
@@ -391,27 +396,27 @@
     "modalText": "File type is incorrect!"
   },
   "chips": {
-    "chips": { 
-    "title": "Chips",
-    "primary": "Primary chip",
-    "secondary": "Secondary chip",
-    "success": "Success chip",
-    "info": "Info chip",
-    "danger": "Danger chip",
-    "warning": "Warning chip",
-    "gray": "Gray chip",
-    "dark": "Dark chip"
+    "chips": {
+      "title": "Chips",
+      "primary": "Primary chip",
+      "secondary": "Secondary chip",
+      "success": "Success chip",
+      "info": "Info chip",
+      "danger": "Danger chip",
+      "warning": "Warning chip",
+      "gray": "Gray chip",
+      "dark": "Dark chip"
     },
-    "badges": { 
-    "title": "Badges",
-    "primary": "Primary badge",
-    "secondary": "Secondary badge",
-    "success": "Success badge",
-    "info": "Info badge",
-    "danger": "Danger badge",
-    "warning": "Warning badge",
-    "gray": "Gray badge",
-    "dark": "Dark badge"
+    "badges": {
+      "title": "Badges",
+      "primary": "Primary badge",
+      "secondary": "Secondary badge",
+      "success": "Success badge",
+      "info": "Info badge",
+      "danger": "Danger badge",
+      "warning": "Warning badge",
+      "gray": "Gray badge",
+      "dark": "Dark badge"
     }
   },
   "navbar": {
