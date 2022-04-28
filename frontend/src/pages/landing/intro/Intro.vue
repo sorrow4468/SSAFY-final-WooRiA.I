@@ -15,7 +15,7 @@
     <div class="content">
       <div class="f3">부모마음이</div>
       <div class="f3">다 그런거니까</div>
-      <va-button color="success">시작하기</va-button>
+      <va-button class="start-button" color="success">시작하기</va-button>
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     margin-top: 20rem;
   }
 
-  .va-button {
+  .start-button {
     width: 15rem;
     height: 3rem;
     margin-top: 1rem;

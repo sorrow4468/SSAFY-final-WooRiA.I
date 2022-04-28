@@ -1,7 +1,7 @@
 <template>
   <center class="landing-layout">
     <Intro />
-    <WhyWeCreate style="margin-top:380px;"/>
+    <WhyWeCreate style="margin-top:400px;"/>
     <WhatCanDo />
     <WhatWeChange />
     <Footer />
@@ -103,6 +103,6 @@ $tabletBreakPointPX: 768px;
   text-shadow: 1px 1px 1px gray;
   font-size: 2.5rem;
   margin-bottom: 3rem;
-  margin-top: 5rem;
+  margin-top: 10rem;
 }
 </style>
