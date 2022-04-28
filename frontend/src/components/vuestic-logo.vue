@@ -53,7 +53,7 @@ export default {
 
   props: {
     height: { type: [Number, String], default: 16 },
-    color: { type: [String], default: "primary" },
+    color: { type: [String], default: "primary" }
   },
 
   computed: {
@@ -62,7 +62,7 @@ export default {
       const color = getColor(this.color, "primary");
 
       return { start: color, end: shiftHSLAColor(color, { l: -20 }) };
-    },
-  },
+    }
+  }
 };
 </script>
