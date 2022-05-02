@@ -1,5 +1,5 @@
 <template>
-  <h1>whatwechange</h1>
+  <p class="f4">우리A.I는 무엇을 할 수 있나요?</p>
 </template>
 
 <script>

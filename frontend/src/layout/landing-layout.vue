@@ -92,8 +92,8 @@ $mobileBreakPointPX: 640px;
 $tabletBreakPointPX: 768px;
 
 .landing-layout {
-  height: 100vh;
-  width: 100vh;
+  height: 110vh;
+  width: 50%;
   margin: auto;
 }
 
