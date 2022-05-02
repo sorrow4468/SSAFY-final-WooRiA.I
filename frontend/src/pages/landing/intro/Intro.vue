@@ -41,21 +41,21 @@ export default {
 
   .f1 {
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: white;
     text-shadow: 3px 3px 3px #434343;
   }
 
   .f2 {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: white;
     text-shadow: 3px 3px 3px #434343;
   }
 
   .f3 {
     color: white;
-    font-size: 4rem;
+    font-size: 3rem;
     margin: 1.25rem;
     font-weight: bold;
     text-shadow: 3px 3px 3px #434343;

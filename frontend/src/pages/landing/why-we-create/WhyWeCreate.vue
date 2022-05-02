@@ -2,7 +2,7 @@
   <div>
     <div class="f4">우리A.I는 왜 만들어졌나요?</div>
     <div class="d-flex justify-space-between">
-      <div class="card-left">
+      <div class="card-left d-flex align--center justify--center">
         <img src="@/../public/img/landing-page/ChildDanger.png" alt="dangerous child" class="example-image">
       </div>
       <div class="card-right justify-center">
@@ -26,7 +26,7 @@
           <p><span style="font-size:1.7rem; font-weight:bold;">우리A.I</span>가 도움이 되었으면 합니다</p>
         </div>
       </div>
-      <div class="card-right justify-center">
+      <div class="card-right d-flex align--center justify--center">
         <img src="@/../public/img/landing-page/ForChild.png" alt="dangerous child" class="example-image">
       </div>
     </div>
@@ -41,7 +41,7 @@ export default {
 
 <style>
 .example-image {
-  width: 30rem;
+  width: 90%;
   box-shadow: 3px 3px 10px #a8a8a8;
 }
 
@@ -53,15 +53,15 @@ export default {
 }
 
 .card-left {
-  width: 50vh;
+  width: 100%;
 }
 
 .card-right {
-  width: 50vh;
+  width: 100%;
 }
 
 .detail {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 </style>
