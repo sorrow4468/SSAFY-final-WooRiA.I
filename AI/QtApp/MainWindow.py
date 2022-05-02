@@ -70,8 +70,8 @@ class MainWindow(QMainWindow):
         s3 : 연결된 s3 객체(boto3 client)
         filename : s3에 저장된 파일 명
         """
-        location = self.s3.get_bucket_location(Bucket={"ssafit-01-bucket"})["LocationConstraint"]
-        return f"https://{{ssafit-01-bucket}}.s3.{location}.amazonaws.com/{filename}.avi"
+        location = self.s3.get_bucket_location(Bucket="ssafit-01-bucket")["LocationConstraint"]
+        return f"https://ssafit-01-bucket.s3.{location}.amazonaws.com/{filename}.avi"
 
     def thread_CCTV_run(self):
         Frame_1, Frame_2, Frame3, Frame4 = None, None, None, None
@@ -89,14 +89,7 @@ class MainWindow(QMainWindow):
                     # 상황이 발생하면.
                     # 형이 전처리한 이미지.
 
-
-                    #makeVideo
-                        # 동영상으로 제작.
-                    # time.sleep(1)
-                    # now = datetime.datetime.now().strftime("%d_%H-%M-%S")
-                    # video = cv2.VideoWriter("C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi", fourcc, 20.0, (frame.shape[1], frame.shape[0]))               
-                
-                if self.cnt == 0 :
+                if self.cnt == 0 :  # if 상황이 발생하면
                     self.cnt = 1
                     t = threading.Thread(target= self.record) # video 녹음 쓰레드
                     t.start()
