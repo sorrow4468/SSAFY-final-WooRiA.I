@@ -85,7 +85,56 @@ class MainWindow(QMainWindow):
                         self.resize_image(Frame_1, width,height)))
                 self.mainForm.cctv_1.setPixmap(pixmap)
                 self.mainForm.cctv_1.update()
+                #AI
+                    # 상황이 발생하면.
+                    # 형이 전처리한 이미지.
 
+
+                    #makeVideo
+                        # 동영상으로 제작.
+                    # time.sleep(1)
+                    # now = datetime.datetime.now().strftime("%d_%H-%M-%S")
+                    # video = cv2.VideoWriter("C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi", fourcc, 20.0, (frame.shape[1], frame.shape[0]))               
+                
+                if self.cnt == 0 :
+                    self.cnt = 1
+                    t = threading.Thread(target= self.record) # video 녹음 쓰레드
+                    t.start()
+                    
+    # 형이 하나하나 전처리한 프레임을 리스트에 넣어서 주는 방식으로 하시는지
+    # cctv(전처리) -> record
+
+    def record(self):
+        cctv_1 = CcTv.rtsp()
+        trigger = True
+        flag = True
+        start = time.time()
+        while trigger == True :
+            Frame_1, Frame_2, Frame3, Frame4 = None, None, None, None
+            if cctv_1 != None and cctv_1.grab():
+                _, Frame_1 = cctv_1.retrieve()
+
+                if flag == True :
+                    print("video record start!")
+                    now = datetime.datetime.now().strftime("%d_%H-%M-%S")
+                    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+                    path = "C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi"
+                    video = cv2.VideoWriter("C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi", fourcc, 20.0, (Frame_1.shape[1], Frame_1.shape[0]))
+                    flag = False
+                
+                video.write(Frame_1)
+                if (time.time() - start) > 5 :
+                    trigger = False
+                    video.release()
+                    print("video record end!")
+                    print(self.s3_put_object("ssafit-01-bucket", path, str(now)+ ".avi"))
+                    if os.path.isfile(path):
+                        os.remove(path)
+                    # connect to web
+                    url = self.s3_get_image_url(str(now))
+                    data = {'str' : url}
+                    self.producer.send('kafka-demo2', value=data)
+                    
     def CCTV_start(self):
         self.cctv_1 = CcTv.rtsp()
 
