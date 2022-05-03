@@ -17,7 +17,7 @@ from json import dumps
 class MainWindow(QMainWindow):
     def initialize(self, mainForm: Ui_MainWindow):
         self.mainForm = mainForm
-        self.producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers=['localhost:9092'], value_serializer=lambda x: dumps(x).encode('utf-8')) 
+        self.producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers=['52.79.114.28:9092'], value_serializer=lambda x: dumps(x).encode('utf-8')) 
         self.setWindowIcon(QIcon("icon.png"))
         self.cnt = 0
         self.cctv_1 = None
