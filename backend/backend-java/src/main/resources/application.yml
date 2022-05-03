@@ -82,7 +82,7 @@ spring:
       enable-auto-commit: 'true'
     template:
       default-topic: kafka-demo
-    bootstrap-servers: http://52.79.114.28:9092
+    bootstrap-servers: https://k6e2021.p.ssafy.io/kafka
 #  profiles:
 #    include:
 #      -aws
