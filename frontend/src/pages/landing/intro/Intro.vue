@@ -2,6 +2,7 @@
   <div>
     <head class="d-flex justify--space-between mt-5">
       <img src="@/../public/img/landing-page/LandingPage.png" alt="wallpaper" class="wallpaper">
+      <img src="@/../public/img/landing-page/Background.png" alt="background" class="background">
       <div class="d-flex align--center">
         <img src="@/../public/img/landing-page/woori-ai-logo/child-boy.png" alt="logo" class="main-logo">
         <div class="f1 mr-2 ml-2">우리A.I</div>
@@ -75,6 +76,13 @@ export default {
     height: 90%;
     max-height: 900px;
     object-fit: cover;
+  }
+
+  .background {
+    z-index: -2;
+    position: absolute;
+    width: 100%;
+    left: 0%;
   }
 
 </style>
