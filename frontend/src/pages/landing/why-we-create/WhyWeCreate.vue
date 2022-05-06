@@ -49,7 +49,7 @@ export default {
 .subtitle {
   color: #52d08f;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-shadow: 1px 1px 3px #a8a8a8;
   margin-bottom: 3rem;
 }
@@ -63,7 +63,7 @@ export default {
 }
 
 .detail {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 </style>
