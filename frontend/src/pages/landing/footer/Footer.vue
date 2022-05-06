@@ -56,7 +56,7 @@ export default {
 <style lang="scss">
 
 .footer {
-  padding-bottom: 15rem;
+  padding-bottom: 2rem;
 }
 
 .footer-logo {
@@ -82,7 +82,7 @@ export default {
 }
 
 .dnbbd {
-  max-width: 300px;
+  max-width: 250px;
   border-radius: 1rem;
   box-shadow: 5px 5px 5px #d2d2d2;
 }
