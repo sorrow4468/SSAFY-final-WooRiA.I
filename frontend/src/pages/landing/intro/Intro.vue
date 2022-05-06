@@ -9,14 +9,15 @@
         <img src="@/../public/img/landing-page/woori-ai-logo/child-girl.png" alt="logo" class="main-logo">
       </div>
       <auth class="d-flex align--center">
-        <div class="f2">회원가입</div>
-        <div class="ml-3 f2">로그인</div>
+        <a href="auth/signup/"><div class="f2">회원가입</div></a>
+        <a href="auth/login/"><div class="ml-3 f2">로그인</div></a>
       </auth>
     </head>
     <div class="content">
       <div class="f3">부모마음이</div>
       <div class="f3">다 그런거니까</div>
-      <va-button class="start-button" color="success">시작하기</va-button>
+      <a href="auth/login/"><va-button class="start-button" color="success">시작하기</va-button></a>
+
     </div>
     <img src="@/../public/img/landing-page/ScrollDown.png" alt="scroll-down" class="scroll-down">
   </div>
