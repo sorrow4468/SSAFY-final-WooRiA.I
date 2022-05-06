@@ -1,12 +1,13 @@
 <template>
   <div>
     <p class="f4">우리A.I는 무엇을 할 수 있나요?</p>
+    <va-button-group outline color=#49b37c size=large class="mb-4">
+      <va-button class="example-button__off">위험상황 인식</va-button>
+      <va-button class="example-button__on">위험정보 문자알림</va-button>
+      <va-button class="example-button__off">관리자 페이지</va-button>
+    </va-button-group>
     <div class="">
-      <button class="example-button example-button__off mr-3 ml-3">위험상황 인식</button>
-      <button class="example-button example-button__on mr-3 ml-3">위험정보 문자알림</button>
-      <button class="example-button example-button__off mr-3 ml-3">관리자 페이지</button>
-    </div>
-    <div class="mt-4">
+      <div class="d-flex justify--end"><img src="@/../public/img/landing-page/main-service/ChildThinking.png" alt="thinking" class="thinking"></div>
       <img
         src="@/../public/img/landing-page/main-service/Notification.png"
         alt="notification"
@@ -26,30 +27,34 @@ export default {
 <style lang="scss">
 
 .example-button {
-  width: 15rem;
-  height: 3rem;
-  margin-top: 1rem;
-  font-size: 1.25rem;
-  border-radius: 2rem;
-  border: 0;
-  outline: 0;
-  box-shadow: 2px 2px 2px #a8a8a8;
-  font-weight: bold;
 
   &__on {
-    background-color: #64D89D;
+    background-color: #49b37c;
     color: white;
-    text-shadow: 2px 2px 2px #a8a8a8;
+    font-weight: bold;
+    font-size: 1.5rem;
   }
   &__off {
-    color: #434343;
-    background-color: rgb(244, 244, 244);
+    font-size: 1rem;
   }
 
 }
 
 .main-service-image {
-  width: 100%;
+  width: 70%;
+  max-height: 700px;
+  object-fit: cover;
+  margin-top: 3rem;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 1px #cccccc;
+}
+
+.thinking {
+  width: 200px;
+  position: absolute;
+  z-index: -1;
+  margin-top: -200px;
+  right: 28rem;
 }
 
 </style>

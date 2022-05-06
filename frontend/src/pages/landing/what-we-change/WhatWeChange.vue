@@ -33,10 +33,11 @@ export default {
   max-width: 300px;
   margin-left: 6.9rem;
   margin-right: 6.9rem;
+  filter: drop-shadow(3px 3px 3px #cccccc);
 }
 
 .v-line {
-  border-left : thin solid #52d08f;
+  border-left : 2px solid #52d08f;
   height : 300px;
 }
 

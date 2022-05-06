@@ -43,6 +43,7 @@ export default {
 .example-image {
   width: 90%;
   box-shadow: 3px 3px 10px #a8a8a8;
+  border-radius: 2rem;
 }
 
 .subtitle {
