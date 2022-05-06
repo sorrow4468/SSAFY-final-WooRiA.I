@@ -20,6 +20,8 @@ public class KafkaConsumer {
     public void consume(String message) throws IOException {
 
 
+        messageService.sendSms(messageRequest.getTo());
+
         // webSocket send
         webSocket.sendAllMessage(message);
     }
