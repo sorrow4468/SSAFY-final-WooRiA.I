@@ -3,6 +3,7 @@ import AuthLayout from '@/layout/auth-layout.vue'
 import AppLayout from '@/layout/app-layout.vue'
 import Page404Layout from '@/layout/page-404-layout.vue'
 import LandingLayout from '@/layout/landing-layout.vue'
+import CctvPages from '@/layout/cctv-pages.vue'
 
 import RouteViewComponent from './route-view.vue'
 import UIRoute from '@/pages/admin/ui/route'
@@ -211,6 +212,17 @@ const routes: Array<RouteRecordRaw> = [
         name: 'not-found-large-text',
         path: '/pages/not-found-large-text',
         component: () => import('@/pages/404-pages/VaPageNotFoundLargeText.vue'),
+      },
+    ],
+  },
+  {
+    path: '/cctvpage',
+    component: CctvPages,
+    children: [
+      {
+        name: 'cctvbase',
+        path: 'cctvbase',
+        component: () => import('@/pages/cctvPages/cctvBase.vue'),
       },
     ],
   },
