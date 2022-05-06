@@ -18,6 +18,7 @@
       <div class="f3">다 그런거니까</div>
       <va-button class="start-button" color="success">시작하기</va-button>
     </div>
+    <img src="@/../public/img/landing-page/ScrollDown.png" alt="scroll-down" class="scroll-down">
   </div>
 </template>
 
@@ -30,7 +31,7 @@ export default {
 
 <style lang="scss">
   .content {
-    margin-top: 20rem;
+    margin-top: 25rem;
   }
 
   .start-button {
@@ -73,8 +74,8 @@ export default {
     z-index: -1;
     top: -50px;
     left: 0%;
-    height: 90%;
-    max-height: 900px;
+    height: 92%;
+    max-height: 1080px;
     object-fit: cover;
   }
 
@@ -83,6 +84,12 @@ export default {
     position: absolute;
     width: 100%;
     left: 0%;
+    top: -100%;
+  }
+
+  .scroll-down {
+    width: 10%;
+    margin-top: 5rem;
   }
 
 </style>
