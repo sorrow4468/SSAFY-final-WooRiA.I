@@ -1,26 +1,68 @@
 <template>
   <div>
     <p class="f4">우리A.I는 무엇을 할 수 있나요?</p>
+    <va-button-toggle
+      outline
+      outline-color=#49b37c
+      v-model="model"
+      :options="options"
+      color=#49b37c
+      size=large
+      class="mb-4"
+    />
     <va-button-group outline color=#49b37c size=large class="mb-4">
-      <va-button class="example-button__off">위험상황 인식</va-button>
-      <va-button class="example-button__on">위험정보 문자알림</va-button>
-      <va-button class="example-button__off">관리자 페이지</va-button>
+      <va-button v-on:click="changeService(1)" class="example-button__on">위험상황 인식</va-button>
+      <va-button v-on:click="changeService(2)" class="example-button__off">위험정보 문자알림</va-button>
+      <va-button v-on:click="changeService(3)" class="example-button__off">관리자 페이지</va-button>
     </va-button-group>
     <div class="">
       <div class="d-flex justify--end"><img src="@/../public/img/landing-page/main-service/ChildThinking.png" alt="thinking" class="thinking"></div>
       <img
-        src="@/../public/img/landing-page/main-service/Notification.png"
+        :src="imageURL"
         alt="notification"
         class="main-service-image"
       >
     </div>
-    <p class="mt-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p class="mt-4">{{textContent}}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'what-can-do',
+  // 버튼 함수 만들고, state만 바꿔주기, v-if 활용해서,
+  // 클릭했을 때
+
+  data() {
+    return {
+      stateNumber: 0,
+      imageURL: require('@/../public/img/landing-page/main-service/Service1.png'),
+      textContent: 'service 1',
+      options: [
+        { label: '위험상황 인식', value: 'one' },
+        { label: '위험정보 문자알림', value: 'two' },
+        { label: '관리자 페이지', value: 'three' },
+      ],
+      model: 'one',
+    }
+  },
+
+  methods: {
+    changeService(key) {
+      if (key == 1) {
+        this.imageURL = require('@/../public/img/landing-page/main-service/Service1.png')
+        this.textContent = 'service1'
+      } else if (key == 2) {
+        this.imageURL = require('@/../public/img/landing-page/main-service/Service2.png')
+        this.textContent = 'service2'
+      } else if (key == 3) {
+        this.imageURL = require('@/../public/img/landing-page/main-service/Service3.png')
+        this.textContent = 'service3'
+      } else {
+        console.log(this.state.model)
+      }
+    }
+  },
 }
 </script>
 
