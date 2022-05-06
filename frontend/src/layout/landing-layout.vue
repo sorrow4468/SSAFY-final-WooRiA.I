@@ -4,7 +4,7 @@
     <WhyWeCreate style="margin-top:15rem;"/>
     <WhatCanDo />
     <WhatWeChange />
-    <Footer />
+    <Footer style="margin-top:60rem;"/>
   </center>
 </template>
 
