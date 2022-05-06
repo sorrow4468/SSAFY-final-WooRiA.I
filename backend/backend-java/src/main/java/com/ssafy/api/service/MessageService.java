@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 
 public interface MessageService {
     public SendSmsResponseDto sendSms(String recipientPhoneNumber) throws ParseException, JsonProcessingException, UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, URISyntaxException;
-
+    public SendSmsResponseDto sendAlert(String recipientPhoneNumber) throws ParseException, JsonProcessingException, UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, URISyntaxException;
     public String makeSignature(Long time) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException;
     public boolean isVerify(String recipientPhoneNumber, String certificationNumber);
     public boolean verifySms(MessagesRequestDto messageRequest);
