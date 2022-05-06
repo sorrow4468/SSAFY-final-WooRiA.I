@@ -25,10 +25,6 @@ public class CCTV extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="userId")
-    User user;
-
     @Column(name = "TYPE", length = 128)
     @NotNull
     @Size(max = 32)
@@ -38,14 +34,6 @@ public class CCTV extends BaseEntity {
     @NotNull
     @Size(max = 32)
     private Long stype;
-
-    @Column(name = "START_TIME", length = 128)
-    @NotNull
-    private LocalDateTime START_TIME;
-
-    @Column(name = "END_TIME", length = 128)
-    @NotNull
-    private LocalDateTime END_TIME;
 
     @Column(name = "LOCATION", length = 256)
     @NotNull
