@@ -41,14 +41,14 @@
     <div class="row">
       <va-input
         class="mb-3"
-        v-model="phone_number"
+        v-model="phoneNumber"
         type="phone_number"
         :label="$t('auth.phone_number')"
         :error="!!phoneNumberErrors.length"
         :error-messages="phoneNumberErrors"
       />
       <div class="d-flex justify--center ml-3 mb-3">
-        <va-button @click="onsubmit" class="my-0" style="border-radius:10px;"
+        <va-button @click="phonesubmit" class="my-0" style="border-radius:10px;"
           >인증번호 발송</va-button
         >
       </div>
@@ -58,14 +58,14 @@
     <div class="row">
       <va-input
         class="mb-3"
-        v-model="number_check"
+        v-model="numbercheck"
         type="number_check"
         :label="$t('auth.number_check')"
-        :error="!!phoneNumberErrors.length"
-        :error-messages="phoneNumberErrors"
+        :error="!!numbercheckerr.length"
+        :error-messages="numbercheckerr"
       />
       <div class="d-flex justify--center ml-3 mb-3">
-        <va-button @click="onsubmit" class="my-0" style="border-radius:10px;"
+        <va-button @click="certnumsubmit" class="my-0" style="border-radius:10px;"
           >인증번호 확인</va-button
         >
       </div>
@@ -129,7 +129,10 @@ export default {
       passwordCheckErrors: [],
       phoneNumberErrors: [],
       emailErrors: [],
-      agreedToTermsErrors: []
+      emailSuccess: [],
+      agreedToTermsErrors: [],
+      numbercheck:[],
+      numbercheckerr:[],
     };
   },
   methods: {
@@ -151,6 +154,7 @@ export default {
       }
       this.$router.push({ name: "dashboard" });
     },
+    //  이메일 검증
     emailsubmit() {
        this.emailErrors = [];
       if (!this.email) {
@@ -164,9 +168,58 @@ export default {
            "email" : this.email
                 } 
       ).then((res)=>{
-        console.log('성공')}
+        console.log(res);
+        }
       ).catch((err) => {
         console.log('실패')}
+      )
+      }
+      // axios 요청 보내서
+      if (!this.formReady) {
+        return;
+      }
+    },
+    phonesubmit() {
+       this.phoneNumberErrors = [];
+      if (!this.phoneNumber) {
+        this.phoneNumberErrors.push('핸드폰을 입력해 주세요.');
+      } else if (!this.validphoneNumber(this.phoneNumber)) {  // 이메일 형식이 아닐경우
+        this.phoneNumberErrors.push('유효한 번호가 아닙니다');
+      } else {
+        http.post(
+        'auth/sms/sends',
+         {
+           "to" : this.phoneNumber
+                } 
+      ).then((res)=>{
+        console.log(res);
+        }
+      ).catch((err) => {
+        console.log('실패')}
+      )
+      }
+      // axios 요청 보내서
+      if (!this.formReady) {
+        return;
+      }
+    },
+    certnumsubmit() {
+       this.numbercheckerr = [];
+      if (!this.phoneNumber) {
+        this.numbercheckerr.push('인증번호를 입력해 주세요.');
+      } else {
+        http.post(
+        'auth/sms/confirms',
+         {
+           "to" : this.phoneNumber,
+           "number" : this.numbercheck
+                } 
+      ).then((res)=>{
+        console.log(res);
+        }
+      ).catch((err) => {
+        console.log('실패');
+        this.numbercheckerr.push('유효한 번호가 아닙니다');}
       )
       }
       // axios 요청 보내서
@@ -177,6 +230,10 @@ export default {
     validEmail: function (email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
+    },
+    validphoneNumber: function (phoneNumber) {
+      const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+      return regPhone.test(phoneNumber);
     }
   },
   computed: {
