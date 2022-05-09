@@ -34,7 +34,7 @@ public class SwaggerConfig {
         Server testServer = new Server("test", "https://서버주소", "for testing", Collections.emptyList(), Collections.emptyList());
 
         return new Docket(DocumentationType.SWAGGER_2).useDefaultResponseMessages(false)
-                .servers(serverLocal, testServer)
+                .host("https://xn--vk1bw3clxiimaf76b.kr/api_be")
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.ant("/**"))
