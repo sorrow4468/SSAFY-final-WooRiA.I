@@ -38,7 +38,7 @@ public class KafkaConsumer {
         System.out.println(kafkaVO.getCameraNumber());
 
         // 발생한 상황 디비에 저장.
-//        cctvService.saveVideo();
+        cctvService.saveVideo(kafkaVO);
         // 상황 테이블에 카운트.
 
         // 지정 시간 내의 사람들 리스트 가져오기.
