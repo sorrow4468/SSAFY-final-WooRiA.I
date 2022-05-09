@@ -8,7 +8,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 public class WebSocketConfig {
     /**
      * Inject Server Endpoint Exporter,
-     * This bean automatically registers Web ocket endpoint using the @ServerEndpoint annotation declaration
+     * This bean automatically registers Web socket endpoint using the @ServerEndpoint annotation declaration
      */
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
