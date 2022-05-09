@@ -1,12 +1,12 @@
 <template>
   <va-sidebar
     :width="width"
-    :minimized="minimized" 
+    :minimized="minimized"
     :minimizedWidth="minimizedWidth"
   >
     <menu-minimized v-if="minimized" :items="items" />
     <menu-accordion v-else :items="items" />
-  </va-sidebar>    
+  </va-sidebar>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ import NavigationRoutes from './NavigationRoutes';
 
 
 export default {
-  name: "app-sidebar",
+  name: "user-sidebar",
   components: {
     MenuAccordion,
     MenuMinimized,

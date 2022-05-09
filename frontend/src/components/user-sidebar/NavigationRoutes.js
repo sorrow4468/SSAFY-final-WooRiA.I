@@ -1,43 +1,29 @@
 export default {
   root: {
-    name: '/',
+    name: '/user',
     displayName: 'navigationRoutes.home',
   },
   routes: [
     {
-      name: 'dashboard',
+      name: 'userboard',
       displayName: 'menu.dashboard',
       meta: {
         icon: 'vuestic-iconset-dashboard',
       },
     },
     {
-      name: 'tables',
+      name: 'usertables',
       displayName: 'menu.tables',
       meta: {
         icon: 'vuestic-iconset-tables',
       },
-      children: [
-        {
-          name: 'markup',
-          displayName: 'menu.markupTables',
-        },
-      ],
     },
     {
-      name: 'cctvbase',
+      name: 'usercctv',
       displayName: 'CCTV',
       meta: {
         icon: 'vuestic-iconset-video',
       },
-      disabled: true,
-      children: [
-        {
-          name: 'cctvbase',
-          displayName: 'base',
-        },
-
-      ],
     },
   ],
 }
