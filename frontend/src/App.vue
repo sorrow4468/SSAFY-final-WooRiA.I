@@ -18,7 +18,6 @@ import Vue from 'vue';
             }
         },
         mounted() {// page creation lifecycle function
-              console.log("sssssssssssssss")
               this.initWebSocket()
         },
         destroyed: function () {// leave page life cycle function
@@ -35,7 +34,7 @@ import Vue from 'vue';
             },
             initWebSocket: function () {
                 // WebSocket is different from ordinary requests in terms of protocol, WS is equivalent to http, WSS is equivalent to HTTPS
-                this.websock = new WebSocket("wss://13.125.56.138:8971/websocket/DPS007");
+                this.websock = new WebSocket("ws://13.125.56.138:8971/websocket/DPS007");
                 this.websock.onopen = this.websocketonopen;
                 this.websock.onerror = this.websocketonerror;
                 this.websock.onmessage = this.websocketonmessage;
