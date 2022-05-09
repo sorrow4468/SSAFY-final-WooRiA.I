@@ -1,6 +1,6 @@
 import threading
 import cv2
-import datetime, time
+import datetime, time, json
 import boto3
 import os
 
@@ -17,7 +17,7 @@ from json import dumps
 class MainWindow(QMainWindow):
     def initialize(self, mainForm: Ui_MainWindow):
         self.mainForm = mainForm
-        self.producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers=['52.79.114.28:9092'], value_serializer=lambda x: dumps(x).encode('utf-8')) 
+        self.producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers=['52.79.114.28:9092'], value_serializer=lambda v: json.dumps(v).encode('utf-8')) 
         self.setWindowIcon(QIcon("icon.png"))
         self.cnt = 0
         self.cctv_1 = None
@@ -125,7 +125,9 @@ class MainWindow(QMainWindow):
                         os.remove(path)
                     # connect to web
                     url = self.s3_get_image_url(str(now))
-                    data = {'str' : url}
+                    data = {'url' : url,
+                            'detection' : '0',
+                            'cameraNumber' : '1'}
                     self.producer.send('kafka-demo2', value=data)
                     
     def CCTV_start(self):
