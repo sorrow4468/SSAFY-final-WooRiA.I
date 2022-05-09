@@ -29,6 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .exposedHeaders(JwtTokenUtil.HEADER_STRING)
+                .exposedHeaders(JwtTokenUtil.REFRESH_STRING)
                 .maxAge(3600L);
     }
 
