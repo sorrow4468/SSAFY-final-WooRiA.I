@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import AuthLayout from '@/layout/auth-layout.vue'
 import AppLayout from '@/layout/app-layout.vue'
+import UserLayout from '@/layout/user-layout.vue'
 import Page404Layout from '@/layout/page-404-layout.vue'
 import LandingLayout from '@/layout/landing-layout.vue'
 import CctvPages from '@/layout/cctv-pages.vue'
@@ -167,7 +168,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: 'user',
     path: '/user',
-    component: AppLayout,
+    component: UserLayout,
     children: [
       {
         name: 'dashboard',
