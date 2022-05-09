@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import AuthLayout from "@/layout/auth-layout.vue";
 import AppLayout from "@/layout/app-layout.vue";
+import UserLayout from "@/layout/user-layout.vue";
 import Page404Layout from "@/layout/page-404-layout.vue";
 import LandingLayout from "@/layout/landing-layout.vue";
 import CctvPages from "@/layout/cctv-pages.vue";
-import Calendar from "@/layout/calendar-layout.vue";
+import Calendar from "@/layout/calendar.vue";
 
 import RouteViewComponent from "./route-view.vue";
 import UIRoute from "@/pages/admin/ui/route";
@@ -12,7 +13,7 @@ import UIRoute from "@/pages/admin/ui/route";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
-    redirect: { name: "dashboard" }
+    redirect: { name: "landing" }
   },
   {
     name: "landing",
@@ -175,7 +176,35 @@ const routes: Array<RouteRecordRaw> = [
           }
         ]
       },
+      {
+        name: "cctvbase",
+        path: "cctvbase",
+        component: () => import("@/pages/admin/cctvPages/cctvBase.vue")
+      },
       UIRoute
+    ]
+  },
+  {
+    name: "user",
+    path: "/user",
+    component: UserLayout,
+    children: [
+      {
+        name: "userboard",
+        path: "userboard",
+        component: () => import("@/pages/user/dashboard/Dashboard.vue")
+      },
+      {
+        name: "usertables",
+        path: "usertables",
+        component: () =>
+          import("@/pages/user/tables/markup-tables/MarkupTables.vue")
+      },
+      {
+        name: "usercctv",
+        path: "/usercctv",
+        component: () => import("@/pages/user/cctvPages/cctvBase.vue")
+      }
     ]
   },
   {
@@ -522,7 +551,8 @@ const routes: Array<RouteRecordRaw> = [
   //         name: 'faq',
   //         path: 'faq',
   //         component: () => import('../components/pages/FaqPage.vue'),
-  //       },
+  //       },import { Calendar } from '@/layout/calendar-layout.vue';
+
   //     ],
   //   },
   // ],
