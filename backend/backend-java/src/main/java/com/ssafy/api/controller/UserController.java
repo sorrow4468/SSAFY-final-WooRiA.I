@@ -1,6 +1,7 @@
 package com.ssafy.api.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.api.request.MessagesRequest;
 import com.ssafy.api.request.MessagesRequestDto;
 import com.ssafy.api.request.ValidateEmailReq;
 import com.ssafy.api.response.SendSmsResponseDto;
@@ -158,7 +159,7 @@ public class UserController {
 			@ApiResponse(code = 404, message = "사용자 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
-	public ResponseEntity<SendSmsResponseDto> sendSms(@RequestBody @ApiParam(value="전화번호 및 인증번호", required = true) MessagesRequestDto messageRequest) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
+	public ResponseEntity<SendSmsResponseDto> sendSms(@RequestBody @ApiParam(value="전화번호 및 인증번호", required = true) MessagesRequest messageRequest) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
 		SendSmsResponseDto data = messageService.sendSms(messageRequest.getTo());
 		return ResponseEntity.ok().body(data);
 	}

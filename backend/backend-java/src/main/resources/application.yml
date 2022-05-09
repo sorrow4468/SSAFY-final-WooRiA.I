@@ -54,6 +54,7 @@ springfox:
     swagger:
       use-model-v3: 'false'
 
+
 #
 #cloud:
 #  aws:
