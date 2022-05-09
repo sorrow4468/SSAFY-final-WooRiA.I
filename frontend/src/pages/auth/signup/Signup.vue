@@ -1,17 +1,17 @@
 <template>
-  <form @submit.prevent="onsubmit()">
+  <form @submit.prevent="emailsubmit()">
     <!-- 아이디 -->
     <div class="row">
-      <va-input
-        class="mb-3"
-        v-model="id"
-        type="id"
-        :label="$t('auth.id')"
-        :error="!!idErrors.length"
-        :error-messages="idErrors"
-      />
+          <va-input
+      class="mb-3"
+      v-model="email"
+      type="email"
+      :label="$t('auth.email')"
+      :error="!!emailErrors.length"
+      :error-messages="emailErrors"
+    />
       <div class="d-flex justify--center ml-3 mb-3">
-        <va-button @click="onsubmit" class="my-0" style="border-radius:10px;"
+        <va-button @click="emailsubmit" class="my-0" style="border-radius:10px;"
           >중복확인</va-button
         >
       </div>
@@ -72,14 +72,14 @@
     </div>
 
     <!-- 이메일 -->
-    <va-input
+    <!-- <va-input
       class="mb-3"
       v-model="email"
       type="email"
       :label="$t('auth.email')"
       :error="!!emailErrors.length"
       :error-messages="emailErrors"
-    />
+    /> -->
 
     <div
       class="auth-layout__options d-flex align--center justify--space-between"
@@ -111,6 +111,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "signup",
   data() {
@@ -147,16 +149,44 @@ export default {
         return;
       }
       this.$router.push({ name: "dashboard" });
+    },
+    emailsubmit() {
+       this.emailErrors = [];
+      if (!this.email) {
+        this.emailErrors.push('이메일을 입력하세요.');
+      } else if (!this.validEmail(this.email)) {  // 이메일 형식이 아닐경우
+        this.emailErrors.push('유효한 이메일이 아닙니다');
+      } else {
+        axios.post(
+          
+        'https://xn--vk1bw3clxiimaf76b.kr/api_be​/auth​/email​/confirms',
+         {
+                  "email" : this.email
+                } 
+          
+      ).then((res)=>{
+        console.log('성공')}
+      ).catch((err) => {
+        console.log('실패')}
+      )
+      }
+      // axios 요청 보내서
+      if (!this.formReady) {
+        return;
+      }
+    },
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     }
   },
   computed: {
     formReady() {
       return !(
-        this.idErrors.length ||
+        this.emailErrors.length ||
         this.passwordErrors.length ||
         this.passwordCheckErrors.length ||
         this.phoneNumberErrors.length ||
-        this.emailErrors.length ||
         this.agreedToTermsErrors.length
       );
     }
