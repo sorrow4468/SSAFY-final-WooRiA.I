@@ -111,7 +111,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import http from '@/components/common/axios.js'
 
 export default {
   name: "signup",
@@ -157,13 +158,11 @@ export default {
       } else if (!this.validEmail(this.email)) {  // 이메일 형식이 아닐경우
         this.emailErrors.push('유효한 이메일이 아닙니다');
       } else {
-        axios.post(
-          
-        'https://xn--vk1bw3clxiimaf76b.kr/api_be​/auth​/email​/confirms',
+        http.post(
+        'auth/email/confirms',
          {
-                  "email" : this.email
+           "email" : this.email
                 } 
-          
       ).then((res)=>{
         console.log('성공')}
       ).catch((err) => {
@@ -176,7 +175,7 @@ export default {
       }
     },
     validEmail: function (email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     }
   },
