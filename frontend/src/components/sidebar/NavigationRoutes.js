@@ -226,14 +226,6 @@ export default {
       meta: {
         icon: 'vuestic-iconset-video',
       },
-      disabled: true,
-      children: [
-        {
-          name: 'cctvbase',
-          displayName: 'base',
-        },
-
-      ],
     },
   ],
 }

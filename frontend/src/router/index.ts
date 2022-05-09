@@ -162,6 +162,11 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        name: 'cctvbase',
+        path: 'cctvbase',
+        component: () => import('@/pages/admin/cctvPages/cctvBase.vue'),
+      },
       UIRoute,
     ]
   },
@@ -171,144 +176,20 @@ const routes: Array<RouteRecordRaw> = [
     component: UserLayout,
     children: [
       {
-        name: 'dashboard',
-        path: 'dashboard',
+        name: 'userboard',
+        path: 'userboard',
         component: () => import('@/pages/user/dashboard/Dashboard.vue'),
       },
       {
-        name: 'statistics',
-        path: 'statistics',
-        component: RouteViewComponent,
-        children: [
-          {
-            name: 'charts',
-            path: 'charts',
-            component: () => import('@/pages/user/statistics/charts/Charts.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Charts',
-            },
-          },
-          {
-            name: 'progress-bars',
-            path: 'progress-bars',
-            component: () => import('@/pages/user/statistics/progress-bars/ProgressBars.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Progress-Bars',
-            },
-          },
-        ],
+        name: 'usertables',
+        path: 'usertables',
+        component: () => import('@/pages/user/tables/markup-tables/MarkupTables.vue'),
       },
       {
-        name: 'forms',
-        path: 'forms',
-        component: RouteViewComponent,
-        children: [
-          {
-            name: 'form-elements',
-            path: 'form-elements',
-            component: () => import('@/pages/user/forms/form-elements/FormElements.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/inputs',
-            },
-          },
-          {
-            name: 'medium-editor',
-            path: 'medium-editor',
-            component: () => import('@/pages/user/forms/medium-editor/MediumEditor.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Medium-Editor',
-            },
-          },
-        ],
+        name: 'usercctv',
+        path: '/usercctv',
+        component: () => import('@/pages/user/cctvPages/cctvBase.vue'),
       },
-      {
-        name: 'maps',
-        path: 'maps',
-        component: RouteViewComponent,
-        children: [
-          {
-            name: 'google-maps',
-            path: 'google-maps',
-            component: () => import('@/pages/user/maps/google-maps/GoogleMapsPage.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Maps',
-            },
-          },
-          {
-            name: 'yandex-maps',
-            path: 'yandex-maps',
-            component: () => import('@/pages/user/maps/yandex-maps/YandexMapsPage.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Maps',
-            },
-          },
-          {
-            name: 'leaflet-maps',
-            path: 'leaflet-maps',
-            component: () => import('@/pages/user/maps/leaflet-maps/LeafletMapsPage.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Maps',
-            },
-          },
-          {
-            name: 'bubble-maps',
-            path: 'bubble-maps',
-            component: () => import('@/pages/user/maps/bubble-maps/BubbleMapsPage.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Maps',
-            },
-          },
-          {
-            name: 'line-maps',
-            path: 'line-maps',
-            component: () => import('@/pages/user/maps/line-maps/LineMapsPage.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Maps',
-            },
-          },
-        ],
-      },
-      {
-        name: 'tables',
-        path: 'tables',
-        component: RouteViewComponent,
-        children: [
-          {
-            name: 'markup',
-            path: 'markup',
-            component: () => import('@/pages/user/tables/markup-tables/MarkupTables.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Tables',
-            },
-          },
-          {
-            name: 'data',
-            path: 'data',
-            component: () => import('@/pages/user/tables/data-tables/DataTables.vue'),
-            meta: {
-              wikiLink: 'https://github.com/epicmaxco/vuestic-user/wiki/Tables',
-            },
-          },
-        ],
-      },
-      {
-        name: 'pages',
-        path: 'pages',
-        component: RouteViewComponent,
-        children: [
-          {
-            name: '404-pages',
-            path: '404-pages',
-            component: () => import('@/pages/user/pages/404PagesPage.vue'),
-          },
-          {
-            name: 'faq',
-            path: 'faq',
-            component: () => import('@/pages/user/pages/FaqPage.vue'),
-          },
-        ],
-      },
-      UIRoute,
     ]
   },
   {
@@ -362,17 +243,17 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
-  {
-    path: '/cctvpage',
-    component: CctvPages,
-    children: [
-      {
-        name: 'cctvbase',
-        path: 'cctvbase',
-        component: () => import('@/pages/cctvPages/cctvBase.vue'),
-      },
-    ],
-  },
+  // {
+  //   path: '/cctvpage',
+  //   component: CctvPages,
+  //   children: [
+  //     {
+  //       name: 'cctvbase',
+  //       path: 'cctvbase',
+  //       component: () => import('@/pages/cctvPages/cctvBase.vue'),
+  //     },
+  //   ],
+  // },
   // {
   //   name: 'admin',
   //   path: '/admin',
