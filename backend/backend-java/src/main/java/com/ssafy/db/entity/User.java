@@ -39,6 +39,12 @@ public class User extends BaseEntity {
     @Size(max = 512)
     private String email;
 
+    @Column(name = "START_TIME", length = 128)
+    private LocalDateTime START_TIME;
+
+    @Column(name = "END_TIME", length = 128)
+    private LocalDateTime END_TIME;
+
     @JsonIgnore
     @Column(name = "PASSWORD", length = 128)
     @NotNull
