@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "vue-alertify": "^1.1.0"
+  }
+}
