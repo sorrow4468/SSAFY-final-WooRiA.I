@@ -1,10 +1,7 @@
 package com.ssafy.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "CCTV")
 public class CCTV extends BaseEntity {
 
@@ -28,12 +26,11 @@ public class CCTV extends BaseEntity {
     @Column(name = "TYPE", length = 128)
     @NotNull
     @Size(max = 32)
-    private Long type;
+    private String type;
 
-    @Column(name = "STYPE", length = 128)
-    @NotNull
-    @Size(max = 32)
-    private Long stype;
+    @Column(name = "DANGER")
+    @Enumerated(EnumType.STRING)
+    private Danger danger;
 
     @Column(name = "LOCATION", length = 256)
     @NotNull
