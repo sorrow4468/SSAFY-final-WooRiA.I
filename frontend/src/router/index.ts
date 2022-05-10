@@ -202,7 +202,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         name: "usercctv",
-        path: "/usercctv",
+        path: "usercctv",
         component: () => import("@/pages/user/cctvPages/cctvBase.vue")
       }
     ]
