@@ -129,18 +129,23 @@ export default {
       passwordCheckErrors: [],
       phoneNumberErrors: [],
       emailErrors: [],
-      emailSuccess: [1],
+      emailSuccess: false,
       agreedToTermsErrors: [],
       numbercheck:[],
-      numbersuccess:[1],
+      numbersuccess: false,
       numbercheckerr:[],
     };
   },
   methods: {
-    onsubmit() {
+    onsubmit() {  
       this.idErrors = this.id ? [] : ["아이디를 적어주세요"];
-      this.emailSuccess = this.emailErrors ? [] : ["이메일 중복 체크를 해주세요"];
-      this.numbersuccess = this.numbercheckerr ? [] : ["인증번호를 입력해 주세요"];
+      // this.emailSuccess = this.emailErrors ? [] : ["이메일 중복 체크를 해주세요"];
+      // if (this.emailSuccess != []) {
+      //   this.emailErrors = ["이메일 중복 체크를 해주세요"]
+      // }
+      // if (this.numbersuccess != []) {
+      //   this.numbercheckerr = ["인증번호를 입력해 주세요"]
+      // }
       this.passwordErrors = this.password ? [] : ["비밀번호를 적어주세요"];
       if (this.password != this.passwordCheck) {
         this.passwordCheckErrors = ["비밀번호를 확인해주세요"]
@@ -155,30 +160,43 @@ export default {
         ? []
         : ["계속하려면 사용 약관에 동의해야 합니다"];
       if (!this.formReady) {
+        
         return;
       }
-      http.post(
-        '/auth/signup',
-        {
-          "email": this.email,
-          "nickname": this.email,
-          "password": this.password,
-          "phone": this.phoneNumber
-        }
-      ).then((res)=>{
-        console.log(res);
-        alert('회원가입 성공')
-        
-        }
-      ).catch((err) => {
-        console.log('실패')}
-      )
+      if (!this.emailSuccess)
+      {
+        this.emailErrors = ["이메일 중복체크를 해주세요"]
+        console.log(this.emailSuccess)
+      } else if (!this.numbersuccess) {
+          this.numbercheckerr = ["인증번호를 확인해 주세요"]
+          console.log(this.numbersuccess)
+          console.log(this.emailSuccess)
+      } else {
+            http.post(
+            '/auth/signup',
+            {
+              "email": this.email,
+              "nickname": this.email,
+              "password": this.password,
+              "phone": this.phoneNumber
+            }
+          ).then((res)=>{
+            console.log(res);
+            alert('회원가입 성공');
+            this.$router.push({ name: "dashboard" });
+            
+            }
+          ).catch((err) => {
+            console.log('실패')}
+          )
+      }
+
+      
       
     },
     //  이메일 검증
     emailsubmit() {
-      this.emailSuccess = [1]
-       this.emailErrors = [];
+      this.emailErrors = [];
       if (!this.email) {
         this.emailErrors.push('이메일을 입력하세요.');
       } else if (!this.validEmail(this.email)) {  // 이메일 형식이 아닐경우
@@ -191,10 +209,11 @@ export default {
                 } 
       ).then((res)=>{
         console.log(res);
-        this.emailSuccess = []
+        this.emailSuccess = true;
         }
       ).catch((err) => {
-        console.log('실패')}
+        console.log('실패');
+      }
       )
       }
       // axios 요청 보내서
@@ -241,13 +260,13 @@ export default {
                 } 
       ).then((res)=>{
         console.log(res);
-        this.numbersuccess = [];
+        this.numbersuccess = true;
         }
       ).catch((err) => {
         console.log('실패');
         this.numbercheckerr.push('유효한 번호가 아닙니다');
-        this.numbersuccess = [1];}
-      )
+            
+        })
       }
       // axios 요청 보내서
       if (!this.formReady) {
