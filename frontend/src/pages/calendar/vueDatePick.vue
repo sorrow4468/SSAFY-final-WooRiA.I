@@ -8,7 +8,7 @@
             :processUserInput="processUserInput"
             :valueToInputFormat="valueToInputFormat"
         >
-            <!-- <input
+            <input
                 v-if="hasInputElement"
                 type="text"
                 v-bind="inputAttributes"
@@ -17,7 +17,7 @@
                 @input="editable && processUserInput($event.target.value)"
                 @focus="editable && open()"
                 @click="editable && open()"
-            > -->
+            >
             <button
                 v-if="editable && hasInputElement && inputValue"
                 class="vdpClearInput"
@@ -27,11 +27,11 @@
         </slot>
         <transition name="vdp-toggle-calendar">
             <div
-
+                v-if="opened"
                 class="vdpOuterWrap"
                 ref="outerWrap"
                 @click="closeViaOverlay"
-                
+                :class="[positionClass, {vdpFloating: hasInputElement}]"
             >
                 <div class="vdpInnerWrap">
                     <header class="vdpHeader">

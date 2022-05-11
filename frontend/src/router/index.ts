@@ -5,7 +5,7 @@ import UserLayout from "@/layout/user-layout.vue";
 import Page404Layout from "@/layout/page-404-layout.vue";
 import LandingLayout from "@/layout/landing-layout.vue";
 import CctvPages from "@/layout/cctv-pages.vue";
-import Calendar from "@/layout/calendar.vue";
+import Calendar from "@/layout/calendar-layout.vue";
 
 import RouteViewComponent from "./route-view.vue";
 import UIRoute from "@/pages/admin/ui/route";
