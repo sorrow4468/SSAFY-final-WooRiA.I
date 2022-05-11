@@ -124,7 +124,7 @@ $vdpColor: #7485c2 !default;
 }
 
 .vdpPositionFixed .vdpInnerWrap {
-  max-width: 30em;
+  max-width: 60em;
   margin: 0 auto;
   border: 0;
   animation: vdpToggleCalendar 0.3s;
@@ -167,8 +167,8 @@ $vdpColor: #7485c2 !default;
   border: 1px solid rgba(0, 0, 0, 0.15);
   margin-top: 5em;
   margin-left: 3em;
-  height: 500px;
-  width: 500px;
+  height: 485px;
+  width: 560px;
 }
 
 .vdpHeader {
