@@ -50,6 +50,9 @@
 </template>
 
 <script>
+import http from '@/components/common/axios.js'
+
+
 export default {
   name: "login",
   data() {
@@ -81,8 +84,24 @@ export default {
       this.passwordErrors = this.password ? [] : ["비밀번호를 적어주세요"];
       if (!this.formReady) {
         return;
+      } else{
+        http.post(
+            '/auth/login',
+            {
+              "email": this.email,
+              "password": this.password
+            }
+          ).then((res)=>{
+            window.localStorage.setItem('accessToken', res.data.accessToken);
+            window.localStorage.setItem('refreshToken', res.data.refreshToken);
+            alert('로그인 성공');
+            this.$router.push({ name: "dashboard" });
+            
+            }
+          ).catch((err) => {
+            console.log(err)
+            })
       }
-      this.$router.push({ name: "dashboard" });
     }
   }
 };
