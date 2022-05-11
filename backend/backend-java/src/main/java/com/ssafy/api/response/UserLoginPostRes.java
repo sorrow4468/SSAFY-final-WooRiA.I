@@ -18,10 +18,12 @@ public class UserLoginPostRes extends BaseResponseBody{
 	String accessToken;
 	String refreshToken;
 	
-	public static UserLoginPostRes ofs(Integer statusCode, String message) {
+	public static UserLoginPostRes ofs(Integer statusCode, String message,String accessToken, String refreshToken) {
 		UserLoginPostRes res = new UserLoginPostRes();
 		res.setStatusCode(statusCode);
 		res.setMessage(message);
+		res.setAccessToken(accessToken);
+		res.setRefreshToken(refreshToken);
 		return res;
 	}
 	public static UserLoginPostRes of(Integer statusCode, String message, String accessToken) {
