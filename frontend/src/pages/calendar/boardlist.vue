@@ -1,14 +1,5 @@
 <template>
-  <div class="markup-tables flex">
-    <div>
-      <va-date-input
-        class="mb-4 mt-4"
-        label="placeholder"
-        placeholder="날짜를 선택해주세요"
-        clearable
-        stateful
-      />
-    </div>
+  <div class="markup-tables flex mt-5 ml-3">
     <va-card :title="$t('tables.stripedHoverable')">
       <va-card-content>
         <div class="table-wrapper">
@@ -56,9 +47,11 @@
 import data from "@/data/tables/markup-table/data.json";
 
 export default {
+  name: "boardlist",
+  components: {},
   data() {
     return {
-      users: data.slice(0, 8),
+      users: data.slice(0, 6),
       value: 1
     };
   },
@@ -80,6 +73,8 @@ export default {
 
 <style lang="scss">
 .markup-tables {
+  width: 95%;
+  height: 30px;
   .table-wrapper {
     overflow: auto;
   }
