@@ -58,7 +58,7 @@ export default {
 <style lang="scss">
 
 .main-service-image {
-  width: 70%;
+  width: 70vw;
   max-height: 700px;
   object-fit: cover;
   margin-top: 3rem;
@@ -71,7 +71,7 @@ export default {
   position: absolute;
   z-index: -1;
   margin-top: -200px;
-  right: 28rem;
+  right: 15vw;
 }
 
 </style>

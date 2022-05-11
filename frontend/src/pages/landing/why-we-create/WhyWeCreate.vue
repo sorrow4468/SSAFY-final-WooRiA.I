@@ -23,7 +23,7 @@
           <p class="mt-5 mb-5">모든 부모는 늘 마음만은 아이 곁에 있을 것입니다</p>
           <p class="mt-5 mb-5">하지만 불가피하게 아이의 곁을 지킬 수 없을 때</p>
           <p class="mt-5">아이가 위험하지는 않은지 걱정되시는 모든분께</p>
-          <p class="mt-4"><span style="font-size:2.7rem; font-weight:bold;">우리A.I</span>가 도움이 되었으면 합니다</p>
+          <p class="mt-4"><span style="font-size:2.7vw; font-weight:bold;">우리A.I</span>가 도움이 되었으면 합니다</p>
         </div>
       </div>
       <div class="card-right d-flex align--center justify--center">
@@ -49,7 +49,7 @@ export default {
 .subtitle {
   color: #52d08f;
   font-weight: bold;
-  font-size: 2.5rem;
+  font-size: 2.5vw;
   text-shadow: 1px 1px 3px #a8a8a8;
   margin-bottom: 3rem;
 }
@@ -63,7 +63,7 @@ export default {
 }
 
 .detail {
-  font-size: 1.25rem;
+  font-size: 1.5vw;
 }
 
 </style>
