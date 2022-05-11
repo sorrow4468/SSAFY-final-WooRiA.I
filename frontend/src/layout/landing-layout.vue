@@ -4,7 +4,7 @@
     <WhyWeCreate style="margin-top:15rem;"/>
     <WhatCanDo />
     <WhatWeChange />
-    <Footer style="margin-top:50rem;"/>
+    <Footer />
   </center>
 </template>
 
@@ -101,7 +101,7 @@ $tabletBreakPointPX: 768px;
   font-weight: bold;
   color: #212121;
   text-shadow: 1px 1px 1px gray;
-  font-size: 2.5rem;
+  font-size: 3vw;
   margin-bottom: 3rem;
   margin-top: 10rem;
 }

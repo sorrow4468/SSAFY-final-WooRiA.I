@@ -1,8 +1,8 @@
 <template>
   <div>
+    <img src="@/../public/img/landing-page/Background.png" alt="background" class="background">
     <head class="d-flex justify--space-between mt-5">
       <img src="@/../public/img/landing-page/LandingPage.png" alt="wallpaper" class="wallpaper">
-      <img src="@/../public/img/landing-page/Background.png" alt="background" class="background">
       <div class="d-flex align--center">
         <img src="@/../public/img/landing-page/woori-ai-logo/child-boy.png" alt="logo" class="main-logo">
         <div class="f1 mr-2 ml-2">우리A.I</div>
@@ -16,7 +16,7 @@
     <div class="content">
       <div class="f3">부모마음이</div>
       <div class="f3">다 그런거니까</div>
-      <a href="auth/login/"><va-button class="start-button" color="success">시작하기</va-button></a>
+      <a href="admin/dashboard/"><va-button class="start-button" color="success">시작하기</va-button></a>
     </div>
     <img src="@/../public/img/landing-page/ScrollDown.png" alt="scroll-down" class="scroll-down">
   </div>
@@ -80,11 +80,12 @@ export default {
   }
 
   .background {
-    z-index: -2;
     position: absolute;
+    z-index: -2;
     width: 100%;
     left: 0%;
-    top: -90%;
+    object-fit: scale-down;
+    max-height: 600vw;
   }
 
   .scroll-down {

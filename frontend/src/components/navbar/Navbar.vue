@@ -3,19 +3,24 @@
     <va-navbar>
       <template v-slot:left>
         <div class="left">
-          <va-icon-menu-collapsed 
+          <va-icon-menu-collapsed
             @click="isSidebarMinimized = !isSidebarMinimized"
             :class="{ 'x-flip': isSidebarMinimized }"
             class="va-navbar__item"
             :color="colors.primary"
           />
-          <router-link to="/">
+          <!-- <router-link to="/">
             <vuestic-logo class="logo"/>
-          </router-link>          
+          </router-link>           -->
+          <div class="d-flex align--center">
+            <img src="@/../public/img/landing-page/woori-ai-logo/child-boy.png" alt="logo" class="nav-logo">
+            <div class="f-logo mr-2 ml-2">우리A.I</div>
+            <img src="@/../public/img/landing-page/woori-ai-logo/child-girl.png" alt="logo" class="nav-logo">
+          </div>
         </div>
       </template>
       <template v-slot:center>
-        
+
       </template>
       <template #right>
         <app-navbar-actions
@@ -107,4 +112,16 @@ export default {
       margin-right: 0;
     }
   }
+
+
+  .nav-logo {
+    width: 2rem;
+  }
+
+  .f-logo {
+    font-weight: bold;
+    font-size: 1.75rem;
+    color: #303030;
+  }
+
 </style>

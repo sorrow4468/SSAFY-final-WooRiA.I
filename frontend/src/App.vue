@@ -14,11 +14,11 @@ import Vue from 'vue';
         name:'app',
         data() {
             return {
-                shopId:''
+                shopId:'',
+                accessVerify : ''
             }
         },
         mounted() {// page creation lifecycle function
-              console.log("sssssssssssssss")
               this.initWebSocket()
         },
         destroyed: function () {// leave page life cycle function
@@ -35,7 +35,7 @@ import Vue from 'vue';
             },
             initWebSocket: function () {
                 // WebSocket is different from ordinary requests in terms of protocol, WS is equivalent to http, WSS is equivalent to HTTPS
-                this.websock = new WebSocket("wss://13.125.56.138:8971/websocket/DPS007");
+                this.websock = new WebSocket("wss://xn--vk1bw3clxiimaf76b.kr/api_be/websocket/DPS007");
                 this.websock.onopen = this.websocketonopen;
                 this.websock.onerror = this.websocketonerror;
                 this.websock.onmessage = this.websocketonmessage;
@@ -43,13 +43,16 @@ import Vue from 'vue';
               },  
               websocketonopen: function () {
                 console. log ("WebSocket Connection Successful");
+                this.accessVerify = window.localStorage.getItem('accessToken')
               },
               websocketonerror: function () {
                 console. log ("WebSocket connection error");
               },
               websocketonmessage: function (e) {
+                this.accessVerify = window.localStorage.getItem('accessToken')
+
+                if (this.accessVerify) {
                 // 로그인 조건문 달아주기
-                console.log(e.data);
                 alert('위험감지!')
                 // this.$alertify.prompt(
                 //   '위험 감지!',
@@ -57,6 +60,9 @@ import Vue from 'vue';
                 //   (evt, value) => this.$alertify.success('ok: ' + value),
                 //   () => this.$alertify.error('cancel')
                 // );
+              }else{
+                console.log('')
+              }
               },
               websocketclose: function (e) {
                 console.log("connection closed (" + e.code + ")");
