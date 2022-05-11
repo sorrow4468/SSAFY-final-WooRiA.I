@@ -149,8 +149,6 @@ export default {
       this.passwordErrors = this.password ? [] : ["비밀번호를 적어주세요"];
       if (this.password != this.passwordCheck) {
         this.passwordCheckErrors = ["비밀번호를 확인해주세요"]
-        console.log(this.password)
-        console.log(this.passwordCheck)
       }
       this.phoneNumberErrors = this.phoneNumber
         ? []
@@ -166,11 +164,8 @@ export default {
       if (!this.emailSuccess)
       {
         this.emailErrors = ["이메일 중복체크를 해주세요"]
-        console.log(this.emailSuccess)
       } else if (!this.numbersuccess) {
           this.numbercheckerr = ["인증번호를 확인해 주세요"]
-          console.log(this.numbersuccess)
-          console.log(this.emailSuccess)
       } else {
             http.post(
             '/auth/signup',
@@ -181,13 +176,12 @@ export default {
               "phone": this.phoneNumber
             }
           ).then((res)=>{
-            console.log(res);
             alert('회원가입 성공');
             this.$router.push({ name: "dashboard" });
             
             }
           ).catch((err) => {
-            console.log('실패')}
+}
           )
       }
 
@@ -208,11 +202,9 @@ export default {
            "email" : this.email
                 } 
       ).then((res)=>{
-        console.log(res);
         this.emailSuccess = true;
         }
       ).catch((err) => {
-        console.log('실패');
       }
       )
       }
@@ -235,10 +227,10 @@ export default {
            "to" : this.phoneNumber
                 } 
       ).then((res)=>{
-        console.log(res);
+
         }
       ).catch((err) => {
-        console.log('실패')}
+       }
       )
       }
       // axios 요청 보내서
@@ -259,11 +251,9 @@ export default {
            "number" : this.numbercheck
                 } 
       ).then((res)=>{
-        console.log(res);
         this.numbersuccess = true;
         }
       ).catch((err) => {
-        console.log('실패');
         this.numbercheckerr.push('유효한 번호가 아닙니다');
             
         })
