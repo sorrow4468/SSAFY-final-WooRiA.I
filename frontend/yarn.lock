@@ -7802,6 +7802,11 @@
   "resolved" "https://registry.npmjs.org/jsesc/-/jsesc-0.5.0.tgz"
   "version" "0.5.0"
 
+"jsmpeg@^1.0.0":
+  "integrity" "sha1-fkFRbXSHIOBjNjku65UXCa5TJEI="
+  "resolved" "https://registry.npmjs.org/jsmpeg/-/jsmpeg-1.0.0.tgz"
+  "version" "1.0.0"
+
 "json-parse-better-errors@^1.0.1", "json-parse-better-errors@^1.0.2":
   "integrity" "sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw=="
   "resolved" "https://registry.npmjs.org/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz"

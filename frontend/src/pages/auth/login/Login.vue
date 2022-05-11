@@ -17,7 +17,7 @@
       :error="!!passwordErrors.length"
       :error-messages="passwordErrors"
     />
-
+        <canvas></canvas>
     <div
       class="auth-layout__options d-flex align--center justify--space-between"
     >
@@ -60,6 +60,15 @@ export default {
       emailErrors: [],
       passwordErrors: []
     };
+  },
+  mounted() {
+            var client = new WebSocket('wss://52.79.114.28:9911');
+            var canvas = document.querySelector('canvas');
+            var jsmpeg = require('jsmpeg');
+            var player = new jsmpeg(client, {
+              canvas: canvas
+            });
+            console.log(player)
   },
   computed: {
     formReady() {
