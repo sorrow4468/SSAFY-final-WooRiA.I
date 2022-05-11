@@ -62,7 +62,7 @@ export default {
     };
   },
   mounted() {
-            var client = new WebSocket('wss://52.79.114.28:9911');
+            var client = new WebSocket('ws://52.79.114.28:9911');
             var canvas = document.querySelector('canvas');
             var jsmpeg = require('jsmpeg');
             var player = new jsmpeg(client, {
