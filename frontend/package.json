@@ -22,6 +22,7 @@
     "font-awesome": "^4.7.0",
     "google-maps": "^4.3.3",
     "ionicons": "^4.6.3",
+    "jsmpeg": "^1.0.0",
     "leaflet": "^1.7.1",
     "leaflet-map": "^0.2.1",
     "medium-editor": "^5.23.3",

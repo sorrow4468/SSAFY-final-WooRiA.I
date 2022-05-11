@@ -3,7 +3,7 @@ import cv2
 class CcTv():
     def rtsp():
         cam = cv2.VideoCapture(
-            'rtsp://tapoadmin:tapoadmin@bandong.iptime.org:554/stream1')
+            'rtsp://admin:12345@223.171.47.23:1111/stream_ch00_0')
         return cam
         # while True:
         #     _, img = cam.read()
