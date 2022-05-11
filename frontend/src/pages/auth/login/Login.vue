@@ -83,8 +83,6 @@ export default {
               "password": this.password
             }
           ).then((res)=>{
-            console.log(res.data.refreshToken);
-            console.log(res.headers);
             window.localStorage.setItem('accessToken', res.data.accessToken);
             window.localStorage.setItem('refreshToken', res.data.refreshToken);
             alert('로그인 성공');
