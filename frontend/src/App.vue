@@ -14,7 +14,8 @@ import Vue from 'vue';
         name:'app',
         data() {
             return {
-                shopId:''
+                shopId:'',
+                accessVerify : ''
             }
         },
         mounted() {// page creation lifecycle function
@@ -43,13 +44,16 @@ import Vue from 'vue';
               },
               websocketonopen: function () {
                 console. log ("WebSocket Connection Successful");
+                this.accessVerify = window.localStorage.getItem('accessToken')
               },
               websocketonerror: function () {
                 console. log ("WebSocket connection error");
               },
               websocketonmessage: function (e) {
+                this.accessVerify = window.localStorage.getItem('accessToken')
+
+                if (this.accessVerify) {
                 // 로그인 조건문 달아주기
-                console.log(e.data);
                 alert('위험감지!')
                 // this.$alertify.prompt(
                 //   '위험 감지!',
@@ -57,6 +61,9 @@ import Vue from 'vue';
                 //   (evt, value) => this.$alertify.success('ok: ' + value),
                 //   () => this.$alertify.error('cancel')
                 // );
+              }else{
+                console.log('')
+              }
               },
               websocketclose: function (e) {
                 console.log("connection closed (" + e.code + ")");
