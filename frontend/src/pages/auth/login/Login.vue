@@ -65,7 +65,7 @@ export default {
     };
   },
   mounted() {
-            var client = new WebSocket('wss://k6e2021.p.ssafy.io/cctv1/');
+            var client = new WebSocket('wss://k6e2021.p.ssafy.io/api/cctv1/');
             var canvas = document.querySelector('canvas');
             var jsmpeg = require('jsmpeg');
             var player = new jsmpeg(client, {
