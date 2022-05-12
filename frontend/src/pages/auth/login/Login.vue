@@ -17,7 +17,6 @@
       :error="!!passwordErrors.length"
       :error-messages="passwordErrors"
     />
-        <canvas></canvas>
     <div
       class="auth-layout__options d-flex align--center justify--space-between"
     >
