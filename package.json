@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "vue-alertify": "^1.1.0"
+    "vue-alertify": "^1.1.0",
+    "vue-date-pick": "^1.4.1"
   }
 }

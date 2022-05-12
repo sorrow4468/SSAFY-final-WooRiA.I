@@ -17,8 +17,8 @@
         <p class="mt-4">한명은 누구?</p>
       </div>
     </div>
+    <div style="height:45vw;"><img src="@/../public/img/landing-page/BackgroundBottom.png" alt="background-bottom" class="bg-bottom"></div>
   </div>
-
 </template>
 
 <script>
@@ -30,15 +30,22 @@ export default {
 <style lang="scss">
 
 .persona {
-  max-width: 300px;
-  margin-left: 6.9rem;
-  margin-right: 6.9rem;
+  width: 20vw;
+  margin-left: 3vw;
+  margin-right: 3vw;
   filter: drop-shadow(3px 3px 3px #cccccc);
 }
 
 .v-line {
   border-left : 2px solid #52d08f;
-  height : 300px;
+  height : 22vw;
+}
+
+.bg-bottom {
+  position: absolute;
+  left: 0%;
+  width: 100%;
+  z-index: -1;
 }
 
 </style>
