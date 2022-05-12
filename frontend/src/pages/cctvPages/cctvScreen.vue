@@ -1,6 +1,6 @@
 <template >
   <div class="cctv-border"> 
-    <h1>cctv스크린</h1>
+    <canvas  class="cctv-border"></canvas>
   </div>
 </template>
 
@@ -11,7 +11,15 @@ export default {
   components: {
 
   },
-
+  mounted() {
+            var client = new WebSocket('wss://k6e2021.p.ssafy.io/api/cctv1/');
+            var canvas = document.querySelector('canvas');
+            var jsmpeg = require('jsmpeg');
+            var player = new jsmpeg(client, {
+              canvas: canvas
+            });
+            console.log(player)
+  },
   data() {
     return {
     };
