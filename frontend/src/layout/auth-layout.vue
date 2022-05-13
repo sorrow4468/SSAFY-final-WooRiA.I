@@ -3,7 +3,12 @@
     <div class="auth-layout row align-content--center">
       <div class="flex xs12 pa-3 flex-center">
         <router-link class="py-5 flex-center" to="/">
-          <vuestic-logo height="32" />
+          <!-- <vuestic-logo height="32" /> -->
+          <div class="d-flex align--center">
+            <img src="@/../public/img/landing-page/woori-ai-logo/child-boy.png" alt="logo" class="auth-logo">
+            <div class="f-auth mr-2 ml-2">우리A.I</div>
+            <img src="@/../public/img/landing-page/woori-ai-logo/child-girl.png" alt="logo" class="auth-logo">
+          </div>
         </router-link>
       </div>
 
@@ -71,4 +76,15 @@ export default {
     max-width: 600px;
   }
 }
+
+.auth-logo {
+  width: 3rem;
+}
+
+.f-auth {
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: #303030;
+}
+
 </style>
