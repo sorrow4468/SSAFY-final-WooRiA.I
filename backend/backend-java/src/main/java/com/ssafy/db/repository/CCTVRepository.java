@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface CCTVRepository extends JpaRepository<CCTV, Long> {
     // 아래와 같이, Query Method 인터페이스(반환값, 메소드명, 인자) 정의를 하면 자동으로 Query Method 구현됨.
-    List<CCTV> findAllByRegDateBetween(LocalDateTime start, LocalDateTime end);
+    List<CCTV> findAllByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 
 
 }
