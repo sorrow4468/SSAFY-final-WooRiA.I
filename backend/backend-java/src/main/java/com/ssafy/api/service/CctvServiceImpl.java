@@ -1,6 +1,8 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.request.CCTVListReq;
 import com.ssafy.api.request.KafkaVO;
+import com.ssafy.api.response.CctvListRes;
 import com.ssafy.db.entity.CCTV;
 import com.ssafy.db.entity.Danger;
 import com.ssafy.db.entity.User;
@@ -9,7 +11,10 @@ import com.ssafy.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -61,5 +66,24 @@ public class CctvServiceImpl implements CctvService {
             cctvRepository.saveAndFlush(cctv);
         }
 
+    }
+
+    @Override
+    public CctvListRes getCCTVList(CCTVListReq cctvListReq) {
+
+        // Date TO LocalDate
+        LocalDate localDate = cctvListReq.getDateTime().toInstant() // Date -> Instant
+                .atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
+                .toLocalDate(); // ZonedDateTime -> LocalDate
+
+
+
+        LocalDateTime startDatetime = LocalDateTime.of(localDate.minusDays(1), LocalTime.of(0,0,0));
+        LocalDateTime endDatetime = LocalDateTime.of(localDate, LocalTime.of(23,59,59));
+        CctvListRes cctvListRes = new CctvListRes();
+        List<CCTV> cctvList = cctvRepository.findAllByRegDateBetween(startDatetime,endDatetime);
+        cctvListRes.setCctvList(cctvList);
+
+        return cctvListRes;
     }
 }
