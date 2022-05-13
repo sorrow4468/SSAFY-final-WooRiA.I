@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @Table(name = "CCTV")
 public class CCTV extends BaseEntity {
 
+
     @JsonIgnore
     @Id
     @Column(name = "ID")

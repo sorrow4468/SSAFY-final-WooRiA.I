@@ -200,4 +200,5 @@ public class UserController {
 		return ResponseEntity.status(400).body(BaseResponseBody.of(400, "failed"));
 	}
 
+
 }

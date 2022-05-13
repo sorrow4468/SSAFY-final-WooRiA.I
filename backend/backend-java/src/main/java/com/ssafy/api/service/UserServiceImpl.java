@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.request.SetTimeReq;
 import com.ssafy.api.request.ValidateEmailReq;
 import com.ssafy.db.entity.Gender;
 import com.ssafy.db.entity.User;
@@ -70,6 +71,15 @@ public class UserServiceImpl implements UserService {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
 		userRepository.updatePassword(email,bCryptPasswordEncoder.encode(pw));
 
+	}
+
+	@Override
+	public void setTimer(SetTimeReq setTimeReq) {
 
 	}
+
+//	@Override
+//	public void setTimer(SetTimeReq setTimeReq) {
+//		userRepository.setTimer()
+//	}
 }

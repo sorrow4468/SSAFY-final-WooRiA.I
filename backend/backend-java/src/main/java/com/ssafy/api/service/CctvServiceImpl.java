@@ -81,7 +81,7 @@ public class CctvServiceImpl implements CctvService {
         LocalDateTime startDatetime = LocalDateTime.of(localDate.minusDays(1), LocalTime.of(0,0,0));
         LocalDateTime endDatetime = LocalDateTime.of(localDate, LocalTime.of(23,59,59));
         CctvListRes cctvListRes = new CctvListRes();
-        List<CCTV> cctvList = cctvRepository.findAllByRegDateBetween(startDatetime,endDatetime);
+        List<CCTV> cctvList = cctvRepository.findAllByCreatedAtBetween(startDatetime,endDatetime);
         cctvListRes.setCctvList(cctvList);
 
         return cctvListRes;
