@@ -8,7 +8,7 @@ import CctvPages from "@/layout/cctv-pages.vue";
 import Calendar from "@/layout/calendar-layout.vue";
 
 import BoardList from "@/pages/calendar/boardlist.vue";
-
+import Detail from "@/pages/calendar/detail.vue";
 import RouteViewComponent from "./route-view.vue";
 import UIRoute from "@/pages/admin/ui/route";
 
@@ -211,6 +211,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "Boardlist",
         name: "Boardlist",
         component: BoardList
+      },
+      {
+        path: "Boardlist/detail/:id",
+        name: "detail",
+        component: Detail
       }
     ]
   },
