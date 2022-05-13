@@ -50,6 +50,9 @@
 
 <script>
 import http from '@/components/common/axios.js'
+import { useStore } from 'vuex'
+import jwt_decode from "jwt-decode"
+import { mapMutations } from 'vuex';
 
 
 export default {
@@ -93,9 +96,16 @@ export default {
           ).then((res)=>{
             window.localStorage.setItem('accessToken', res.data.accessToken);
             window.localStorage.setItem('refreshToken', res.data.refreshToken);
+
             alert('로그인 성공');
             this.$router.push({ name: "dashboard" });
-            
+
+            var decoded = jwt_decode(window.localStorage.getItem('accessToken', res.data.accessToken));
+            console.log(window.localStorage)
+            console.log(decoded.name)
+            this.$store.state.userName = decoded.name
+            console.log(this.$store.state.userName)
+
             }
           ).catch((err) => {
             console.log(err)
