@@ -3,6 +3,7 @@ import cv2
 import datetime, time, json
 import boto3
 import os
+import moviepy.editor as moviepy
 
 from PyQt5.QtWidgets import QMainWindow
 from QtApp.QtUI.MainUI import Ui_MainWindow
@@ -58,7 +59,7 @@ class MainWindow(QMainWindow):
                 Filename=filepath,
                 Bucket=bucket,
                 Key=access_key,
-                ExtraArgs={"ContentType": "video/avi", "ACL": "public-read"},
+                ExtraArgs={"ContentType": "video/mp4", "ACL": "public-read"},
             )
             print("upload video to aws s3!")
         except Exception as e:
@@ -71,7 +72,7 @@ class MainWindow(QMainWindow):
         filename : s3에 저장된 파일 명
         """
         location = self.s3.get_bucket_location(Bucket="ssafit-01-bucket")["LocationConstraint"]
-        return f"https://ssafit-01-bucket.s3.{location}.amazonaws.com/{filename}.avi"
+        return f"https://ssafit-01-bucket.s3.{location}.amazonaws.com/{filename}.mp4"
 
     def thread_CCTV_run(self):
         Frame_1, Frame_2, Frame3, Frame4 = None, None, None, None
@@ -112,17 +113,24 @@ class MainWindow(QMainWindow):
                     now = datetime.datetime.now().strftime("%d_%H-%M-%S")
                     fourcc = cv2.VideoWriter_fourcc(*'XVID')
                     path = "C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi"
+                    realpath = "C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".mp4"
                     video = cv2.VideoWriter("C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi", fourcc, 20.0, (Frame_1.shape[1], Frame_1.shape[0]))
+                    
                     flag = False
                 
                 video.write(Frame_1)
+                
                 if (time.time() - start) > 5 :
                     trigger = False
                     video.release()
+                    clip = moviepy.VideoFileClip(path)
+                    clip.write_videofile(realpath)
                     print("video record end!")
-                    print(self.s3_put_object("ssafit-01-bucket", path, str(now)+ ".avi"))
+                    print(self.s3_put_object("ssafit-01-bucket", realpath, str(now)+ ".mp4"))
                     if os.path.isfile(path):
                         os.remove(path)
+                    if os.path.isfile(realpath):
+                        os.remove(realpath)                        
                     # connect to web
                     url = self.s3_get_image_url(str(now))
                     data = {'url' : url,
