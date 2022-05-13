@@ -2,6 +2,7 @@
   <div  class="pageSet">
     <div class="flex xs8 md8">
       <cctvscreen/>
+
     </div>
     <div class="flex xs4 md4">
       <cctvclock color="green"/>
