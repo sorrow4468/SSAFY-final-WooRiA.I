@@ -8,7 +8,7 @@
       :error="!!emailErrors.length"
       :error-messages="emailErrors"
     />
-
+    <canvas></canvas>
     <va-input
       class="mb-3"
       v-model="password"

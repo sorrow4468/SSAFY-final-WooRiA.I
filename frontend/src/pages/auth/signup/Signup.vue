@@ -89,6 +89,7 @@
         class="mb-0"
         :error="!!agreedToTermsErrors.length"
         :errorMessages="agreedToTermsErrors"
+        style="visibility:hidden;"
       >
         <template #label>
           <span class="ml-1">
@@ -137,7 +138,7 @@ export default {
     };
   },
   methods: {
-    onsubmit() {  
+    onsubmit() {
       this.idErrors = this.id ? [] : ["아이디를 적어주세요"];
       // this.emailSuccess = this.emailErrors ? [] : ["이메일 중복 체크를 해주세요"];
       // if (this.emailSuccess != []) {
@@ -158,7 +159,7 @@ export default {
         ? []
         : ["계속하려면 사용 약관에 동의해야 합니다"];
       if (!this.formReady) {
-        
+
         return;
       }
       if (!this.emailSuccess)
@@ -178,15 +179,15 @@ export default {
           ).then((res)=>{
             alert('회원가입 성공');
             this.$router.push({ name: "dashboard" });
-            
+
             }
           ).catch((err) => {
 }
           )
       }
 
-      
-      
+
+
     },
     //  이메일 검증
     emailsubmit() {
@@ -200,7 +201,7 @@ export default {
         'auth/email/confirms',
          {
            "email" : this.email
-                } 
+                }
       ).then((res)=>{
         this.emailSuccess = true;
         }
@@ -225,7 +226,7 @@ export default {
         'auth/sms/sends',
          {
            "to" : this.phoneNumber
-                } 
+                }
       ).then((res)=>{
 
         }
@@ -249,13 +250,13 @@ export default {
          {
            "to" : this.phoneNumber,
            "number" : this.numbercheck
-                } 
+                }
       ).then((res)=>{
         this.numbersuccess = true;
         }
       ).catch((err) => {
         this.numbercheckerr.push('유효한 번호가 아닙니다');
-            
+
         })
       }
       // axios 요청 보내서
