@@ -8,6 +8,7 @@ import com.ssafy.api.response.CctvListRes;
 import com.ssafy.api.service.CctvService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
+import com.ssafy.common.util.JwtTokenUtil;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
@@ -34,6 +36,9 @@ public class CctvController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
+
 
     //상황 발생 리스트 출력
     @PostMapping("/find/list")
@@ -61,8 +66,20 @@ public class CctvController {
             @ApiResponse(code = 404, message = "사용자 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
-    public ResponseEntity<? extends BaseResponseBody> EmailVerification(@RequestBody @ApiParam(value="설정 시간", required = true) SetTimeReq setTimeReq) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
-        userService.setTimer(setTimeReq);
+    public ResponseEntity<? extends BaseResponseBody> setTimer(@RequestBody @ApiParam(value="설정 시간", required = true) SetTimeReq setTimeReq, HttpServletRequest request)  {
+        String token;
+        if(request.getAttribute("authorization") != null) {
+            token = request.getAttribute("authorization").toString();
+        }else {
+            token = request.getHeader(JwtTokenUtil.HEADER_STRING);
+        }
+
+
+        token = token.replace(JwtTokenUtil.TOKEN_PREFIX, "");
+
+        String email = jwtTokenUtil.getUserEmail(token);
+
+        userService.setTimer(email,setTimeReq);
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }

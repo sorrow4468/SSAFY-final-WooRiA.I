@@ -28,6 +28,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findUserByEmail(String email);
 
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE User b SET b.START_TIME= :startTime, b.END_TIME= :endTime where b.email= :email")
+    int setUserTimer(String email,LocalDateTime startTime, LocalDateTime endTime);
 
     // 정보를 들고오는게 아닌 유무만 확인
     boolean existsByEmail(String email);
