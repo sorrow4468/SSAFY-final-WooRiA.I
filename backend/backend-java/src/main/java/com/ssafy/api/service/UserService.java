@@ -15,5 +15,5 @@ public interface UserService {
 	public boolean verifyEmail(ValidateEmailReq validateEmailReq);
 	void setUserPasswordByEmail(String email,String pw);
 
-	void setTimer(SetTimeReq setTimeReq);
+	void setTimer(String email,SetTimeReq setTimeReq);
 }

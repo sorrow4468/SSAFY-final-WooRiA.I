@@ -13,6 +13,9 @@ import com.ssafy.db.repository.UserRepository;
 import com.ssafy.db.repository.UserRepositorySupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 /**
  *	유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
  */
@@ -74,12 +77,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void setTimer(SetTimeReq setTimeReq) {
+	@Transactional
+	public void setTimer(String email, SetTimeReq setTimeReq) {
+		LocalDateTime startTime = setTimeReq.getStartTime().toInstant() // Date -> Instant
+				.atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
+				.toLocalDateTime();
 
+		LocalDateTime endTime = setTimeReq.getEndTime().toInstant() // Date -> Instant
+				.atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
+				.toLocalDateTime();
+
+
+		userRepository.setUserTimer(email,startTime,endTime);
 	}
 
-//	@Override
-//	public void setTimer(SetTimeReq setTimeReq) {
-//		userRepository.setTimer()
-//	}
 }
