@@ -12,6 +12,7 @@
 <script>
 import calendar from "./user-calendar.vue";
 import boardlist from "./boardlist.vue";
+import http from "@/components/common/axios.js";
 
 export default {
   name: "cctvbase",

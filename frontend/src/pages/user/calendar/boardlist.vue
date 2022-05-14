@@ -16,16 +16,11 @@
             </thead>
 
             <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.country }}</td>
-                <td>
-                  <!-- <va-badge :color="getStatusColor(user.status)">
-                    {{ user.status }}
-                  </va-badge> -->
-                  <va-badge :text="user.status" :color="user.status" />
-                </td>
+              <tr v-for="li in listGetters" :key="li.createdAt">
+                <td>{{ li.createdAt }}</td>
+                <td>{{ li.danger }}</td>
+                <td>{{ li.location }}</td>
+                <td>{{ li.video_URL }}</td>
               </tr>
             </tbody>
           </table>
@@ -45,15 +40,21 @@
 
 <script>
 import data from "@/data/tables/markup-table/data.json";
+import { mapMutations } from "vuex";
 
 export default {
   name: "boardlist",
   components: {},
   data() {
     return {
-      users: data.slice(0, 6),
+      users: data.slice(0, 4),
       value: 1
     };
+  },
+  computed: {
+    listGetters() {
+      return this.$store.getters["getList"];
+    }
   },
   methods: {
     getStatusColor(status) {
@@ -64,7 +65,6 @@ export default {
       if (status === "processing") {
         return "info";
       }
-
       return "danger";
     }
   }

@@ -1,17 +1,25 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
-  strict: true, // process.env.NODE_ENV !== 'production',
+  strict: false, // process.env.NODE_ENV !== 'production',
+  plugins: [createPersistedState()],
   state: {
     isSidebarMinimized: false,
-    userName: 'Vasili S'
+    userName: "Vasili S",
+    cctvList: []
   },
   mutations: {
     updateSidebarCollapsedState(state, isSidebarMinimized) {
-      state.isSidebarMinimized = isSidebarMinimized
+      state.isSidebarMinimized = isSidebarMinimized;
     },
     changeUserName(state, newUserName) {
-      state.userName = newUserName
+      state.userName = newUserName;
     }
   },
-})
+  getters: {
+    getList: function(state) {
+      return state.cctvList;
+    }
+  }
+});

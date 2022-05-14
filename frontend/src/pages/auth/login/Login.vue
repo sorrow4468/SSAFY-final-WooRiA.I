@@ -49,8 +49,7 @@
 </template>
 
 <script>
-import http from '@/components/common/axios.js'
-
+import http from "@/components/common/axios.js";
 
 export default {
   name: "login",
@@ -64,13 +63,13 @@ export default {
     };
   },
   mounted() {
-            var client = new WebSocket('wss://k6e2021.p.ssafy.io/api/cctv1/');
-            var canvas = document.querySelector('canvas');
-            var jsmpeg = require('jsmpeg');
-            var player = new jsmpeg(client, {
-              canvas: canvas
-            });
-            console.log(player)
+    var client = new WebSocket("wss://k6e2021.p.ssafy.io/api/cctv1/");
+    var canvas = document.querySelector("canvas");
+    var jsmpeg = require("jsmpeg");
+    var player = new jsmpeg(client, {
+      canvas: canvas
+    });
+    console.log(player);
   },
   computed: {
     formReady() {
@@ -83,23 +82,21 @@ export default {
       this.passwordErrors = this.password ? [] : ["비밀번호를 적어주세요"];
       if (!this.formReady) {
         return;
-      } else{
-        http.post(
-            '/auth/login',
-            {
-              "email": this.email,
-              "password": this.password
-            }
-          ).then((res)=>{
-            window.localStorage.setItem('accessToken', res.data.accessToken);
-            window.localStorage.setItem('refreshToken', res.data.refreshToken);
-            alert('로그인 성공');
+      } else {
+        http
+          .post("/auth/login", {
+            email: this.email,
+            password: this.password
+          })
+          .then(res => {
+            window.localStorage.setItem("accessToken", res.data.accessToken);
+            window.localStorage.setItem("refreshToken", res.data.refreshToken);
+            alert("로그인 성공");
             this.$router.push({ name: "dashboard" });
-            
-            }
-          ).catch((err) => {
-            console.log(err)
-            })
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     }
   }
