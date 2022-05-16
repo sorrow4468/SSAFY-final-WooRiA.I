@@ -6,28 +6,21 @@
           @click="start"
           class="va-button va-button--outline va-button--normal mr-2 mb-4 haha"
           style="color: rgb(0, 78, 193); border-color: rgba(86, 189, 233, 1); background: rgba(0, 0, 0, 0);"
-          ><p>일시</p></va-button
+          ><p>일시 : {{ this.$store.state.detailList.createdAt }}</p></va-button
         >
 
         <va-button
           @click="start"
           class="va-button va-button--outline va-button--normal mr-2 mb-4 haha"
           style="color: rgb(0, 78, 193); border-color: rgba(86, 189, 233, 1); background: rgba(0, 0, 0, 0);"
-          ><p>번호</p></va-button
+          ><p>장소 : {{ this.$store.state.detailList.location }}</p></va-button
         >
 
         <va-button
           @click="start"
           class="va-button va-button--outline va-button--normal mr-2 mb-4 haha"
           style="color: rgb(0, 78, 193); border-color: rgba(86, 189, 233, 1); background: rgba(0, 0, 0, 0);"
-          ><p>상황</p></va-button
-        >
-
-        <va-button
-          @click="start"
-          class="va-button va-button--outline va-button--normal  haha"
-          style="color: rgb(0, 78, 193); border-color: rgba(86, 189, 233, 1); background: rgba(0, 0, 0, 0);"
-          ><p>내용</p></va-button
+          ><p>상황 : {{ this.$store.state.detailList.danger }}</p></va-button
         >
       </div>
 

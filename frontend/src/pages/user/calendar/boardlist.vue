@@ -11,7 +11,7 @@
                 <th>탐지일시</th>
                 <th>탐지종류</th>
                 <th>위치</th>
-                <th>다운로드</th>
+                <th>자세히</th>
               </tr>
             </thead>
 
@@ -20,7 +20,13 @@
                 <td>{{ li.createdAt }}</td>
                 <td>{{ li.danger }}</td>
                 <td>{{ li.location }}</td>
-                <td>{{ li.video_URL }}</td>
+                <td>
+                  <va-badge
+                    text="바로가기"
+                    color="success"
+                    v-on:click="detail(li)"
+                  />
+                </td>
               </tr>
             </tbody>
           </table>
@@ -57,6 +63,15 @@ export default {
     }
   },
   methods: {
+    detail(li) {
+      this.$store.state.detailList.createdAt = li.createdAt;
+      this.$store.state.detailList.danger = li.danger;
+      this.$store.state.detailList.location = li.location;
+      this.$store.state.detailList.video_URL = li.video_URL;
+
+      console.log(this.$store.state.detailList.createdAt);
+      this.$router.push({ name: "detail" });
+    },
     getStatusColor(status) {
       if (status === "paid") {
         return "success";

@@ -36,7 +36,11 @@ export default {
     };
   },
   computed: {},
-  methods: {}
+  methods: {},
+  mounted() {
+    this.config.url = this.$store.state.detailList.video_URL;
+    console.log(this.config.url);
+  }
 };
 </script>
 <style>

@@ -7,7 +7,8 @@ export default createStore({
   state: {
     isSidebarMinimized: false,
     userName: "Vasili S",
-    cctvList: []
+    cctvList: [],
+    detailList: {}
   },
   mutations: {
     updateSidebarCollapsedState(state, isSidebarMinimized) {

@@ -210,7 +210,7 @@ const routes: Array<RouteRecordRaw> = [
       //   component: Detail
       // },
       {
-        path: "usercalendar/detail/:id",
+        path: "usercalendar/detail",
         name: "detail",
         component: () => import("@/pages/user/calendar/detail.vue")
       },
