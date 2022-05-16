@@ -1,40 +1,65 @@
 <template>
   <div class="container">
     <div class="border">
-      <div class="mt-3 ml-5">
+      <div class="mt-5 ml-5">
+        <br />
+        <br />
+        <br />
         <va-button
-          @click="start"
           class="va-button va-button--outline va-button--normal mr-2 mb-4 haha"
-          style="color: rgb(0, 78, 193); border-color: rgba(86, 189, 233, 1); background: rgba(0, 0, 0, 0);"
+          style="
+            color: rgb(0, 78, 193);
+            border-color: rgba(40, 99, 188);
+            background: rgba(255, 255, 255);
+          "
           ><p>일시 : {{ this.$store.state.detailList.createdAt }}</p></va-button
         >
 
         <va-button
-          @click="start"
           class="va-button va-button--outline va-button--normal mr-2 mb-4 haha"
-          style="color: rgb(0, 78, 193); border-color: rgba(86, 189, 233, 1); background: rgba(0, 0, 0, 0);"
+          style="
+            color: rgb(0, 78, 193);
+            border-color: rgba(40, 99, 188);
+            background: rgba(255, 255, 255);
+          "
           ><p>장소 : {{ this.$store.state.detailList.location }}</p></va-button
         >
 
         <va-button
-          @click="start"
           class="va-button va-button--outline va-button--normal mr-2 mb-4 haha"
-          style="color: rgb(0, 78, 193); border-color: rgba(86, 189, 233, 1); background: rgba(0, 0, 0, 0);"
+          style="
+            color: rgb(0, 78, 193);
+            border-color: rgba(40, 99, 188);
+            background: rgba(255, 255, 255);
+          "
           ><p>상황 : {{ this.$store.state.detailList.danger }}</p></va-button
         >
       </div>
 
-      <div class="haha mt-3 ml-5">
+      <div class="haha mt-5 ml-5">
         <va-button
-          @click="home"
-          class="va-button va-button--outline va-button--normal mx-4 mb-2"
-          style="border-radius:10px; width:100px; color: rgb(21, 78, 193); border-color: rgb(21, 78, 193); background: rgba(0, 0, 0, 0);"
+          @click="goHome()"
+          class="va-button va-button--outline va-button--normal mx-2 mb-2"
+          style="
+            border-radius: 10px;
+            width: 210px;
+            color: rgb(255, 255, 255);
+            border-color: rgb(0, 204, 0);
+            background: rgb(0, 204, 0);
+          "
           >홈으로</va-button
         >
+
         <va-button
-          @click="out"
-          class="va-button va-button--outline va-button--normal mx-4 mb-2"
-          style="border-radius:10px; width:100px; color: rgb(228, 34, 34); border-color: rgb(228, 34, 34); background: rgba(0, 0, 0, 0);"
+          @click="goCalendar()"
+          class="va-button va-button--outline va-button--normal mx-2 mb-2"
+          style="
+            border-radius: 10px;
+            width: 210px;
+            color: rgb(255, 255, 255);
+            border-color: rgb(228, 34, 34);
+            background: rgba(228, 34, 34);
+          "
           >나가기</va-button
         >
       </div>
@@ -45,7 +70,15 @@
 <script>
 export default {
   name: "detailInfo",
-  data() {}
+  data() {},
+  methods: {
+    goHome() {
+      this.$router.push("/");
+    },
+    goCalendar() {
+      this.$router.push("/user/usercalendar");
+    },
+  },
 };
 </script>
 <style scoped>
@@ -80,7 +113,7 @@ p {
   justify-content: center;
   align-items: center;
   width: 95%;
-  height: 90px;
+  height: 95px;
   margin-left: 5%;
 }
 </style>
