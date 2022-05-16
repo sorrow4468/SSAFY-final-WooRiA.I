@@ -16,6 +16,7 @@
             </thead>
 
             <tbody>
+              <!-- 실제 데이터 삽인 구간 -->
               <tr v-for="user in users" :key="user.id">
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
@@ -44,6 +45,7 @@
 </template>
 
 <script>
+// 더미 데이터
 import data from "@/data/tables/markup-table/data.json";
 
 export default {
