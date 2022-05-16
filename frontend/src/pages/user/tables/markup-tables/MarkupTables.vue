@@ -21,7 +21,7 @@
                 <th>탐지일시</th>
                 <th>탐지종류</th>
                 <th>위치</th>
-                <th>다운로드</th>
+                <th>자세히</th>
               </tr>
             </thead>
 
@@ -31,9 +31,11 @@
                 <td>{{ li.danger }}</td>
                 <td>{{ li.location }}</td>
                 <td>
-                  <div>{{ li.video_URL }}</div>
-
-                  <!-- <va-badge :text="user.status" :color="user.status" /> -->
+                  <va-badge
+                    text="바로가기"
+                    color="success"
+                    v-on:click="tableDetail(li)"
+                  />
                 </td>
               </tr>
             </tbody>
@@ -60,15 +62,24 @@ export default {
   data() {
     return {
       listGetters: data.slice(0, 8),
-      value: new Date()
+      value: new Date(),
     };
   },
   computed: {
     listGetters() {
       return this.$store.getters["getList"];
-    }
+    },
   },
   methods: {
+    tableDetail(li) {
+      this.$store.state.detailList.createdAt = li.createdAt;
+      this.$store.state.detailList.danger = li.danger;
+      this.$store.state.detailList.location = li.location;
+      this.$store.state.detailList.video_URL = li.video_URL;
+
+      console.log(this.$store.state.detailList.createdAt);
+      this.$router.push({ name: "tableDetail" });
+    },
     getStatusColor(status) {
       if (status === "paid") {
         return "success";
@@ -84,18 +95,18 @@ export default {
       console.log(this.value);
       http
         .post("/cctv/find/list", {
-          dateTime: this.value
+          dateTime: this.value,
         })
-        .then(res => {
+        .then((res) => {
           console.log(res.data);
           this.$store.state.cctvList = res.data.cctvList;
           console.log(this.$store.state.cctvList);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
