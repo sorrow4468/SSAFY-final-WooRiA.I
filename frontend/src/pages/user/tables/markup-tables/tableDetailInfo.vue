@@ -51,7 +51,7 @@
         >
 
         <va-button
-          @click="goCalendar()"
+          @click="goTable()"
           class="va-button va-button--outline va-button--normal mx-2 mb-2"
           style="
             border-radius: 10px;
@@ -69,14 +69,14 @@
 
 <script>
 export default {
-  name: "detailInfo",
+  name: "tableDetailInfo",
   data() {},
   methods: {
     goHome() {
       this.$router.push("/");
     },
-    goCalendar() {
-      this.$router.push("/user/usercalendar");
+    goTable() {
+      this.$router.push("/user/usertables");
     },
   },
 };

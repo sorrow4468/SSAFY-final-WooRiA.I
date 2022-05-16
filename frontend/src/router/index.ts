@@ -11,12 +11,12 @@ import UIRoute from "@/pages/admin/ui/route";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
-    redirect: { name: "landing" }
+    redirect: { name: "landing" },
   },
   {
     name: "landing",
     path: "/landing",
-    component: LandingLayout
+    component: LandingLayout,
   },
   {
     name: "admin",
@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "dashboard",
         path: "dashboard",
-        component: () => import("@/pages/admin/dashboard/Dashboard.vue")
+        component: () => import("@/pages/admin/dashboard/Dashboard.vue"),
       },
       {
         name: "statistics",
@@ -39,8 +39,9 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/statistics/charts/Charts.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Charts"
-            }
+              wikiLink:
+                "https://github.com/epicmaxco/vuestic-admin/wiki/Charts",
+            },
           },
           {
             name: "progress-bars",
@@ -49,10 +50,10 @@ const routes: Array<RouteRecordRaw> = [
               import("@/pages/admin/statistics/progress-bars/ProgressBars.vue"),
             meta: {
               wikiLink:
-                "https://github.com/epicmaxco/vuestic-admin/wiki/Progress-Bars"
-            }
-          }
-        ]
+                "https://github.com/epicmaxco/vuestic-admin/wiki/Progress-Bars",
+            },
+          },
+        ],
       },
       {
         name: "forms",
@@ -65,8 +66,9 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/forms/form-elements/FormElements.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/inputs"
-            }
+              wikiLink:
+                "https://github.com/epicmaxco/vuestic-admin/wiki/inputs",
+            },
           },
           {
             name: "medium-editor",
@@ -75,10 +77,10 @@ const routes: Array<RouteRecordRaw> = [
               import("@/pages/admin/forms/medium-editor/MediumEditor.vue"),
             meta: {
               wikiLink:
-                "https://github.com/epicmaxco/vuestic-admin/wiki/Medium-Editor"
-            }
-          }
-        ]
+                "https://github.com/epicmaxco/vuestic-admin/wiki/Medium-Editor",
+            },
+          },
+        ],
       },
       {
         name: "maps",
@@ -91,8 +93,8 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/maps/google-maps/GoogleMapsPage.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps"
-            }
+              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps",
+            },
           },
           {
             name: "yandex-maps",
@@ -100,8 +102,8 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/maps/yandex-maps/YandexMapsPage.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps"
-            }
+              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps",
+            },
           },
           {
             name: "leaflet-maps",
@@ -109,8 +111,8 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/maps/leaflet-maps/LeafletMapsPage.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps"
-            }
+              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps",
+            },
           },
           {
             name: "bubble-maps",
@@ -118,8 +120,8 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/maps/bubble-maps/BubbleMapsPage.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps"
-            }
+              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps",
+            },
           },
           {
             name: "line-maps",
@@ -127,10 +129,10 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/maps/line-maps/LineMapsPage.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps"
-            }
-          }
-        ]
+              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Maps",
+            },
+          },
+        ],
       },
       {
         name: "tables",
@@ -143,8 +145,9 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/tables/markup-tables/MarkupTables.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Tables"
-            }
+              wikiLink:
+                "https://github.com/epicmaxco/vuestic-admin/wiki/Tables",
+            },
           },
           {
             name: "data",
@@ -152,10 +155,11 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import("@/pages/admin/tables/data-tables/DataTables.vue"),
             meta: {
-              wikiLink: "https://github.com/epicmaxco/vuestic-admin/wiki/Tables"
-            }
-          }
-        ]
+              wikiLink:
+                "https://github.com/epicmaxco/vuestic-admin/wiki/Tables",
+            },
+          },
+        ],
       },
       {
         name: "pages",
@@ -165,22 +169,22 @@ const routes: Array<RouteRecordRaw> = [
           {
             name: "404-pages",
             path: "404-pages",
-            component: () => import("@/pages/admin/pages/404PagesPage.vue")
+            component: () => import("@/pages/admin/pages/404PagesPage.vue"),
           },
           {
             name: "faq",
             path: "faq",
-            component: () => import("@/pages/admin/pages/FaqPage.vue")
-          }
-        ]
+            component: () => import("@/pages/admin/pages/FaqPage.vue"),
+          },
+        ],
       },
       {
         name: "cctvbase",
         path: "cctvbase",
-        component: () => import("@/pages/admin/cctvPages/cctvBase.vue")
+        component: () => import("@/pages/admin/cctvPages/cctvBase.vue"),
       },
-      UIRoute
-    ]
+      UIRoute,
+    ],
   },
   {
     name: "user",
@@ -190,36 +194,37 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "userboard",
         path: "userboard",
-        component: () => import("@/pages/user/dashboard/Dashboard.vue")
+        component: () => import("@/pages/user/dashboard/Dashboard.vue"),
       },
       {
         name: "usertables",
         path: "usertables",
         component: () =>
-          import("@/pages/user/tables/markup-tables/MarkupTables.vue")
+          import("@/pages/user/tables/markup-tables/MarkupTables.vue"),
       },
       {
         name: "usercctv",
         path: "usercctv",
-        component: () => import("@/pages/user/cctvPages/cctvBase.vue")
+        component: () => import("@/pages/user/cctvPages/cctvBase.vue"),
       },
 
-      // {
-      //   path: "usertables/detail/:id",
-      //   name: "detail",
-      //   component: Detail
-      // },
+      {
+        path: "usertables/detail",
+        name: "tableDetail",
+        component: () =>
+          import("@/pages/user/tables/markup-tables/tableDetail.vue"),
+      },
       {
         path: "usercalendar/detail",
         name: "detail",
-        component: () => import("@/pages/user/calendar/detail.vue")
+        component: () => import("@/pages/user/calendar/detail.vue"),
       },
       {
         name: "usercalendar",
         path: "usercalendar",
-        component: () => import("@/pages/user/calendar/calendar.vue")
-      }
-    ]
+        component: () => import("@/pages/user/calendar/calendar.vue"),
+      },
+    ],
   },
   {
     path: "/auth",
@@ -228,24 +233,24 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "login",
         path: "login",
-        component: () => import("@/pages/auth/login/Login.vue")
+        component: () => import("@/pages/auth/login/Login.vue"),
       },
       {
         name: "signup",
         path: "signup",
-        component: () => import("@/pages/auth/signup/Signup.vue")
+        component: () => import("@/pages/auth/signup/Signup.vue"),
       },
       {
         name: "recover-password",
         path: "recover-password",
         component: () =>
-          import("@/pages/auth/recover-password/RecoverPassword.vue")
+          import("@/pages/auth/recover-password/RecoverPassword.vue"),
       },
       {
         path: "",
-        redirect: { name: "login" }
-      }
-    ]
+        redirect: { name: "login" },
+      },
+    ],
   },
   {
     path: "/404",
@@ -254,24 +259,25 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "not-found-advanced",
         path: "not-found-advanced",
-        component: () => import("@/pages/404-pages/VaPageNotFoundSearch.vue")
+        component: () => import("@/pages/404-pages/VaPageNotFoundSearch.vue"),
       },
       {
         name: "not-found-simple",
         path: "not-found-simple",
-        component: () => import("@/pages/404-pages/VaPageNotFoundSimple.vue")
+        component: () => import("@/pages/404-pages/VaPageNotFoundSimple.vue"),
       },
       {
         name: "not-found-custom",
         path: "not-found-custom",
-        component: () => import("@/pages/404-pages/VaPageNotFoundCustom.vue")
+        component: () => import("@/pages/404-pages/VaPageNotFoundCustom.vue"),
       },
       {
         name: "not-found-large-text",
         path: "/pages/not-found-large-text",
-        component: () => import("@/pages/404-pages/VaPageNotFoundLargeText.vue")
-      }
-    ]
+        component: () =>
+          import("@/pages/404-pages/VaPageNotFoundLargeText.vue"),
+      },
+    ],
   },
   {
     path: "/cctvpage",
@@ -280,10 +286,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "cctvbase",
         path: "cctvbase",
-        component: () => import("@/pages/cctvPages/cctvBase.vue")
-      }
-    ]
-  }
+        component: () => import("@/pages/cctvPages/cctvBase.vue"),
+      },
+    ],
+  },
   // {
   //   path: "/user",
   //   component: Calendar,
@@ -300,7 +306,7 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   //  mode: process.env.VUE_APP_ROUTER_MODE_HISTORY === 'true' ? 'history' : 'hash',
-  routes
+  routes,
 });
 
 export default router;
