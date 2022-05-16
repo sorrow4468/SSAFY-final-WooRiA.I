@@ -54,7 +54,6 @@ import { useStore } from 'vuex'
 import jwt_decode from "jwt-decode"
 import { mapMutations } from 'vuex';
 
-
 export default {
   name: "login",
   data() {
@@ -67,13 +66,13 @@ export default {
     };
   },
   mounted() {
-            var client = new WebSocket('wss://k6e2021.p.ssafy.io/api/cctv1/');
-            var canvas = document.querySelector('canvas');
-            var jsmpeg = require('jsmpeg');
-            var player = new jsmpeg(client, {
-              canvas: canvas
-            });
-            console.log(player)
+    var client = new WebSocket("wss://k6e2021.p.ssafy.io/api/cctv1/");
+    var canvas = document.querySelector("canvas");
+    var jsmpeg = require("jsmpeg");
+    var player = new jsmpeg(client, {
+      canvas: canvas
+    });
+    console.log(player);
   },
   computed: {
     formReady() {

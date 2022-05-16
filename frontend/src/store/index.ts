@@ -1,29 +1,26 @@
-import { createStore } from 'vuex'
-import jwt_decode from "jwt-decode"
+import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
-
-// var token =
-// var decoded = jwt_decode(token);
-
-
 export default createStore({
+  strict: false, // process.env.NODE_ENV !== 'production',
   plugins: [createPersistedState()],
-  strict: true, // process.env.NODE_ENV !== 'production',
   state: {
     isSidebarMinimized: false,
-    // userName: 'Vasili S',
-    userName: '',
-    // userToken: '',
-    // userName: jwt_decode(this.store.state.userToken),
-
+    userName: "Vasili S",
+    cctvList: [],
+    detailList: {}
   },
   mutations: {
     updateSidebarCollapsedState(state, isSidebarMinimized) {
-      state.isSidebarMinimized = isSidebarMinimized
+      state.isSidebarMinimized = isSidebarMinimized;
     },
     changeUserName(state, newUserName) {
-      state.userName = newUserName
+      state.userName = newUserName;
     }
   },
-})
+  getters: {
+    getList: function(state) {
+      return state.cctvList;
+    }
+  }
+});
