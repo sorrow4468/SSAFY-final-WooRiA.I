@@ -54,13 +54,13 @@ export default {
   data() {
     return {
       users: data.slice(0, 4),
-      value: 1
+      value: 1,
     };
   },
   computed: {
     listGetters() {
       return this.$store.getters["getList"];
-    }
+    },
   },
   methods: {
     detail(li) {
@@ -81,8 +81,8 @@ export default {
         return "info";
       }
       return "danger";
-    }
-  }
+    },
+  },
 };
 </script>
 
