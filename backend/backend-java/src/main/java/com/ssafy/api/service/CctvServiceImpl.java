@@ -86,4 +86,13 @@ public class CctvServiceImpl implements CctvService {
 
         return cctvListRes;
     }
+
+    @Override
+    public CctvListRes getALLCCTVList() {
+
+        CctvListRes cctvListRes = new CctvListRes();
+        List<CCTV> cctvList = cctvRepository.findAll();
+        cctvListRes.setCctvList(cctvList);
+        return cctvListRes;
+    }
 }

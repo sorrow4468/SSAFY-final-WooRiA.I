@@ -15,4 +15,6 @@ public interface CctvService {
     void saveVideo(KafkaVO kafkaVO);
 
     CctvListRes getCCTVList(CCTVListReq cctvListReq);
+
+    CctvListRes getALLCCTVList();
 }

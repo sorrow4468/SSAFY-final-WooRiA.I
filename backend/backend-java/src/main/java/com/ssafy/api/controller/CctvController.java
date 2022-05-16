@@ -14,10 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -52,6 +49,23 @@ public class CctvController {
     public ResponseEntity<CctvListRes> getCCTVList(@RequestBody @ApiParam(value="달력의 LocalDate", required = true) CCTVListReq cctvListReq)  {
 
         CctvListRes cctvList = cctvService.getCCTVList(cctvListReq);
+
+        return new ResponseEntity<CctvListRes>(cctvList, HttpStatus.OK);
+
+    }
+
+    //상황 발생 리스트 출력
+    @GetMapping("/list")
+    @ApiOperation(value = "상황 발생 전체 리스트를 확인한다", notes = "상황 발생 전체 리스트를 확인한다")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 401, message = "인증 실패"),
+            @ApiResponse(code = 404, message = "사용자 없음"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
+    public ResponseEntity<CctvListRes> getALLCCTVList()  {
+
+        CctvListRes cctvList = cctvService.getALLCCTVList();
 
         return new ResponseEntity<CctvListRes>(cctvList, HttpStatus.OK);
 
