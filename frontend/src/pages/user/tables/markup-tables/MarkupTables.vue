@@ -7,7 +7,9 @@
         placeholder="날짜를 선택해주세요"
         clearable
         @click="getcctvlist"
+        v-model="value"
         stateful
+        highlight-weekend
       />
     </div>
     <va-card :title="$t('tables.stripedHoverable')">
@@ -57,6 +59,7 @@
 <script>
 import data from "@/data/tables/markup-table/data.json";
 import { mapMutations } from "vuex";
+import http from "@/components/common/axios.js";
 
 export default {
   data() {
@@ -80,17 +83,7 @@ export default {
       console.log(this.$store.state.detailList.createdAt);
       this.$router.push({ name: "tableDetail" });
     },
-    getStatusColor(status) {
-      if (status === "paid") {
-        return "success";
-      }
 
-      if (status === "processing") {
-        return "info";
-      }
-
-      return "danger";
-    },
     getcctvlist() {
       console.log(this.value);
       http

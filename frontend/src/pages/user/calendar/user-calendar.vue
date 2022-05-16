@@ -1,10 +1,11 @@
 <template>
   <va-date-picker
-    class="date "
+    class="date"
     mode="single"
     v-model="value"
     @click="getcctvlist"
     stateful
+    highlight-weekend
   />
 </template>
 
@@ -18,7 +19,7 @@ export default {
   props: {},
   data() {
     return {
-      value: new Date()
+      value: new Date(),
     };
   },
 
@@ -27,18 +28,18 @@ export default {
       console.log(this.value);
       http
         .post("/cctv/find/list", {
-          dateTime: this.value
+          dateTime: this.value,
         })
-        .then(res => {
+        .then((res) => {
           console.log(res.data);
           this.$store.state.cctvList = res.data.cctvList;
           console.log(this.$store.state.cctvList);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -47,7 +48,7 @@ export default {
 .date {
   font-size: 1em;
 
-  padding: 1em;
+  padding: 2em;
   background: #fff;
   box-shadow: 0 0.2em 1.5em rgba(0, 0, 0, 0.06);
   border-radius: 0.5em;
