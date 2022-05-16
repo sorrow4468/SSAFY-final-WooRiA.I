@@ -8,7 +8,7 @@
             :processUserInput="processUserInput"
             :valueToInputFormat="valueToInputFormat"
         >
-   
+
             <button
                 v-if="editable && hasInputElement && inputValue"
                 class="vdpClearInput"
@@ -22,7 +22,7 @@
                 class="vdpOuterWrap"
                 ref="outerWrap"
                 @click="closeViaOverlay"
-                
+
             >
                 <div class="vdpInnerWrap">
                     <header class="vdpHeader">
@@ -409,7 +409,7 @@ export default {
     this.teardownPosition();
   },
   methods: {
-    
+
     valueToInputFormat(value) {
       return !this.displayFormat
         ? value
