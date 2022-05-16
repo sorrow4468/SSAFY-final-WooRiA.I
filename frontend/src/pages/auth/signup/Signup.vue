@@ -46,6 +46,9 @@
         :label="$t('auth.phone_number')"
         :error="!!phoneNumberErrors.length"
         :error-messages="phoneNumberErrors"
+        :success="!!successMessage.length"
+        :success-messages="successMessage"
+
       />
       <div class="d-flex justify--center ml-3 mb-3">
         <va-button @click="phonesubmit" class="my-0" style="border-radius:10px;"
@@ -70,18 +73,7 @@
         >
       </div>
     </div>
-
-    <!-- 이메일 -->
-    <!-- <va-input
-      class="mb-3"
-      v-model="email"
-      type="email"
-      :label="$t('auth.email')"
-      :error="!!emailErrors.length"
-      :error-messages="emailErrors"
-    /> -->
-
-    <div
+        <div
       class="auth-layout__options d-flex align--center justify--space-between"
     >
       <va-checkbox
@@ -108,6 +100,64 @@
         $t("auth.sign_up")
       }}</va-button>
     </div>
+    
+    <!-- 아이디 중복 모달 -->
+    <va-modal
+      v-model="idComfirm"
+      hide-default-actions
+      overlay-opacity="0.2"
+    >
+      <template #header>
+        <h2>이메일 중복 확인</h2>
+      </template>
+      <div style="margin-top : 5px">사용할 수 있는 아이디 입니다.</div>
+      <template #footer>
+          <va-button class="timer-mg" @click="idComfirm = !idComfirm">
+            사용하기            
+          </va-button>
+          <va-button class="timer-mg" @click="cancelId">
+            취소          
+          </va-button>
+      </template>
+    </va-modal>
+    <!-- 문자 전송 모달 -->
+    <va-modal
+      v-model="sendMessage"
+      hide-default-actions
+      overlay-opacity="0.2"
+    >
+      <template #header>
+        <h2>시간 설정</h2>
+      </template>
+      <div style="margin-top : 5px">{{setTimecustom}}{{ startMessage }}</div>
+      <template #footer>
+          <va-button class="timer-mg" @click="startTimer">
+            시작
+          </va-button>
+          <va-button class="timer-mg" @click="timerStop">
+            취소
+          </va-button>
+      </template>
+    </va-modal>
+    <!-- 문자 확인 모달 -->
+    <va-modal
+      v-model="messageComfrim"
+      hide-default-actions
+      overlay-opacity="0.2"
+    >
+      <template #header>
+        <h2>알림</h2>
+      </template>
+      <div style="margin-top : 5px">성공적으로 확인되었습니다</div>
+      <template #footer>
+          <va-button class="timer-mg" @click="messageComfrim = !messageComfrim">
+            확인
+          </va-button>
+
+      </template>
+    </va-modal>
+
+
   </form>
 </template>
 
@@ -135,6 +185,10 @@ export default {
       numbercheck:[],
       numbersuccess: false,
       numbercheckerr:[],
+      idComfirm:false,
+      sendMessage:false,
+      messageComfrim:false,
+      successMessage : [],
     };
   },
   methods: {
@@ -155,9 +209,9 @@ export default {
         ? []
         : ["전화번호를 적어주세요"];
       this.emailErrors = this.email ? [] : ["이메일을 적어주세요"];
-      this.agreedToTermsErrors = this.agreedToTerms
-        ? []
-        : ["계속하려면 사용 약관에 동의해야 합니다"];
+      // this.agreedToTermsErrors = this.agreedToTerms
+      //   ? []
+      //   : ["계속하려면 사용 약관에 동의해야 합니다"];
       if (!this.formReady) {
 
         return;
@@ -178,7 +232,7 @@ export default {
             }
           ).then((res)=>{
             alert('회원가입 성공');
-            this.$router.push({ name: "dashboard" });
+            this.$router.push({ name: "userboard" });
 
             }
           ).catch((err) => {
@@ -204,8 +258,11 @@ export default {
                 }
       ).then((res)=>{
         this.emailSuccess = true;
+        this.idComfirm = true;
         }
       ).catch((err) => {
+        this.emailErrors.push('이미 사용중인 아이디 입니다.');
+
       }
       )
       }
@@ -222,6 +279,7 @@ export default {
       } else if (!this.validphoneNumber(this.phoneNumber)) {  // 이메일 형식이 아닐경우
         this.phoneNumberErrors.push('유효한 번호가 아닙니다');
       } else {
+        this.successMessage.push('성공적으로 전송하였습니다');
         http.post(
         'auth/sms/sends',
          {
@@ -253,6 +311,7 @@ export default {
                 }
       ).then((res)=>{
         this.numbersuccess = true;
+        this.messageComfrim = true;
         }
       ).catch((err) => {
         this.numbercheckerr.push('유효한 번호가 아닙니다');
@@ -271,6 +330,10 @@ export default {
     validphoneNumber: function (phoneNumber) {
       const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
       return regPhone.test(phoneNumber);
+    },
+    cancelId() {
+      this.email = '';
+      this.idComfirm = false;
     }
   },
   computed: {
@@ -287,4 +350,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .timer-mg {
+    margin: 0px 10px;
+  }
+</style>
