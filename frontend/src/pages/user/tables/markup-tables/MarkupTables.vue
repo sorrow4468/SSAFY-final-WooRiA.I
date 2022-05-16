@@ -6,7 +6,10 @@
         label="placeholder"
         placeholder="날짜를 선택해주세요"
         clearable
+        @click="getcctvlist"
+        v-model="value"
         stateful
+        highlight-weekend
       />
     </div>
     <va-card :title="$t('tables.stripedHoverable')">
@@ -20,20 +23,21 @@
                 <th>탐지일시</th>
                 <th>탐지종류</th>
                 <th>위치</th>
-                <th>다운로드</th>
+                <th>자세히</th>
               </tr>
             </thead>
 
             <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.country }}</td>
+              <tr v-for="li in listGetters" :key="li.createdAt">
+                <td>{{ li.createdAt }}</td>
+                <td>{{ li.danger }}</td>
+                <td>{{ li.location }}</td>
                 <td>
-                  <!-- <va-badge :color="getStatusColor(user.status)">
-                    {{ user.status }}
-                  </va-badge> -->
-                  <va-badge :text="user.status" :color="user.status" />
+                  <va-badge
+                    text="바로가기"
+                    color="success"
+                    v-on:click="tableDetail(li)"
+                  />
                 </td>
               </tr>
             </tbody>
@@ -54,27 +58,48 @@
 
 <script>
 import data from "@/data/tables/markup-table/data.json";
+import { mapMutations } from "vuex";
+import http from "@/components/common/axios.js";
 
 export default {
   data() {
     return {
-      users: data.slice(0, 8),
-      value: 1
+      listGetters: data.slice(0, 8),
+      value: new Date(),
     };
   },
+  computed: {
+    listGetters() {
+      return this.$store.getters["getList"];
+    },
+  },
   methods: {
-    getStatusColor(status) {
-      if (status === "paid") {
-        return "success";
-      }
+    tableDetail(li) {
+      this.$store.state.detailList.createdAt = li.createdAt;
+      this.$store.state.detailList.danger = li.danger;
+      this.$store.state.detailList.location = li.location;
+      this.$store.state.detailList.video_URL = li.video_URL;
 
-      if (status === "processing") {
-        return "info";
-      }
+      console.log(this.$store.state.detailList.createdAt);
+      this.$router.push({ name: "tableDetail" });
+    },
 
-      return "danger";
-    }
-  }
+    getcctvlist() {
+      console.log(this.value);
+      http
+        .post("/cctv/find/list", {
+          dateTime: this.value,
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.state.cctvList = res.data.cctvList;
+          console.log(this.$store.state.cctvList);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
 

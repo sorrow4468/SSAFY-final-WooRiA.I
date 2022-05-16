@@ -1,23 +1,24 @@
 <template>
   <div class="pageSet">
-    <div class="flex xs6 md6 mt-3 ml-5">
-      <cctvscreen />
+    <div class="flex xs8 md8">
+      <calendar />
     </div>
-    <div class="flex xs6 md6 mt-3 mr-5">
-      <detailInfo />
+    <div class="flex xs8 md8">
+      <boardlist />
     </div>
   </div>
 </template>
 
 <script>
-import cctvscreen from "../cctvPages/cctvScreen.vue";
-import detailInfo from "./detailInfo.vue";
+import calendar from "./user-calendar.vue";
+import boardlist from "./boardlist.vue";
+import http from "@/components/common/axios.js";
 
 export default {
   name: "cctvbase",
   components: {
-    cctvscreen,
-    detailInfo
+    calendar,
+    boardlist
   },
 
   data() {
@@ -29,7 +30,6 @@ export default {
 </script>
 <style>
 .pageSet {
-  /* margin-top: 5%; */
   display: flex;
   flex-direction: row;
 }
