@@ -9,6 +9,7 @@ import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.CCTVRepository;
 import com.ssafy.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -91,7 +92,7 @@ public class CctvServiceImpl implements CctvService {
     public CctvListRes getALLCCTVList() {
 
         CctvListRes cctvListRes = new CctvListRes();
-        List<CCTV> cctvList = cctvRepository.findAll();
+        List<CCTV> cctvList = cctvRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         cctvListRes.setCctvList(cctvList);
         return cctvListRes;
     }
