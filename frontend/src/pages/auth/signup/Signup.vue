@@ -127,15 +127,12 @@
       overlay-opacity="0.2"
     >
       <template #header>
-        <h2>시간 설정</h2>
+        <h2>알림</h2>
       </template>
-      <div style="margin-top : 5px">{{setTimecustom}}{{ startMessage }}</div>
+      <div style="margin-top : 5px">인증번호가 전송되었습니다</div>
       <template #footer>
-          <va-button class="timer-mg" @click="startTimer">
-            시작
-          </va-button>
-          <va-button class="timer-mg" @click="timerStop">
-            취소
+          <va-button class="timer-mg" @click="sendMessage = !sendMessage">
+            확인
           </va-button>
       </template>
     </va-modal>
@@ -279,6 +276,8 @@ export default {
       } else if (!this.validphoneNumber(this.phoneNumber)) {  // 이메일 형식이 아닐경우
         this.phoneNumberErrors.push('유효한 번호가 아닙니다');
       } else {
+        this.sendMessage = true;
+
         this.successMessage.push('성공적으로 전송하였습니다');
         http.post(
         'auth/sms/sends',
