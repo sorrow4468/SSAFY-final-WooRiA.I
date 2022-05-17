@@ -17,7 +17,7 @@
 
             <tbody>
               <tr v-for="li in listGetters" :key="li.createdAt">
-                <td>{{ li.createdAt }}</td>
+                <td>{{ li.createdAt.replace(".000000", "") }}</td>
                 <td>{{ li.danger }}</td>
                 <td>{{ li.location }}</td>
                 <td>
