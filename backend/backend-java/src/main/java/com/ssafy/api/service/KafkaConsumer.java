@@ -49,7 +49,7 @@ public class KafkaConsumer {
         // for each 사람들한테 메시지 다 보내기.
 
         for (User user: userList) {
-            messageService.sendAlert(user.getPhone());
+            messageService.sendAlert(user.getPhone(),kafkaVO.getCameraNumber());
         }
 
 
