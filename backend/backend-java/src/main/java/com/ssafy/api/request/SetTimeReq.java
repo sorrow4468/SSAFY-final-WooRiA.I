@@ -7,6 +7,6 @@ import java.util.Date;
 @Data
 public class SetTimeReq {
 
-    Date StartTime;
+    Date startTime;
     Date endTime;
 }
