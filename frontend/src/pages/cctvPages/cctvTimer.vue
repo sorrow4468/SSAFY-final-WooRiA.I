@@ -144,7 +144,7 @@ export default {
       http.post(
             '/cctv/set/timer',
         {
-          "endTime": "2022-05-16T07:06:45.951Z",
+          "endTime": startdate,
           "startTime": "2022-05-16T07:06:45.951Z"
         }
           ).then((res)=>{
