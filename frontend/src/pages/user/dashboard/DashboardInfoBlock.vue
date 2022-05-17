@@ -15,7 +15,7 @@
           </va-card>
         </div>
       </div>
-      <div class="flex xs9 sm9 ml-3"><Table /></div>
+      <div class="flex xs9 sm9 ml-3"><Table class="haha" /></div>
     </div>
   </div>
 </template>
@@ -57,4 +57,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.haha {
+  width: 102.5%;
+}
+</style>
