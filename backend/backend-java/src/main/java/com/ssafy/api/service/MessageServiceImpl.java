@@ -72,13 +72,26 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public SendSmsResponseDto sendAlert(String recipientPhoneNumber) throws ParseException, JsonProcessingException, UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, URISyntaxException {
+    public SendSmsResponseDto sendAlert(String recipientPhoneNumber,String cameraNum) throws ParseException, JsonProcessingException, UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, URISyntaxException {
         Long time = System.currentTimeMillis();
         List<MessagesRequestDto> messages = new ArrayList<>(); // 보내는 사람에게 내용을 보냄.
 
+        String location;
+        if(cameraNum.equals("1")) {
+            location = "신호동" +
+                    "234-6" + "소정공원";
+        }else if(cameraNum.equals("2")) {
+            location = "명지동" +
+                    "3230-12" + "링컨공원";
+        }else if(cameraNum.equals("3")) {
+            location = "범방동" +
+                    "1875-4" + "금병공원";
+        }else {
+            location = "명지동" +
+                    "3428-4" + "나뭇잎 공원";
+        }
 
-
-        String content = "아이가 위험 합니다!";
+        String content = location+"에서 아이가 위험 합니다!";
 
         messages.add(new MessagesRequestDto(recipientPhoneNumber,content)); // content부분이 내용임 // 전체 json에 대해 메시지를 만든다.
         SmsRequestDto smsRequestDto = new SmsRequestDto("SMS", "COMM", "82", "01073085445", content, messages); // 쌓아온 바디를 json 형태로 변환시켜준다.
