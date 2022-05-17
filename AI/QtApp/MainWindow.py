@@ -4,8 +4,12 @@ import threading
 import cv2
 import datetime
 import time
+from datetime import datetime
 import boto3
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+import time
 import torch
 from matplotlib import pyplot as plt
 import numpy as np
@@ -34,8 +38,6 @@ from yolov5.utils.general import (LOGGER, check_img_size, non_max_suppression, s
                                 check_imshow, xyxy2xywh, increment_path)
 from yolov5.utils.torch_utils import select_device, time_sync
 from yolov5.utils.plots import Annotator, colors
-from deep_sort.utils.parser import get_config
-from deep_sort.deep_sort import DeepSort
 
 class roiimage:
     def __init__(self,frame,x,y,w,h):
@@ -70,7 +72,7 @@ class MainWindow(QMainWindow):
         self.roi_que = queue.Queue()
         self.model = torch.hub.load('ultralytics/yolov5', 'custom', path='./yolov5s.pt', force_reload=True)
         self.Frame_1 = None
-        # self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+        # self.model = torch.hub.load('ultralytics/yolov5', 'yolov5m')
         # self.device = select_device(0)
         # cfg = get_config()
         # cfg.merge_from_file("deep_sort/configs/deep_sort.yaml")
@@ -86,6 +88,7 @@ class MainWindow(QMainWindow):
         self.CCTV_start()
         self.thread_CCTV = Worker(target=self.thread_CCTV_run)
         self.thread_CCTV.start()
+        self.modeltf = None
         test = Worker(target=self.testfunc)
         test.start()
 
@@ -141,10 +144,11 @@ class MainWindow(QMainWindow):
         if self.cctv_1 != None and self.cctv_1.grab():
             _, self.Frame_1 = self.cctv_1.retrieve()
             self.count += 1
-            if self.Frame_1 is not None and self.roi_que.empty()==True:
-                result = self.model(self.Frame_1)
+            if self.Frame_1 is not None:
+                result = self.model(self.Frame_1, size=640)
                 # result = self.model(Frame_1, augment = True)
                 labels, cord = result.xyxyn[0][:,-1].cpu().numpy(), result.xyxyn[0][:, :-1].cpu().numpy()
+
                 # annotator = Annotator(Frame_1, line_width=2, pil=not ascii)
                 # det = result.pred[0]
 
@@ -173,7 +177,7 @@ class MainWindow(QMainWindow):
                     temp = []
                     for box in cord:
                         ob+=1
-                        if int(labels[ob]) != 0:
+                        if int(labels[ob]) != 0 or box[4] < 0.8:
                             continue
                         height, width, c = self.Frame_1.shape
                         x = box[0]*width
@@ -197,8 +201,7 @@ class MainWindow(QMainWindow):
                                 inner_index+=1
                                 continue
                             dis = math.hypot(pt2[0] - pt[0], pt2[1] - pt[1])
-                            print(dis)
-                            if dis<250:
+                            if dis<temp[inner_index].w and self.roi_que.empty()==True:
                                 temp_ob = temp[inner_index]
                                 self.roi_que.put(temp_ob)
                                 temp_ob = temp[index]
@@ -207,7 +210,7 @@ class MainWindow(QMainWindow):
                         index+=1
                     for box in cord:
                         ob+=1
-                        if int(labels[ob]) != 0:
+                        if int(labels[ob]) != 0 or box[4] < 0.8:
                             continue
                         height, width, c = self.Frame_1.shape
                         x = box[0]*width
@@ -338,8 +341,8 @@ class MainWindow(QMainWindow):
         sentence = []
         predictions = []
         threshold = 0.5
-        actions = np.array(['assult', 'faint'])
-        model = tf.keras.models.load_model('action.h5')
+        actions = np.array(['assult', 'stand', 'fall'])
+        self.modeltf = tf.keras.models.load_model('action.h5')
         while True:
             if(self.roi_que.empty()!=True):
                 frame_info = self.roi_que.get()
@@ -353,10 +356,13 @@ class MainWindow(QMainWindow):
                 sequence.append(keypoints)
                 sequence = sequence[-1:]
                 if len(sequence) == 1:
-                    res = model.predict(np.expand_dims(sequence, axis=0))[0]
-                    print(actions[np.argmax(res)])
+                    res = self.modeltf.predict(np.expand_dims(sequence, axis=0))[0]
+                    print(res)
+                    abnor = actions[np.argmax(res)]
                     predictions.append(np.argmax(res))
-
+                    if abnor == "assult":
+                        str = "{:%Y%m%d%H%M%S}".format(datetime.now()) + " 폭행 발생"
+                        self.mainForm.textBrowser.append(str)
                     if np.unique(predictions[-10:])[0]==np.argmax(res): 
                         if res[np.argmax(res)] > threshold: 
                             
@@ -368,7 +374,6 @@ class MainWindow(QMainWindow):
 
                     if len(sentence) > 5: 
                         sentence = sentence[-5:]
-                    print(res)
                 if results.pose_landmarks:
                     mpDraw.draw_landmarks(frame_info.frame, results.pose_landmarks,mpPose.POSE_CONNECTIONS)
                 # self.Frame_1[int(frame_info.y):int(frame_info.y+frame_info.h),int(frame_info.x):int(frame_info.x+frame_info.w)] = frame_info.frame
