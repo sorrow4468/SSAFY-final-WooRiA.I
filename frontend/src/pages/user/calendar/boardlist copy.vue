@@ -1,16 +1,5 @@
 <template>
-  <div class="markup-tables flex ml-4 mt-5">
-    <!-- <div>
-      <va-date-input
-        class="mb-4 mt-4"
-        label="placeholder"
-        placeholder="날짜를 선택해주세요"
-        clearable
-        @click="getcctvlist"
-        v-model="value"
-        highlight-weekend
-      />
-    </div> -->
+  <div class="markup-tables flex mt-5 ml-3">
     <va-card :title="$t('tables.stripedHoverable')">
       <va-card-content>
         <div class="table-wrapper">
@@ -35,7 +24,7 @@
                   <va-badge
                     text="바로가기"
                     color="success"
-                    v-on:click="tableDetail(li)"
+                    v-on:click="detail(li)"
                   />
                 </td>
               </tr>
@@ -56,15 +45,19 @@
 </template>
 
 <script>
-import data from "@/data/tables/markup-table/data.json";
-import { mapMutations } from "vuex";
 import http from "@/components/common/axios.js";
 
+// 더미 데이터
+import data from "@/data/tables/markup-table/data.json";
+import { mapMutations } from "vuex";
+
 export default {
+  name: "boardlist",
+  components: {},
   data() {
     return {
-      listGetters: data.slice(0, 8),
-      value: 0,
+      users: data.slice(0, 4),
+      value: 1,
       issueData: undefined,
       issueList: undefined,
       start: 0,
@@ -80,8 +73,8 @@ export default {
         console.log(this.issueData);
         console.log(res.data.cctvList);
         this.issueList = this.issueData.slice(
-          0 + this.value * 7,
-          7 + this.value * 7
+          0 + this.value * 5,
+          5 + this.value * 5
         );
       })
       .catch((err) => {
@@ -94,38 +87,29 @@ export default {
     },
   },
   methods: {
-    tableDetail(li) {
+    detail(li) {
       this.$store.state.detailList.createdAt = li.createdAt;
       this.$store.state.detailList.danger = li.danger;
       this.$store.state.detailList.location = li.location;
       this.$store.state.detailList.video_URL = li.video_URL;
 
       console.log(this.$store.state.detailList.createdAt);
-      this.$router.push({ name: "tableDetail" });
+      this.$router.push({ name: "detail" });
     },
+    getStatusColor(status) {
+      if (status === "paid") {
+        return "success";
+      }
 
-    getcctvlist() {
-      console.log(this.value);
-      http
-        .post("/cctv/find/list", {
-          dateTime: this.value,
-        })
-        .then((res) => {
-          console.log(res.data);
-          this.$store.state.cctvList = res.data.cctvList;
-          console.log(this.$store.state.cctvList);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if (status === "processing") {
+        return "info";
+      }
+      return "danger";
     },
   },
   watch: {
     value: function (hook) {
-      this.issueList = this.issueData.slice(
-        0 + (hook - 1) * 7,
-        7 + (hook - 1) * 7
-      );
+      this.issueList = this.issueData.slice(0 + hook * 5, 5 + hook * 5);
     },
   },
 };
@@ -133,6 +117,8 @@ export default {
 
 <style lang="scss">
 .markup-tables {
+  width: 95%;
+  height: 30px;
   .table-wrapper {
     overflow: auto;
   }

@@ -16,7 +16,7 @@
             </thead>
 
             <tbody>
-              <tr v-for="li in issueList" :key="li.createdAt">
+              <tr v-for="li in listGetters" :key="li.createdAt">
                 <td>{{ li.createdAt }}</td>
                 <td>{{ li.danger }}</td>
                 <td>{{ li.location }}</td>
@@ -45,8 +45,6 @@
 </template>
 
 <script>
-import http from '@/components/common/axios.js'
-
 // 더미 데이터
 import data from "@/data/tables/markup-table/data.json";
 import { mapMutations } from "vuex";
@@ -58,27 +56,7 @@ export default {
     return {
       users: data.slice(0, 4),
       value: 1,
-      issueData : undefined,
-      issueList : undefined,
-      start : 0,
-      end : 5,
     };
-  },
-  mounted () {
-    http.get(
-      '/cctv/list'
-    ).then((res)=>{
-      console.log(res);
-      this.issueData = res.data.cctvList;
-      console.log(this.issueData);
-      console.log(res.data.cctvList);
-      this.issueList = this.issueData.slice(0 + (this.value *5) ,5 + (this.value *5))
-      }
-    ).catch((err) => {
-      console.log(err)
-      }
-    )
-
   },
   computed: {
     listGetters() {
@@ -106,10 +84,6 @@ export default {
       return "danger";
     },
   },
-     watch : {
-        value : function(hook){
-      this.issueList = this.issueData.slice(0 + (hook *5) ,5 + (hook *5))
-        }}
 };
 </script>
 
