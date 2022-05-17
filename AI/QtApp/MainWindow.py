@@ -1,8 +1,9 @@
 import threading
 import cv2
-import datetime, time
+import datetime, time, json
 import boto3
 import os
+import moviepy.editor as moviepy
 
 from PyQt5.QtWidgets import QMainWindow
 from QtApp.QtUI.MainUI import Ui_MainWindow
@@ -17,7 +18,7 @@ from json import dumps
 class MainWindow(QMainWindow):
     def initialize(self, mainForm: Ui_MainWindow):
         self.mainForm = mainForm
-        self.producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers=['localhost:9092'], value_serializer=lambda x: dumps(x).encode('utf-8')) 
+        self.producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers=['52.79.114.28:9092'], value_serializer=lambda v: json.dumps(v).encode('utf-8')) 
         self.setWindowIcon(QIcon("icon.png"))
         self.cnt = 0
         self.cctv_1 = None
@@ -58,7 +59,7 @@ class MainWindow(QMainWindow):
                 Filename=filepath,
                 Bucket=bucket,
                 Key=access_key,
-                ExtraArgs={"ContentType": "video/avi", "ACL": "public-read"},
+                ExtraArgs={"ContentType": "video/mp4", "ACL": "public-read"},
             )
             print("upload video to aws s3!")
         except Exception as e:
@@ -70,8 +71,8 @@ class MainWindow(QMainWindow):
         s3 : 연결된 s3 객체(boto3 client)
         filename : s3에 저장된 파일 명
         """
-        location = self.s3.get_bucket_location(Bucket={"ssafit-01-bucket"})["LocationConstraint"]
-        return f"https://{{ssafit-01-bucket}}.s3.{location}.amazonaws.com/{filename}.avi"
+        location = self.s3.get_bucket_location(Bucket="ssafit-01-bucket")["LocationConstraint"]
+        return f"https://ssafit-01-bucket.s3.{location}.amazonaws.com/{filename}.mp4"
 
     def thread_CCTV_run(self):
         Frame_1, Frame_2, Frame3, Frame4 = None, None, None, None
@@ -89,14 +90,7 @@ class MainWindow(QMainWindow):
                     # 상황이 발생하면.
                     # 형이 전처리한 이미지.
 
-
-                    #makeVideo
-                        # 동영상으로 제작.
-                    # time.sleep(1)
-                    # now = datetime.datetime.now().strftime("%d_%H-%M-%S")
-                    # video = cv2.VideoWriter("C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi", fourcc, 20.0, (frame.shape[1], frame.shape[0]))               
-                
-                if self.cnt == 0 :
+                if self.cnt == 0 :  # if 상황이 발생하면
                     self.cnt = 1
                     t = threading.Thread(target= self.record) # video 녹음 쓰레드
                     t.start()
@@ -119,20 +113,29 @@ class MainWindow(QMainWindow):
                     now = datetime.datetime.now().strftime("%d_%H-%M-%S")
                     fourcc = cv2.VideoWriter_fourcc(*'XVID')
                     path = "C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi"
+                    realpath = "C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".mp4"
                     video = cv2.VideoWriter("C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi", fourcc, 20.0, (Frame_1.shape[1], Frame_1.shape[0]))
+                    
                     flag = False
                 
                 video.write(Frame_1)
-                if (time.time() - start) > 5 :
+                
+                if (time.time() - start) > 5 :   # 검출되었으면... 5초후에 저장(프로토타입). ..ex) if (폭력이 감지되면...)
                     trigger = False
                     video.release()
+                    clip = moviepy.VideoFileClip(path)
+                    clip.write_videofile(realpath)
                     print("video record end!")
-                    print(self.s3_put_object("ssafit-01-bucket", path, str(now)+ ".avi"))
+                    print(self.s3_put_object("ssafit-01-bucket", realpath, str(now)+ ".mp4"))
                     if os.path.isfile(path):
                         os.remove(path)
+                    if os.path.isfile(realpath):
+                        os.remove(realpath)                        
                     # connect to web
                     url = self.s3_get_image_url(str(now))
-                    data = {'str' : url}
+                    data = {'url' : url,
+                            'detection' : '0',
+                            'cameraNumber' : '1'}
                     self.producer.send('kafka-demo2', value=data)
                     
     def CCTV_start(self):
