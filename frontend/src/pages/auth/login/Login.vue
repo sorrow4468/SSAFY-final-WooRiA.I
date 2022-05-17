@@ -103,7 +103,7 @@ export default {
 
             }
           ).catch((err) => {
-            console.log(err)
+            this.passwordErrors.push("아이디 또는 비밀번호 에러입니다.")
             })
       }
     }
