@@ -8,18 +8,48 @@ function colorToRgba(color: string, a: number) {
 }
 
 // 최대 & 최소 횟수
-const generateValue = () => {
-  return Math.floor(Math.random() * 50);
+const generateValue = (x:number) => {
+
+  console.log(x);
+  if(x == 1) {
+    return 32;
+  }else if(x == 2) {
+    return 20;
+  }else if(x == 3) {
+    return 24;    
+  }else if(x == 4) {
+    return 32;    
+  }else if(x == 5) {
+    return 40;    
+  }else if(x == 6) {
+    return 10;    
+  }else if(x == 7) {
+    return 34;    
+  }else if(x == 8) {
+    return 31;    
+  }else if(x == 9) {
+    return 45;    
+  }else if(x == 10) {
+    return 48;    
+  }else if(x == 11) {
+    return 30;    
+  }else {
+    return 37;    
+  }
+  
+  
+  
 };
 
 // 수치를 랜덤으로 줌
 const generateYLabels = () => {
-  const flip = !!Math.floor(Math.random() * 2);
-  return flip ? ["월별 횟수"] : ["월별 횟수"];
+  const flip = 22;
+  return flip;
 };
 
 const generateArray = (length: number) => {
-  return Array.from(Array(length), generateValue);
+  console.log(Array(length))
+  return Array.from([1,2,3,4,5,6,7,8,9,10,11,12], x=>generateValue(x));
 };
 
 // 몇개월 보여줄지
@@ -67,7 +97,7 @@ export const getLineChartData = (themes: ColorThemes, firstMonth: number) => {
       labels: months.splice(firstMonthIndex, size),
       datasets: [
         {
-          label: yLabels[0],
+          label: "월별 횟수",
           backgroundColor: colorToRgba(themes.primary, 0.6),
           borderColor: "transparent",
           data: generateArray(size - firstMonthIndex),
