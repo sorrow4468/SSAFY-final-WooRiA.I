@@ -127,6 +127,7 @@ export default {
     startTimer() {
         this.timerState = true;
         this.setTimer()
+        this.showcomfirm = false;
 
     },
     timerStop() {
