@@ -5,7 +5,7 @@
       <br />
       <br />
       <br />
-      <Xgplayer :config="config" @player="Player = $event" />
+      <Xgplayer :config="this.$store.state.config" @player="Player = $event" />
     </div>
 
     <div class="flex xs6 md6 mt-3 mr-5">
@@ -31,7 +31,7 @@ export default {
         id: "vs",
         // url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
         // url: 'https://ssafit-01-bucket.s3.ap-northeast-2.amazonaws.com/02_17-17-39.avi'
-        url: "https://ssafit-01-bucket.s3.ap-northeast-2.amazonaws.com/13_16-01-33.mp4",
+        url: "",
       },
       Player: null,
     };

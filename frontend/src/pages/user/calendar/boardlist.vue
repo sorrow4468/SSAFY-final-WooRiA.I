@@ -69,7 +69,8 @@ export default {
       this.$store.state.detailList.danger = li.danger;
       this.$store.state.detailList.location = li.location;
       this.$store.state.detailList.video_URL = li.video_URL;
-
+      this.$store.state.config.url = li.video_URL;
+      this.$store.state.config.id = "vs";
       console.log(this.$store.state.detailList.createdAt);
       this.$router.push({ name: "detail" });
     },
