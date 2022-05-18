@@ -9,7 +9,7 @@
                 {{ info.value }}
               </p>
               <p style="color: white">
-                {{ $t("dashboard.info." + info.text) }}
+                {{ $t(info.text) }}
               </p>
             </va-card-content>
           </va-card>
@@ -32,21 +32,21 @@ export default {
     return {
       infoTiles: [
         {
-          color: "success",
-          value: "803",
-          text: "commits",
-          icon: "",
-        },
-        {
-          color: "danger",
-          value: "57",
-          text: "components",
+          color: "warning",
+          value: "35",
+          text: "일간 탐지 횟수",
           icon: "",
         },
         {
           color: "info",
-          value: "5",
-          text: "teamMembers",
+          value: "57",
+          text: "주간 탐지 횟수",
+          icon: "",
+        },
+        {
+          color: "success",
+          value: "102",
+          text: "월간 탐지 횟수",
           icon: "",
         },
       ],
