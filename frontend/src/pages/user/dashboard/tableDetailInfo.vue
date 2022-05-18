@@ -76,7 +76,7 @@ export default {
       this.$router.push("/");
     },
     goTable() {
-      this.$router.push("/user/usertables");
+      this.$router.push("/user/userboard");
     },
   },
 };
