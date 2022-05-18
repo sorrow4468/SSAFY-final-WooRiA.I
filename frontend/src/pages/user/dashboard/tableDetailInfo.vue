@@ -12,7 +12,7 @@
             border-color: rgba(40, 99, 188);
             background: rgba(255, 255, 255);
           "
-          ><p>일시 : {{ this.$store.state.detailList.createdAt }}</p></va-button
+          ><p>일시 : {{ this.$store.state.detailList.createdAt.replace(".000000", "") }}</p></va-button
         >
 
         <va-button
