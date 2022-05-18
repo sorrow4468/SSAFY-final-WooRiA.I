@@ -63,7 +63,7 @@ public class CctvServiceImpl implements CctvService {
                     .VIDEO_URL(kafkaVO.getUrl())
                     .type(kafkaVO.getCameraNumber())
                     .LOCATION(location)
-                    .danger(Danger.STUMBLE).build();
+                    .danger(Danger.폭행).build();
             cctvRepository.saveAndFlush(cctv);
         }
 
