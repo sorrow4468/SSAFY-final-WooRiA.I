@@ -1,8 +1,8 @@
 <template>
-  <div class="markup-tables">
+  <div class="markupTable">
     <va-card :title="$t('tables.stripedHoverable')">
       <va-card-content>
-        <div class="table-wrapper">
+        <div class="tableWrapper">
           <table
             class="va-table va-table--striped va-table--hoverable va-table--clickable"
           >
@@ -57,13 +57,13 @@ export default {
       issueData: undefined,
       issueList: undefined,
       start: 0,
-      end: 5,
+      end: 5
     };
   },
   mounted() {
     http
       .get("/cctv/list")
-      .then((res) => {
+      .then(res => {
         console.log(res);
         this.issueData = res.data.cctvList;
         console.log(this.issueData);
@@ -73,14 +73,14 @@ export default {
           7 + this.value * 7
         );
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   computed: {
     listGetters() {
       return this.$store.getters["getList"];
-    },
+    }
   },
   methods: {
     tableDetail(li) {
@@ -97,32 +97,32 @@ export default {
       console.log(this.value);
       http
         .post("/cctv/find/list", {
-          dateTime: this.value,
+          dateTime: this.value
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data);
           this.$store.state.cctvList = res.data.cctvList;
           console.log(this.$store.state.cctvList);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
+    }
   },
   watch: {
-    value: function (hook) {
+    value: function(hook) {
       this.issueList = this.issueData.slice(
         0 + (hook - 1) * 7,
         7 + (hook - 1) * 7
       );
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss">
-.markup-tables {
-  .table-wrapper {
+.markupTable {
+  .tableWrapper {
     overflow: auto;
   }
 

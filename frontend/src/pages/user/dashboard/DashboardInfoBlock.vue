@@ -15,7 +15,7 @@
           </va-card>
         </div>
       </div>
-      <div class="flex xs9 sm9 ml-3"><Table class="haha" /></div>
+      <div class="flex xs9 sm9 ml-3"><Table class="hahaha" /></div>
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ import Table from "./MarkupTables.vue";
 export default {
   name: "DashboardInfoBlock",
   components: {
-    Table,
+    Table
   },
   data() {
     return {
@@ -35,30 +35,30 @@ export default {
           color: "warning",
           value: "35",
           text: "일간 탐지 횟수",
-          icon: "",
+          icon: ""
         },
         {
           color: "info",
           value: "57",
           text: "주간 탐지 횟수",
-          icon: "",
+          icon: ""
         },
         {
           color: "success",
           value: "102",
           text: "월간 탐지 횟수",
-          icon: "",
-        },
-      ],
+          icon: ""
+        }
+      ]
     };
   },
   methods: {},
-  computed: {},
+  computed: {}
 };
 </script>
 
 <style lang="scss" scoped>
-.haha {
+.hahaha {
   width: 102.5%;
 }
 </style>
