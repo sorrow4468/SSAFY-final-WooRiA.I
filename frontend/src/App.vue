@@ -3,6 +3,7 @@
 </template>
 <script>
 import Vue from 'vue';
+
 // import VueAlertify from 'vue-alertify';
 // import Notifications from 'vue-notification';
 
@@ -12,6 +13,7 @@ import Vue from 'vue';
 
     export default {
         name:'app',
+
         data() {
             return {
                 shopId:'',
@@ -53,13 +55,14 @@ import Vue from 'vue';
 
                 if (this.accessVerify) {
                 // 로그인 조건문 달아주기
-                alert('위험감지!')
+                console.log('왔다')
                 // this.$alertify.prompt(
                 //   '위험 감지!',
                 //   e.data,
                 //   (evt, value) => this.$alertify.success('ok: ' + value),
                 //   () => this.$alertify.error('cancel')
                 // );
+                this.$vaToast.init('위험감지!')
               }else{
                 console.log('')
               }
