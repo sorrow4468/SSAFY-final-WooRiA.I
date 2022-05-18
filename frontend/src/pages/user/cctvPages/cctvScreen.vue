@@ -2,14 +2,12 @@
   <div class="cctv-border"> 
     <div>
     <canvas class="cctv-border"></canvas>
-    </div>
-    <div>
+
     <canvas id="canvas2" class="cctv-border"></canvas>
     </div>
     <div>
     <canvas id="canvas3" class="cctv-border"></canvas>
-    </div>
-    <div>
+
     <canvas id="canvas4" class="cctv-border"></canvas>
     </div>
   </div>
