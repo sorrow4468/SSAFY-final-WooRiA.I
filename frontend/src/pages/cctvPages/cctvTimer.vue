@@ -7,6 +7,12 @@
         <va-button @click="stop" class="va-button va-button--outline va-button--normal mr-2 mb-2" style="color: rgb(228, 34, 34); border-color: rgb(228, 34, 34); background: rgba(0, 0, 0, 0);">Stop</va-button>
         <va-button @click="reset" class="va-button va-button--outline va-button--normal mr-2 mb-2">Reset</va-button>
                 <p>{{formattedElapsedTime}}</p>
+        <va-icon
+      name="loop"
+      spin="counter-clockwise"
+      class="mr-4 container icon-size"
+      @click="refresh"
+    />
 
         <va-modal
           v-model="showModal"
