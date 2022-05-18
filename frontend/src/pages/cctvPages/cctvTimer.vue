@@ -6,6 +6,8 @@
         <va-button  @click="showModal = !showModal" class="va-button va-button--outline va-button--normal mr-2 mb-2" style="color: rgb(21, 78, 193); border-color: rgb(21, 78, 193); background: rgba(0, 0, 0, 0);" >Start</va-button>
         <va-button @click="stop" class="va-button va-button--outline va-button--normal mr-2 mb-2" style="color: rgb(228, 34, 34); border-color: rgb(228, 34, 34); background: rgba(0, 0, 0, 0);">Stop</va-button>
         <va-button @click="reset" class="va-button va-button--outline va-button--normal mr-2 mb-2">Reset</va-button>
+                <p>{{formattedElapsedTime}}</p>
+
         <va-modal
           v-model="showModal"
           hide-default-actions
@@ -55,7 +57,6 @@
               </va-button>
           </template>
         </va-modal>
-        <!-- <p>{{formattedElapsedTime}}</p> -->
       </div>
     </div>
   </div>
@@ -137,18 +138,22 @@ export default {
     },
     setTimer () {
       const startdate = new Date()
-      this.enddate = startdate;
       // console.log(Date.prototype.toJSON())
       // console.log(Date.prototype.toJSON())
       console.log(Date.parse(startdate))
+      console.log(startdate)
+      const endDate = new Date(startdate)
+      endDate.setHours(endDate.getHours()+1)
       http.post(
             '/cctv/set/timer',
         {
-          "endTime": startdate,
-          "startTime": "2022-05-16T07:06:45.951Z"
+          "startTime": startdate
+,
+          "endTime": endDate
         }
           ).then((res)=>{
             console.log(res)
+            
             }
           ).catch((err) => {
             console.log(err)
