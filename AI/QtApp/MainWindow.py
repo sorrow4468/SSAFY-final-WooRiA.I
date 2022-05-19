@@ -35,10 +35,6 @@ from PyQt5.QtCore import *
 from CCTV.CcTv import CcTv
 from kafka import KafkaProducer
 from json import dumps
-from yolov5.utils.general import (LOGGER, check_img_size, non_max_suppression, scale_coords, 
-                                check_imshow, xyxy2xywh, increment_path)
-from yolov5.utils.torch_utils import select_device, time_sync
-from yolov5.utils.plots import Annotator, colors
 
 class roiimage:
     def __init__(self,frame,x,y,w,h):
@@ -52,7 +48,7 @@ class MainWindow(QMainWindow):
     def initialize(self, mainForm: Ui_MainWindow):
         print(torch.cuda.is_available())
         self.mainForm = mainForm
-        self.producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers=['52.79.114.28:9092'], value_serializer=lambda v: json.dumps(v).encode('utf-8')) 
+        self.producer = None
         self.setWindowIcon(QIcon("icon.png"))
         self.cnt = 0
         self.cctv_1 = None
@@ -67,9 +63,6 @@ class MainWindow(QMainWindow):
         self.static_image_mode=False
         self.upper_body_only = False
         self.roi_person = None
-        smoth_landmarks=True
-        min_detection_confidence=0.5
-        min_tracking_confidence=0.5
         self.roi_que = queue.Queue()
         self.model = torch.hub.load('ultralytics/yolov5', 'custom', path='./yolov5s.pt', force_reload=True)
         self.Frame_1 = None
@@ -84,7 +77,6 @@ class MainWindow(QMainWindow):
         #                 use_cuda=True)
 
         # self.names = self.model.module.names if hasattr(self.model, 'module') else self.model.names
-        
         self.s3 = self.s3_connection()
         self.CCTV_start()
         self.thread_CCTV = Worker(target=self.thread_CCTV_run)
@@ -92,6 +84,7 @@ class MainWindow(QMainWindow):
         self.modeltf = None
         test = Worker(target=self.testfunc)
         test.start()
+
 
 
     def s3_connection(self):
@@ -281,6 +274,7 @@ class MainWindow(QMainWindow):
     # cctv(전처리) -> record
 
     def record(self):
+        self.producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers=['52.79.114.28:9092'], value_serializer=lambda v: json.dumps(v).encode('utf-8')) 
         self.assult = False
         cctv_1 = CcTv.rtsp()
         trigger = True
@@ -293,11 +287,11 @@ class MainWindow(QMainWindow):
 
                 if flag == True :
                     print("video record start!")
-                    now = datetime.datetime.now().strftime("%d_%H-%M-%S")
+                    now = datetime.now().strftime("%d_%H-%M-%S")
                     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-                    path = "C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi"
-                    realpath = "C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".mp4"
-                    video = cv2.VideoWriter("C:/Users/dlrjs/Desktop/S06P31E202/AI/" + str(now) + ".avi", fourcc, 20.0, (Frame_1.shape[1], Frame_1.shape[0]))
+                    path = "C:/자율 프로젝트 데이터셋/video/" + str(now) + ".avi"
+                    realpath = "C:/자율 프로젝트 데이터셋/video/" + str(now) + ".mp4"
+                    video = cv2.VideoWriter("C:/자율 프로젝트 데이터셋/video/" + str(now) + ".avi", fourcc, 20.0, (Frame_1.shape[1], Frame_1.shape[0]))
                     
                     flag = False
                 
@@ -320,6 +314,7 @@ class MainWindow(QMainWindow):
                             'detection' : '0',
                             'cameraNumber' : '1'}
                     self.producer.send('kafka-demo2', value=data)
+                    
                     
     def CCTV_start(self):
         self.cctv_1 = CcTv.rtsp()
@@ -360,7 +355,7 @@ class MainWindow(QMainWindow):
                     print(res)
                     abnor = actions[np.argmax(res)]
                     predictions.append(np.argmax(res))
-                    if abnor == "assult":
+                    if abnor == "assult" and self.assult == False:
                         self.assult = True
                         str = "{:%Y%m%d%H%M%S}".format(datetime.now()) + " 폭행 발생"
                         self.mainForm.textBrowser.append(str)
