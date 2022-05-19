@@ -132,7 +132,6 @@ export default {
           this.showModal = false;
           this.showcomfirm = true;
           // this.setTimecustom = this.setTimecustom;
-          console.log(this.setTimecustom)
           const tests = this.setTimecustom;
           this.countDown = (3600000 * tests);
           this.startTimer()
@@ -158,8 +157,6 @@ export default {
     },
     setTimer () {
       const startdate = new Date()
-      console.log(Date.parse(startdate))
-      console.log(startdate)
       const endDate = new Date(startdate)
       endDate.setHours(endDate.getHours()+1)
       http.post(
@@ -180,8 +177,6 @@ export default {
     },
     doneTimer() {
     const startdate = new Date()
-      console.log(Date.parse(startdate))
-      console.log(startdate)
       http.post(
             '/cctv/set/timer',
         {
@@ -248,7 +243,6 @@ export default {
                     }else {
                       this.sec = s;
                     }
-                    console.log(this.hour, this.min, this.sec)
 
             }
 
