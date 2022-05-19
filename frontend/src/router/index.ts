@@ -196,12 +196,7 @@ const routes: Array<RouteRecordRaw> = [
         path: "userboard",
         component: () => import("@/pages/user/dashboard/Dashboard.vue"),
       },
-      {
-        name: "usertables",
-        path: "usertables",
-        component: () =>
-          import("@/pages/user/tables/markup-tables/MarkupTables.vue"),
-      },
+
       {
         name: "usercctv",
         path: "usercctv",
@@ -209,10 +204,9 @@ const routes: Array<RouteRecordRaw> = [
       },
 
       {
-        path: "usertables/detail",
+        path: "userboard/detail",
         name: "tableDetail",
-        component: () =>
-          import("@/pages/user/tables/markup-tables/tableDetail.vue"),
+        component: () => import("@/pages/user/dashboard/tableDetail.vue"),
       },
       {
         path: "usercalendar/detail",
