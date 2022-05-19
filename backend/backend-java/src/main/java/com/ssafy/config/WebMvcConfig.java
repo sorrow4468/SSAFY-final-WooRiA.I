@@ -24,11 +24,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://ssafit.site")
+                .allowedOrigins("http://localhost:8080", "https://xn--vk1bw3clxiimaf76b.kr", "http://xn--vk1bw3clxiimaf76b.kr:3000")
                 .allowCredentials(true)
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .exposedHeaders(JwtTokenUtil.HEADER_STRING)
+                .exposedHeaders(JwtTokenUtil.REFRESH_STRING)
                 .maxAge(3600L);
     }
 

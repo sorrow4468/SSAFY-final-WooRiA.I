@@ -68,9 +68,9 @@ public class AuthController {
 		if(bCryptPasswordEncoder.matches(password, user.getPassword())) {
 
 			UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userEmail);
-			String url = s3Uploader.getS3(user.getProfileImageUrl());
-			String accessToken = JwtTokenUtil.TOKEN_PREFIX+JwtTokenUtil.getToken(userEmail,user.getNickname(),user.getRole(),user.getId(),url,1800000);
+			String accessToken = JwtTokenUtil.TOKEN_PREFIX+JwtTokenUtil.getToken(userEmail,user.getNickname(),user.getRole(),user.getId(),1800000);
 			String refreshToken = JwtTokenUtil.getToken(userEmail,user.getNickname(),user.getRole(),user.getId(),172800000);
+			String rToken;
 			if(userRefreshToken == null || jwtTokenUtil.validateToken(userRefreshToken.getRefreshToken())) {  // 범위안에 있으면 false를 반환함. 범위안에 없으면 true
 				System.out.println(userEmail);
 				System.out.println(refreshToken);
@@ -78,14 +78,16 @@ public class AuthController {
 				System.out.println("로그인 : " + userRefreshToken);
 
 				refreshTokenService.deleteAndSave(userRefreshToken,userRefreshToken2);
+				rToken = userRefreshToken2.getRefreshToken();
 				response.setHeader("refreshToken", userRefreshToken2.getRefreshToken());
 			}else {
 				response.setHeader("refreshToken", userRefreshToken.getRefreshToken());
+				rToken = userRefreshToken.getRefreshToken();
 			}
 
 			response.setHeader("authorization",accessToken);
 			// 유효한 패스워드가 맞는 경우, 로그인 성공으로 응답.(액세스 토큰을 포함하여 응답값 전달)
-			return ResponseEntity.ok(UserLoginPostRes.ofs(200, "Success"));
+			return ResponseEntity.ok(UserLoginPostRes.ofs(200, "Success",accessToken,rToken));
 		}
 		// 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
 		return ResponseEntity.status(401).body(UserLoginPostRes.of(401, "Invalid Password", null));

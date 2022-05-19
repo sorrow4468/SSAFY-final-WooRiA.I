@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.request.SetTimeReq;
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.request.ValidateEmailReq;
 import com.ssafy.db.entity.User;
@@ -13,4 +14,6 @@ public interface UserService {
 	User saveUser(User user);
 	public boolean verifyEmail(ValidateEmailReq validateEmailReq);
 	void setUserPasswordByEmail(String email,String pw);
+
+	void setTimer(String email,SetTimeReq setTimeReq);
 }

@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CorsConfig {
-   private final List<String> allowedOrigins = Arrays.asList("http://localhost:3000");
+   private final List<String> allowedOrigins = Arrays.asList("http://localhost:8080", "https://k6e2021.p.ssafy.io");
 
    public CorsFilter corsFilter() {
       UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

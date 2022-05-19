@@ -1,6 +1,7 @@
 package com.ssafy.api.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.api.request.MessagesRequest;
 import com.ssafy.api.request.MessagesRequestDto;
 import com.ssafy.api.request.ValidateEmailReq;
 import com.ssafy.api.response.SendSmsResponseDto;
@@ -84,7 +85,7 @@ public class UserController {
         @ApiResponse(code = 404, message = "사용자 없음"),
         @ApiResponse(code = 500, message = "서버 오류")
     })
-	public ResponseEntity<? extends BaseResponseBody> register(
+	public ResponseEntity<? extends BaseResponseBody> register(@RequestBody
 			@ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo, HttpServletResponse response) throws IOException {
 
 		User u = userService.createUser(registerInfo);
@@ -97,6 +98,7 @@ public class UserController {
 
 			String accessToken = JwtTokenUtil.TOKEN_PREFIX+JwtTokenUtil.getToken(userEmail,user.getNickname(),user.getRole(),user.getId(),user.getProfileImageUrl(),1800000);
 			String refreshToken = JwtTokenUtil.getToken(userEmail,user.getNickname(),user.getRole(),user.getId(),172800000);
+			String rToken;
 			if(userRefreshToken == null || jwtTokenUtil.validateToken(userRefreshToken.getRefreshToken())) {  // 범위안에 있으면 false를 반환함. 범위안에 없으면 true
 				System.out.println(userEmail);
 				System.out.println(refreshToken);
@@ -105,13 +107,15 @@ public class UserController {
 
 				refreshTokenService.deleteAndSave(userRefreshToken,userRefreshToken2);
 				response.setHeader("refreshToken", userRefreshToken2.getRefreshToken());
+				rToken = userRefreshToken2.getRefreshToken();
 			}else {
 				response.setHeader("refreshToken", userRefreshToken.getRefreshToken());
+				rToken = userRefreshToken.getRefreshToken();
 			}
 
 			response.setHeader("authorization",accessToken);
 			// 유효한 패스워드가 맞는 경우, 로그인 성공으로 응답.(액세스 토큰을 포함하여 응답값 전달)
-			return ResponseEntity.ok(UserLoginPostRes.ofs(200, "Success"));
+			return ResponseEntity.ok(UserLoginPostRes.ofs(200, "Success",accessToken,rToken));
 
 
 	}
@@ -158,7 +162,7 @@ public class UserController {
 			@ApiResponse(code = 404, message = "사용자 없음"),
 			@ApiResponse(code = 500, message = "서버 오류")
 	})
-	public ResponseEntity<SendSmsResponseDto> sendSms(@RequestBody @ApiParam(value="전화번호 및 인증번호", required = true) MessagesRequestDto messageRequest) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
+	public ResponseEntity<SendSmsResponseDto> sendSms(@RequestBody @ApiParam(value="전화번호 및 인증번호", required = true) MessagesRequest messageRequest) throws NoSuchAlgorithmException, URISyntaxException, UnsupportedEncodingException, InvalidKeyException, JsonProcessingException {
 		SendSmsResponseDto data = messageService.sendSms(messageRequest.getTo());
 		return ResponseEntity.ok().body(data);
 	}
@@ -195,5 +199,6 @@ public class UserController {
 		}
 		return ResponseEntity.status(400).body(BaseResponseBody.of(400, "failed"));
 	}
+
 
 }

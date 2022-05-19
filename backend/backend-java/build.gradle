@@ -159,7 +159,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-mail")
 
     compile 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
-
+    implementation 'org.springframework.kafka:spring-kafka'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.2'
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
@@ -170,6 +170,7 @@ dependencies {
     implementation ('org.springframework.boot:spring-boot-starter-data-redis')
     implementation("org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
     annotationProcessor("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
@@ -179,7 +180,7 @@ dependencies {
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-
+    implementation 'com.google.firebase:firebase-admin:6.8.1'
     implementation('commons-io:commons-io:2.6')
     implementation("org.apache.commons:commons-collections4:4.4")
     implementation("org.apache.commons:commons-lang3:3.9")

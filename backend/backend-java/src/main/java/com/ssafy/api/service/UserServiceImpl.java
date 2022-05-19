@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.request.SetTimeReq;
 import com.ssafy.api.request.ValidateEmailReq;
 import com.ssafy.db.entity.Gender;
 import com.ssafy.db.entity.User;
@@ -11,6 +12,9 @@ import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.db.repository.UserRepository;
 import com.ssafy.db.repository.UserRepositorySupport;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  *	유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
@@ -30,6 +34,7 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(userRegisterInfo.getEmail());
 		// 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장.
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
+		System.out.println("password"+ userRegisterInfo.getPassword());
 		user.setPassword(bCryptPasswordEncoder.encode(userRegisterInfo.getPassword()));
 		user.setNickname(userRegisterInfo.getNickname());
 		user.setRole("ROLE_USER");
@@ -69,6 +74,21 @@ public class UserServiceImpl implements UserService {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
 		userRepository.updatePassword(email,bCryptPasswordEncoder.encode(pw));
 
-
 	}
+
+	@Override
+	@Transactional
+	public void setTimer(String email, SetTimeReq setTimeReq) {
+		LocalDateTime startTime = setTimeReq.getStartTime().toInstant() // Date -> Instant
+				.atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
+				.toLocalDateTime();
+
+		LocalDateTime endTime = setTimeReq.getEndTime().toInstant() // Date -> Instant
+				.atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime
+				.toLocalDateTime();
+
+
+		userRepository.setUserTimer(email,startTime,endTime);
+	}
+
 }
