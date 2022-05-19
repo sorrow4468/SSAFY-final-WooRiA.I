@@ -31,14 +31,14 @@
             </tbody>
           </table>
         </div>
-        <div class="row justify--center">
+        <!-- <div class="row justify--center">
           <va-pagination
             v-model="value"
             :pages="6"
             :visible-pages="4"
             class="mt-5 mb-4"
           />
-        </div>
+        </div> -->
       </va-card-content>
     </va-card>
   </div>
@@ -55,13 +55,13 @@ export default {
   data() {
     return {
       users: data.slice(0, 4),
-      value: 1,
+      value: 1
     };
   },
   computed: {
     listGetters() {
       return this.$store.getters["getList"];
-    },
+    }
   },
   methods: {
     detail(li) {
@@ -83,8 +83,8 @@ export default {
         return "info";
       }
       return "danger";
-    },
-  },
+    }
+  }
 };
 </script>
 
