@@ -12,7 +12,7 @@
             border-color: rgba(40, 99, 188);
             background: rgba(255, 255, 255);
           "
-          ><p>일시 : {{ this.$store.state.detailList.createdAt }}</p></va-button
+          ><p>일시 : {{ this.$store.state.detailList.createdAt.replace(".000000", "") }}</p></va-button
         >
 
         <va-button
@@ -37,7 +37,7 @@
       </div>
 
       <div class="haha mt-5 ml-5">
-        <va-button
+        <!-- <va-button
           @click="goHome()"
           class="va-button va-button--outline va-button--normal mx-2 mb-2"
           style="
@@ -48,7 +48,7 @@
             background: rgb(0, 204, 0);
           "
           >홈으로</va-button
-        >
+        > -->
 
         <va-button
           @click="goCalendar()"
@@ -60,7 +60,7 @@
             border-color: rgb(228, 34, 34);
             background: rgba(228, 34, 34);
           "
-          >나가기</va-button
+          >목록으로</va-button
         >
       </div>
     </div>
