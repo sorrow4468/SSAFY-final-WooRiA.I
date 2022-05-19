@@ -1,21 +1,20 @@
 <template>
-  <div class="cctv-border"> 
-    <div>
-    <canvas class="cctv-border"></canvas>
-
-    <canvas id="canvas2" class="cctv-border"></canvas>
+  <div class="">
+    <div class="d-flex justify--center">
+      <div class="cctv-border"><canvas class="cctv-content"></canvas></div>
+      <div class="cctv-border"><canvas id="canvas2" class="cctv-content"></canvas></div>
     </div>
-    <div>
-    <canvas id="canvas3" class="cctv-border"></canvas>
-
-    <canvas id="canvas4" class="cctv-border"></canvas>
+    <div></div>
+    <div class="d-flex justify--center">
+      <div class="cctv-border"><canvas id="canvas3" class="cctv-content"></canvas></div>
+      <div class="cctv-border"><canvas id="canvas4" class="cctv-content"></canvas></div>
     </div>
   </div>
 </template>
 
 <script>
 
-export default {  
+export default {
   name: "cctvscreen",
   components: {
 
@@ -32,7 +31,7 @@ export default {
       // 2번
             var client2 = new WebSocket('wss://k6e2021.p.ssafy.io/api/cctv2/');
             // querySelector 에서 id 형식으로 받아올 것
-            var canvas2 = document.querySelector('#canvas2'); 
+            var canvas2 = document.querySelector('#canvas2');
             var jsmpeg = require('jsmpeg');
             var player2 = new jsmpeg(client2, {
               canvas : canvas2
@@ -41,7 +40,7 @@ export default {
       // 3번
             var client3 = new WebSocket('wss://k6e2021.p.ssafy.io/api/cctv3/');
             // querySelector 에서 id 형식으로 받아올 것
-            var canvas3 = document.querySelector('#canvas3'); 
+            var canvas3 = document.querySelector('#canvas3');
             var jsmpeg = require('jsmpeg');
             var player3 = new jsmpeg(client3, {
               canvas : canvas3
@@ -50,7 +49,7 @@ export default {
       // 4번
             var client4 = new WebSocket('wss://k6e2021.p.ssafy.io/api/cctv4/');
             // querySelector 에서 id 형식으로 받아올 것
-            var canvas4 = document.querySelector('#canvas4'); 
+            var canvas4 = document.querySelector('#canvas4');
             var jsmpeg = require('jsmpeg');
             var player4 = new jsmpeg(client4, {
               canvas : canvas4
@@ -70,7 +69,10 @@ export default {
 <style scoped>
 .cctv-border {
   border: solid 1px black;
-  width: 100%;
-  height: 100%;
+  width: 35vw;
+}
+
+.cctv-content {
+  width: 35vw;
 }
 </style>

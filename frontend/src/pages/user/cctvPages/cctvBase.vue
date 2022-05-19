@@ -1,13 +1,13 @@
 <template>
   <div  class="pageSet">
-     <div class="row xs4 md4 " style="height:100px;">
+    <div class="row xs4 md4 " style="height:100px;">
       <cctvtimer/>
       <!-- <va-button class="timer-mg refresh" @click="refresh">
         새로고침
       </va-button> -->
 
     </div>
-        <div class="flex xs8 md8">
+    <div class="flex xs12 md12 justify--center">
       <cctvscreen/>
     </div>
   </div>
@@ -20,7 +20,7 @@ import cctvscreen from './cctvScreen.vue'
 import axios from 'axios'
 
 
-export default {  
+export default {
   name: "cctvbase",
   components: {
     cctvclock,
@@ -47,9 +47,9 @@ export default {
       ).then(
         'https://k6e2021.p.ssafy.io/api/streaming/cctv3/start'
       ).then(
-       'https://k6e2021.p.ssafy.io/api/streaming/cctv4/start' 
+       'https://k6e2021.p.ssafy.io/api/streaming/cctv4/start'
 
-      ).catch((err) => { 
+      ).catch((err) => {
         console.log(err)}
       )
     }
@@ -92,7 +92,7 @@ export default {
     font-family: 'Lucida Sans', sans-serif;
     font-size: 20px;
   }
- 
+
   .icon-size {
     size: 10rem;
   }
