@@ -1,15 +1,15 @@
 <template id="cctvtimer">
   <div class="container">
     <div class="timer-border">
-         <va-icon
+         <!-- <va-icon
         name="loop"
         spin="counter-clockwise"
         class="mr-4 container icon-size"
         @click="refresh"
-      />
+      /> -->
       <div class="timer-inner">
         <!--  감지중입니다 만들기 -->
-        <div v-if="!timerState" >
+        <div v-if="!timerState" class="timer-s">
           <h1>감시를 시작하세요</h1>
           <va-button @click="showModal = !showModal" class="va-button va-button--outline va-button--normal mr-2 mb-2" style="color: rgb(21, 78, 193); border-color: rgb(21, 78, 193); background: rgba(0, 0, 0, 0);" >Start</va-button>
         </div>
@@ -42,13 +42,13 @@
               <va-button class="timer-mg"  @click=" setTimetwo">
                 2시간
               </va-button>
-              <va-button class="timer-mg"  @click="showcomfirm = !showcomfirm, showModal = !showModal, setTime">
+              <va-button class="timer-mg"  @click=" setTime">
                 직접설정
               </va-button>
             </div>
             <div>
               <va-input v-model="setTimecustom"></va-input>
-              <va-button class="timer-mg" @click="showcomfirm = !showcomfirm, showModal = !showModal, setTime">
+              <va-button class="timer-mg" @click=" setTime">
                 보내기
               </va-button>
             </div>
@@ -98,7 +98,7 @@ export default {
       startMinutes : undefined,
       startSeconds : undefined,
       enddate : undefined,
-      countDown : 36000,
+      countDown : undefined,
       min : undefined,
       hour : undefined,
       sec : undefined
@@ -145,8 +145,11 @@ export default {
         if (this.showModal) {
           this.showModal = false;
           this.showcomfirm = true;
-          this.setTimecustom = this.setTimecustom;
-          this.countDown = 3600000 * this.setTimecustom;
+          // this.setTimecustom = this.setTimecustom;
+          console.log(this.setTimecustom)
+          const tests = this.setTimecustom;
+          this.countDown = (3600000 * tests);
+          this.startTimer()
 
         }
     },
@@ -162,7 +165,8 @@ export default {
         this.setTimecustom = 0;
         this.showcomfirm = false;
         this.showModal = true
-        this.countDown = 0;
+        this.countDown = 1;
+        
 
     },
     setTimer () {
@@ -207,34 +211,41 @@ export default {
       )
     },
     countDownTimer() {
-      console.log('들어옴')
+                console.log('들어옴')
+                if (!this.timerState){
+                  this.countDown = 0;
+                }
                 if(this.countDown > 0) {
                     setTimeout(() => {
                         this.countDown -= 1
                         this.countDownTimer()
                     }, 1000)
-                }
-                let h = Math.trunc((this.countDown) /1000/ 3600);
-                let m = Math.trunc((this.countDown )  /1000/ 60) % 60;
-                let s = Math.trunc((this.countDown)) % 60
-                console.log(h,m,s)
-                if (10<h) {
-                  this.hour = '0'+h
+                   
                 }else {
-                  this.hour = h;
+                  this.timerState = false;
                 }
-                if (m<10) {
-                  this.min = '0'+m
-                }else {
-                  this.min = m;
-                }
-                
-                if (s<10) {
-                  this.sec = '0'+s
-                }else {
-                  this.sec = s;
-                }
-                console.log(this.hour, this.min, this.sec)
+                 console.log(this.countDown)
+                    let h = Math.trunc((this.countDown) /1000/ 3600);
+                    let m = Math.trunc((this.countDown )  /1000/ 60) % 60;
+                    let s = Math.trunc((this.countDown)) % 60
+                    console.log(h,m,s)
+                    if (10<h) {
+                      this.hour = '0'+h
+                    }else {
+                      this.hour = h;
+                    }
+                    if (m<10) {
+                      this.min = '0'+m
+                    }else {
+                      this.min = m;
+                    }
+                    
+                    if (s<10) {
+                      this.sec = '0'+s
+                    }else {
+                      this.sec = s;
+                    }
+                    console.log(this.hour, this.min, this.sec)
 
             }
 
