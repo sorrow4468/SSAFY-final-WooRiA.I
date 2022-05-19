@@ -137,9 +137,9 @@
       "units": "units",
       "exploreGallery": "Explore gallery",
       "viewLibrary": "View Library",
-      "commits": "commits",
-      "components": "components",
-      "teamMembers": "team members"
+      "commits": "월간 사건",
+      "components": "주간 사건",
+      "teamMembers": "일간 사건"
     },
     "table": {
       "title": "Awesome table",

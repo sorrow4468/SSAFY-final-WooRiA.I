@@ -8,7 +8,7 @@
       :error="!!emailErrors.length"
       :error-messages="emailErrors"
     />
-    <canvas></canvas>
+    <!-- <canvas></canvas> -->
     <va-input
       class="mb-3"
       v-model="password"
@@ -72,7 +72,6 @@ export default {
     var player = new jsmpeg(client, {
       canvas: canvas
     });
-    console.log(player);
   },
   computed: {
     formReady() {
@@ -97,17 +96,14 @@ export default {
             window.localStorage.setItem('refreshToken', res.data.refreshToken);
 
             alert('로그인 성공');
-            this.$router.push({ name: "dashboard" });
+            this.$router.push({ name: "userboard" });
 
             var decoded = jwt_decode(window.localStorage.getItem('accessToken', res.data.accessToken));
-            console.log(window.localStorage)
-            console.log(decoded.name)
             this.$store.state.userName = decoded.name
-            console.log(this.$store.state.userName)
 
             }
           ).catch((err) => {
-            console.log(err)
+            this.passwordErrors.push("아이디 또는 비밀번호 에러입니다.")
             })
       }
     }

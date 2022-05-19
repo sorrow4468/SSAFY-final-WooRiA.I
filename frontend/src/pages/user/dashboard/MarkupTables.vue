@@ -1,19 +1,8 @@
 <template>
-  <div class="markup-tables flex ml-4 mt-5">
-    <!-- <div>
-      <va-date-input
-        class="mb-4 mt-4"
-        label="placeholder"
-        placeholder="날짜를 선택해주세요"
-        clearable
-        @click="getcctvlist"
-        v-model="value"
-        highlight-weekend
-      />
-    </div> -->
+  <div class="markupTable">
     <va-card :title="$t('tables.stripedHoverable')">
       <va-card-content>
-        <div class="table-wrapper">
+        <div class="tableWrapper">
           <table
             class="va-table va-table--striped va-table--hoverable va-table--clickable"
           >
@@ -28,7 +17,7 @@
 
             <tbody>
               <tr v-for="li in issueList" :key="li.createdAt">
-                <td>{{ li.createdAt }}</td>
+                <td>{{ li.createdAt.replace(".000000", "") }}</td>
                 <td>{{ li.danger }}</td>
                 <td>{{ li.location }}</td>
                 <td>
@@ -68,13 +57,13 @@ export default {
       issueData: undefined,
       issueList: undefined,
       start: 0,
-      end: 5,
+      end: 5
     };
   },
   mounted() {
     http
       .get("/cctv/list")
-      .then((res) => {
+      .then(res => {
         console.log(res);
         this.issueData = res.data.cctvList;
         console.log(this.issueData);
@@ -84,14 +73,14 @@ export default {
           7 + this.value * 7
         );
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   computed: {
     listGetters() {
       return this.$store.getters["getList"];
-    },
+    }
   },
   methods: {
     tableDetail(li) {
@@ -99,7 +88,8 @@ export default {
       this.$store.state.detailList.danger = li.danger;
       this.$store.state.detailList.location = li.location;
       this.$store.state.detailList.video_URL = li.video_URL;
-
+      this.$store.state.config.url = li.video_URL;
+      this.$store.state.config.id = "vs";
       console.log(this.$store.state.detailList.createdAt);
       this.$router.push({ name: "tableDetail" });
     },
@@ -108,41 +98,37 @@ export default {
       console.log(this.value);
       http
         .post("/cctv/find/list", {
-          dateTime: this.value,
+          dateTime: this.value
         })
-        .then((res) => {
+        .then(res => {
           console.log(res.data);
           this.$store.state.cctvList = res.data.cctvList;
           console.log(this.$store.state.cctvList);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
+    }
   },
   watch: {
-    value: function (hook) {
+    value: function(hook) {
       this.issueList = this.issueData.slice(
         0 + (hook - 1) * 7,
         7 + (hook - 1) * 7
       );
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss">
-.markup-tables {
-  .table-wrapper {
+.markupTable {
+  .tableWrapper {
     overflow: auto;
   }
 
   .va-table {
     width: 100%;
-  }
-
-  .va-table-responsive {
-    overflow: auto;
   }
 }
 </style>

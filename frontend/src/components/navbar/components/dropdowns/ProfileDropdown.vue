@@ -24,6 +24,7 @@
         <router-link
           :to="{name: option.redirectTo}"
           class="profile-dropdown__item"
+          @click="logoutMethods"
         >
           {{ $t(`user.${option.name}`) }}
         </router-link>          
@@ -47,18 +48,22 @@ export default {
       type: Array,
       default: () => [
         {
-          name: 'profile',
-          redirectTo: '',
-        },
-        {
           name: 'logout',
           redirectTo: 'login',
+
+      
         },
       ],
     },
   },
   computed: {
     theme() { return useGlobalConfig().getGlobalConfig() },
+  },
+  methods : {
+    logoutMethods() {
+      window.localStorage.removeItem("accessToken");
+      window.localStorage.removeItem("refreshToken");
+    }
   }
 }
 </script>

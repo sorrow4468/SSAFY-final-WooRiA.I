@@ -3,6 +3,7 @@
 
 module.exports = {
   lintOnSave: true,
+
   // transpileDependencies: [
   //   'vuestic-ui',
   //   'epic-spinners',
