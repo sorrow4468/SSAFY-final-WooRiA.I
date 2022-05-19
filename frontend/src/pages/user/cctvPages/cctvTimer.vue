@@ -16,9 +16,11 @@
         <div v-else class="timer-s">
           <h1 style="color: rgb(228, 34, 34);"> 우리 AI 가 실행중입니다 </h1>
           <va-button @click="stop" class="va-button va-button--outline va-button--normal mr-2 mb-2" style="color: rgb(228, 34, 34); border-color: rgb(228, 34, 34); background: rgba(0, 0, 0, 0);">정지</va-button>
+          <h1>{{hour}} : {{ min }} : {{sec}}</h1>
         </div>
-   
-        <p>{{formattedElapsedTime}}</p>
+
+        
+        
       </div>
     </div>
             
@@ -96,20 +98,23 @@ export default {
       startMinutes : undefined,
       startSeconds : undefined,
       enddate : undefined,
+      countDown : 36000,
+      min : undefined,
+      hour : undefined,
+      sec : undefined
     };
   },
   computed: {
     formattedElapsedTime() {
       const date = new Date(null);
-      date.setSeconds(this.elapsedTime / 1000);
       const utc = date.toUTCString();
       return utc.substr(utc.indexOf(":") - 2, 8);
-    }
+    },
   },
   methods: {
     start() {
       this.timer = setInterval(() => {
-        this.elapsedTime += 1000;
+        this.elapsedTime -= 1000;
       }, 1000);
     },
     stop() {
@@ -124,6 +129,7 @@ export default {
           this.showModal = false;
           this.showcomfirm = true;
           this.setTimecustom = 1;
+          this.countDown = 3600000;
         }
     },
     setTimetwo() {
@@ -131,6 +137,8 @@ export default {
           this.showModal = false;
           this.showcomfirm = true;
           this.setTimecustom = 2;
+          this.countDown = 7200000;
+
         }
     },
     setTime() {
@@ -138,6 +146,8 @@ export default {
           this.showModal = false;
           this.showcomfirm = true;
           this.setTimecustom = this.setTimecustom;
+          this.countDown = 3600000 * this.setTimecustom;
+
         }
     },
     startTimer() {
@@ -145,12 +155,14 @@ export default {
         this.setTimer()
         this.showcomfirm = false;
         this.start()
+        this.countDownTimer()
 
     },
     timerStop() {
         this.setTimecustom = 0;
         this.showcomfirm = false;
         this.showModal = true
+        this.countDown = 0;
 
     },
     setTimer () {
@@ -194,8 +206,40 @@ export default {
         console.log(err)}
       )
     },
+    countDownTimer() {
+      console.log('들어옴')
+                if(this.countDown > 0) {
+                    setTimeout(() => {
+                        this.countDown -= 1
+                        this.countDownTimer()
+                    }, 1000)
+                }
+                let h = Math.trunc((this.countDown) /1000/ 3600);
+                let m = Math.trunc((this.countDown )  /1000/ 60) % 60;
+                let s = Math.trunc((this.countDown)) % 60
+                console.log(h,m,s)
+                if (10<h) {
+                  this.hour = '0'+h
+                }else {
+                  this.hour = h;
+                }
+                if (m<10) {
+                  this.min = '0'+m
+                }else {
+                  this.min = m;
+                }
+                
+                if (s<10) {
+                  this.sec = '0'+s
+                }else {
+                  this.sec = s;
+                }
+                console.log(this.hour, this.min, this.sec)
+
+            }
 
   }
+  
 };
 </script>
 <style scoped>
