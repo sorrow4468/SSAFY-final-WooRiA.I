@@ -1,5 +1,6 @@
 import cv2
 
+
 class CcTv():
     def rtsp():
         cam = cv2.VideoCapture(
