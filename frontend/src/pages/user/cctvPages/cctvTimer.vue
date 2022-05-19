@@ -217,7 +217,6 @@ export default {
       )
     },
     countDownTimer() {
-                console.log('들어옴')
                 if (!this.timerState){
                   this.countDown = 0;
                 }
@@ -230,11 +229,9 @@ export default {
                 }else {
                   this.timerState = false;
                 }
-                 console.log(this.countDown)
                     let h = Math.trunc((this.countDown) /1000/ 3600);
                     let m = Math.trunc((this.countDown ) /1000/ 60) % 60;
                     let s = Math.trunc((this.countDown)/1000) % 60
-                    console.log(h,m,s)
                     if (10<h) {
                       this.hour = '0'+h
                     }else {
