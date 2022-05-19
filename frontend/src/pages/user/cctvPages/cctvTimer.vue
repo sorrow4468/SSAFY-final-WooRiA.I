@@ -14,43 +14,37 @@
           <h1>{{hour}} : {{ min }} : {{sec}}</h1>
         </div>
 
-        
-        
+
+
       </div>
     </div>
-            
-        
+
+
         <va-modal
           v-model="showModal"
           hide-default-actions
           overlay-opacity="0.2"
         >
           <template #header>
-            <h2>시간 설정</h2>
           </template>
           <div style="margin-top : 5px">{{ message }}</div>
           <template #footer>
-            <div>
+            <div class="d-flex justify--center">
               <va-button class="timer-mg" @click="setTimeone" >
                 1시간
               </va-button>
               <va-button class="timer-mg"  @click=" setTimetwo">
                 2시간
               </va-button>
-              <va-button class="timer-mg"  @click=" setTime">
-                직접설정
-              </va-button>
-            </div>
-            <div>
-              <va-input v-model="setTimecustom"></va-input>
+              <va-input v-model="setTimecustom" placeholder="직접설정" class="cctv-timer-input"></va-input>
               <va-button class="timer-mg" @click=" setTime">
                 보내기
               </va-button>
             </div>
           </template>
-            
+
         </va-modal>
-        
+
         <va-modal
           v-model="showcomfirm"
           hide-default-actions
@@ -87,7 +81,7 @@ export default {
       showcomfirm: false,
       message : '시간을 설정해 주세요',
       startMessage :'시간 선택하셨습니다',
-      setTimecustom : 0,
+      setTimecustom : undefined,
       timerState : false,
       startHours : undefined,
       startMinutes : undefined,
@@ -163,7 +157,7 @@ export default {
         this.showModal = true
         this.countDown = 1;
         this.doneTimer()
-        
+
 
     },
     setTimer () {
@@ -181,7 +175,7 @@ export default {
         }
           ).then((res)=>{
             console.log(res)
-            
+
             }
           ).catch((err) => {
             console.log(err)
@@ -201,7 +195,7 @@ export default {
         }
           ).then((res)=>{
             console.log(res)
-            
+
             }
           ).catch((err) => {
             console.log(err)
@@ -220,9 +214,9 @@ export default {
       ).then(
         'https://k6e2021.p.ssafy.io/api/streaming/cctv3/start'
       ).then(
-       'https://k6e2021.p.ssafy.io/api/streaming/cctv4/start' 
+       'https://k6e2021.p.ssafy.io/api/streaming/cctv4/start'
 
-      ).catch((err) => { 
+      ).catch((err) => {
         console.log(err)}
       )
     },
@@ -236,7 +230,7 @@ export default {
                         this.countDown -= 1
                         this.countDownTimer()
                     }, 1000)
-                   
+
                 }else {
                   this.timerState = false;
                 }
@@ -255,7 +249,7 @@ export default {
                     }else {
                       this.min = m;
                     }
-                    
+
                     if (s<10) {
                       this.sec = '0'+s
                     }else {
@@ -266,7 +260,7 @@ export default {
             }
 
   }
-  
+
 };
 </script>
 <style scoped>
@@ -316,5 +310,9 @@ export default {
   }
     .icon-size {
     size: 10rem;
+  }
+
+  .cctv-timer-input {
+    width: 8vw;
   }
 </style>
