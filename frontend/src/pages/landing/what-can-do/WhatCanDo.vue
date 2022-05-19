@@ -8,7 +8,7 @@
       :options="options"
       color=#49b37c
       size=large
-      class="mb-4"
+      class="mb-2 mt-5"
     />
     <div class="">
       <div class="d-flex justify--end"><img src="@/../public/img/landing-page/main-service/ChildThinking.png" alt="thinking" class="thinking"></div>
@@ -77,11 +77,11 @@ export default {
 }
 
 .thinking {
-  width: 200px;
+  width: 150px;
   position: absolute;
   z-index: -1;
-  margin-top: -200px;
-  right: 15vw;
+  margin-top: -100px;
+  right: 25vw;
 }
 
 .f5 {
