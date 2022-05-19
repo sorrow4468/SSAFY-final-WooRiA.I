@@ -16,7 +16,7 @@
     <div class="content">
       <div class="f3">부모마음이</div>
       <div class="f3">다 그런거니까</div>
-      <a href="admin/dashboard/"><va-button class="start-button" color="success">시작하기</va-button></a>
+      <a href="auth/login/"><va-button class="start-button" color="success">시작하기</va-button></a>
     </div>
     <img src="@/../public/img/landing-page/ScrollDown.png" alt="scroll-down" class="scroll-down">
   </div>

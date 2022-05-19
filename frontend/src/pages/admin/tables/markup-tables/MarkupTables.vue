@@ -6,10 +6,10 @@
           <table class="va-table">
             <thead>
               <tr>
-                <th>{{ $t('tables.headings.name') }}</th>
-                <th>{{ $t('tables.headings.email') }}</th>
-                <th>{{ $t('tables.headings.country') }}</th>
-                <th>{{ $t('tables.headings.status') }}</th>
+                <th>{{ $t("tables.headings.name") }}</th>
+                <th>{{ $t("tables.headings.email") }}</th>
+                <th>{{ $t("tables.headings.country") }}</th>
+                <th>{{ $t("tables.headings.status") }}</th>
               </tr>
             </thead>
 
@@ -25,11 +25,11 @@
                 </td>
               </tr>
             </tbody>
-          </table>                
+          </table>
         </div>
       </va-card-content>
     </va-card>
-  
+
     <va-card :title="$t('tables.stripedHoverable')">
       <va-card-content>
         <div class="table-wrapper">
@@ -55,7 +55,7 @@
                 </td>
               </tr>
             </tbody>
-          </table>          
+          </table>
         </div>
       </va-card-content>
     </va-card>
@@ -63,38 +63,38 @@
 </template>
 
 <script>
-import data from '@/data/tables/markup-table/data.json'
+import data from "@/data/tables/markup-table/data.json";
 
 export default {
-  data () {
+  data() {
     return {
-      users: data.slice(0, 8),
-    }
+      users: data.slice(0, 8)
+    };
   },
   methods: {
-    getStatusColor (status) {
-      if (status === 'paid') {
-        return 'success'
+    getStatusColor(status) {
+      if (status === "paid") {
+        return "success";
       }
 
-      if (status === 'processing') {
-        return 'info'
+      if (status === "processing") {
+        return "info";
       }
 
-      return 'danger'
-    },
-  },
-}
+      return "danger";
+    }
+  }
+};
 </script>
 
 <style lang="scss">
-  .markup-tables {
-    .table-wrapper {
-      overflow: auto;
-    }
-
-    .va-table {
-      width: 100%;
-    }
+.markup-tables {
+  .table-wrapper {
+    overflow: auto;
   }
+
+  .va-table {
+    width: 100%;
+  }
+}
 </style>
