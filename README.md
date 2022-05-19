@@ -41,8 +41,6 @@
   >
   > - Amazon S3에 저장된 url 동영상 파일을 웹 페이지에서 직접 확인 가능합니다.
 
-
-
 **✏️[기획서]** : [기능명세서](https://docs.google.com/spreadsheets/d/1Q-ceSbhnGBfOBoElOF0Ky7u79LbKahsTrGg4pNS0-SM/edit#gid=0)     **🖼 [와이어프레임**] : [와이어프레임 확인](https://www.figma.com/file/HQLKt741nyq0yJK378vQTe/%EC%9E%90%EC%9C%A8-figma)     ▶ \[**팀 노션**] : [팀 노션](https://www.notion.so/SSAFY-6-ee2987ff3a0247ac84579c2f04692632)     ▶ [**마인드맵**] :[마인드맵](https://www.mindmeister.com/map/2201310117)
 
 
@@ -106,7 +104,7 @@
 
 #### 2-3. SNS 메시지 위험 알림.
 
-![Alarm2](README.assets/alarm1.gif)
+![Alarm2](README.assets/sns.png)
 
 - **[Naver Sens]** : Naver Sens API를 이용하여 타이머가 설정된 모든 유저에게 위험 문자를 전송합니다.
 
