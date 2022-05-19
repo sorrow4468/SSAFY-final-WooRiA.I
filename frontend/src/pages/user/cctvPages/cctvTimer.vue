@@ -78,6 +78,7 @@
 <script>
 // import message from './popup-message'
 import http from '@/components/common/axios.js'
+import httpB from '@/components/common/axiosB.js'
 
 export default {
   name: "cctvtimer",
@@ -108,7 +109,7 @@ export default {
   methods: {
     start() {
       this.timer = setInterval(() => {
-        this.elapsedTime += this.setTimecustom * 3600;
+        this.elapsedTime += 1000;
       }, 1000);
     },
     stop() {
@@ -177,7 +178,7 @@ export default {
 
 
     refresh() {
-      axios.get(
+      httpB.get(
         'https://k6e2021.p.ssafy.io/api/streaming/cctv1/start'
 
       ).then(
