@@ -1,11 +1,7 @@
 <template>
-  <div  class="pageSet">
-    <div class="row xs4 md4 " style="height:100px;">
+  <div class="">
+    <div class="flex xs12 md12 " style="height:100px;">
       <cctvtimer/>
-      <!-- <va-button class="timer-mg refresh" @click="refresh">
-        새로고침
-      </va-button> -->
-
     </div>
     <div class="flex xs12 md12 justify--center">
       <cctvscreen/>

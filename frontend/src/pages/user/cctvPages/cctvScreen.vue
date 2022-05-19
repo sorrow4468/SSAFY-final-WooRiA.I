@@ -69,10 +69,10 @@ export default {
 <style scoped>
 .cctv-border {
   border: solid 1px black;
-  width: 35vw;
+  width: 33vw;
 }
 
 .cctv-content {
-  width: 35vw;
+  width: 33vw;
 }
 </style>
