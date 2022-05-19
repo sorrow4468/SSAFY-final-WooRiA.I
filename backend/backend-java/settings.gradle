@@ -1,0 +1,3 @@
+rootProject.name = 'ssafy-web-project'
+include 'Main'
+
