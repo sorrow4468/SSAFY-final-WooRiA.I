@@ -100,7 +100,7 @@
         $t("auth.sign_up")
       }}</va-button>
     </div>
-    
+
     <!-- 아이디 중복 모달 -->
     <va-modal
       v-model="idComfirm"
@@ -113,10 +113,10 @@
       <div style="margin-top : 5px">사용할 수 있는 아이디 입니다.</div>
       <template #footer>
           <va-button class="timer-mg" @click="idComfirm = !idComfirm">
-            사용하기            
+            사용하기
           </va-button>
           <va-button class="timer-mg" @click="cancelId">
-            취소          
+            취소
           </va-button>
       </template>
     </va-modal>
@@ -229,7 +229,7 @@ export default {
             }
           ).then((res)=>{
             alert('회원가입 성공');
-            this.$router.push({ name: "userboard" });
+            this.$router.push({ name: "login" });
 
             }
           ).catch((err) => {
