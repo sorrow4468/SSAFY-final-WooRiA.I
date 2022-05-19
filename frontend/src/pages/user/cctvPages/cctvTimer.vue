@@ -1,12 +1,7 @@
 <template id="cctvtimer">
   <div class="container">
     <div class="timer-border">
-         <!-- <va-icon
-        name="loop"
-        spin="counter-clockwise"
-        class="mr-4 container icon-size"
-        @click="refresh"
-      /> -->
+
       <div class="timer-inner">
         <!--  감지중입니다 만들기 -->
         <div v-if="!timerState" class="timer-s">
