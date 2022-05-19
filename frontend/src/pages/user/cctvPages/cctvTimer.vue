@@ -233,7 +233,7 @@ export default {
                 }
                 if(this.countDown > 0) {
                     setTimeout(() => {
-                        this.countDown -= 1
+                        this.countDown -= 1000
                         this.countDownTimer()
                     }, 1000)
                    
@@ -242,8 +242,8 @@ export default {
                 }
                  console.log(this.countDown)
                     let h = Math.trunc((this.countDown) /1000/ 3600);
-                    let m = Math.trunc((this.countDown )  /1000/ 60) % 60;
-                    let s = Math.trunc((this.countDown)) % 60
+                    let m = Math.trunc((this.countDown ) /1000/ 60) % 60;
+                    let s = Math.trunc((this.countDown)/1000) % 60
                     console.log(h,m,s)
                     if (10<h) {
                       this.hour = '0'+h
