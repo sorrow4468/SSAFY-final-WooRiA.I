@@ -18,7 +18,7 @@
           <va-button @click="stop" class="va-button va-button--outline va-button--normal mr-2 mb-2" style="color: rgb(228, 34, 34); border-color: rgb(228, 34, 34); background: rgba(0, 0, 0, 0);">정지</va-button>
         </div>
    
-        <!-- <p>{{formattedElapsedTime}}</p> -->
+        <p>{{formattedElapsedTime}}</p>
       </div>
     </div>
             
@@ -108,7 +108,7 @@ export default {
   methods: {
     start() {
       this.timer = setInterval(() => {
-        this.elapsedTime += 1000;
+        this.elapsedTime += this.setTimecustom * 3600;
       }, 1000);
     },
     stop() {
@@ -143,6 +143,7 @@ export default {
         this.timerState = true;
         this.setTimer()
         this.showcomfirm = false;
+        this.start()
 
     },
     timerStop() {
@@ -173,6 +174,8 @@ export default {
             })
       //  시작 시간 체크
     },
+
+
     refresh() {
       axios.get(
         'https://k6e2021.p.ssafy.io/api/streaming/cctv1/start'
